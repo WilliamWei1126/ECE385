@@ -1,0 +1,258 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xc7s50csga324-1",
+      "gen_directory": "../../../../registerUnit.gen/sources_1/bd/registerUnit",
+      "name": "registerUnit",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2022.2"
+    },
+    "design_tree": {
+      "ece385_74194_0": "",
+      "ece385_74194_1": "",
+      "ece385_vcc_0": ""
+    },
+    "ports": {
+      "A_0": {
+        "direction": "I"
+      },
+      "B_0": {
+        "direction": "I"
+      },
+      "C_0": {
+        "direction": "I"
+      },
+      "D_0": {
+        "direction": "I"
+      },
+      "QA_0": {
+        "direction": "O"
+      },
+      "QB_0": {
+        "direction": "O"
+      },
+      "QC_0": {
+        "direction": "O"
+      },
+      "QD_0": {
+        "direction": "O"
+      },
+      "S0_0": {
+        "direction": "I"
+      },
+      "S1_0": {
+        "direction": "I"
+      },
+      "SR_0": {
+        "direction": "I"
+      },
+      "A_1": {
+        "direction": "I"
+      },
+      "B_1": {
+        "direction": "I"
+      },
+      "C_1": {
+        "direction": "I"
+      },
+      "CLK": {
+        "type": "clk",
+        "direction": "I"
+      },
+      "D_1": {
+        "direction": "I"
+      },
+      "QA_1": {
+        "direction": "O"
+      },
+      "QB_1": {
+        "direction": "O"
+      },
+      "QC_1": {
+        "direction": "O"
+      },
+      "QD_1": {
+        "direction": "O"
+      },
+      "S0_1": {
+        "direction": "I"
+      },
+      "S1_1": {
+        "direction": "I"
+      },
+      "SR_1": {
+        "direction": "I"
+      }
+    },
+    "components": {
+      "ece385_74194_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_74194:1.0",
+        "xci_name": "registerUnit_ece385_74194_0_0",
+        "xci_path": "ip\\registerUnit_ece385_74194_0_0\\registerUnit_ece385_74194_0_0.xci",
+        "inst_hier_path": "ece385_74194_0"
+      },
+      "ece385_74194_1": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_74194:1.0",
+        "xci_name": "registerUnit_ece385_74194_0_1",
+        "xci_path": "ip\\registerUnit_ece385_74194_0_1\\registerUnit_ece385_74194_0_1.xci",
+        "inst_hier_path": "ece385_74194_1"
+      },
+      "ece385_vcc_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_vcc:1.0",
+        "xci_name": "registerUnit_ece385_vcc_0_0",
+        "xci_path": "ip\\registerUnit_ece385_vcc_0_0\\registerUnit_ece385_vcc_0_0.xci",
+        "inst_hier_path": "ece385_vcc_0"
+      }
+    },
+    "nets": {
+      "A_0_1": {
+        "ports": [
+          "A_0",
+          "ece385_74194_0/A"
+        ]
+      },
+      "A_1_1": {
+        "ports": [
+          "A_1",
+          "ece385_74194_1/A"
+        ]
+      },
+      "B_0_1": {
+        "ports": [
+          "B_0",
+          "ece385_74194_0/B"
+        ]
+      },
+      "B_1_1": {
+        "ports": [
+          "B_1",
+          "ece385_74194_1/B"
+        ]
+      },
+      "CLK_1_1": {
+        "ports": [
+          "CLK",
+          "ece385_74194_1/CLK",
+          "ece385_74194_0/CLK"
+        ]
+      },
+      "CLRN_0_1": {
+        "ports": [
+          "ece385_vcc_0/VCC",
+          "ece385_74194_0/CLRN",
+          "ece385_74194_1/CLRN"
+        ]
+      },
+      "C_0_1": {
+        "ports": [
+          "C_0",
+          "ece385_74194_0/C"
+        ]
+      },
+      "C_1_1": {
+        "ports": [
+          "C_1",
+          "ece385_74194_1/C"
+        ]
+      },
+      "D_0_1": {
+        "ports": [
+          "D_0",
+          "ece385_74194_0/D"
+        ]
+      },
+      "D_1_1": {
+        "ports": [
+          "D_1",
+          "ece385_74194_1/D"
+        ]
+      },
+      "S0_0_1": {
+        "ports": [
+          "S0_0",
+          "ece385_74194_0/S0"
+        ]
+      },
+      "S0_1_1": {
+        "ports": [
+          "S0_1",
+          "ece385_74194_1/S0"
+        ]
+      },
+      "S1_0_1": {
+        "ports": [
+          "S1_0",
+          "ece385_74194_0/S1"
+        ]
+      },
+      "S1_1_1": {
+        "ports": [
+          "S1_1",
+          "ece385_74194_1/S1"
+        ]
+      },
+      "SR_0_1": {
+        "ports": [
+          "SR_0",
+          "ece385_74194_0/SR"
+        ]
+      },
+      "SR_1_1": {
+        "ports": [
+          "SR_1",
+          "ece385_74194_1/SR"
+        ]
+      },
+      "ece385_74194_0_QA": {
+        "ports": [
+          "ece385_74194_0/QA",
+          "QA_0"
+        ]
+      },
+      "ece385_74194_0_QB": {
+        "ports": [
+          "ece385_74194_0/QB",
+          "QB_0"
+        ]
+      },
+      "ece385_74194_0_QC": {
+        "ports": [
+          "ece385_74194_0/QC",
+          "QC_0"
+        ]
+      },
+      "ece385_74194_0_QD": {
+        "ports": [
+          "ece385_74194_0/QD",
+          "QD_0"
+        ]
+      },
+      "ece385_74194_1_QA": {
+        "ports": [
+          "ece385_74194_1/QA",
+          "QA_1"
+        ]
+      },
+      "ece385_74194_1_QB": {
+        "ports": [
+          "ece385_74194_1/QB",
+          "QB_1"
+        ]
+      },
+      "ece385_74194_1_QC": {
+        "ports": [
+          "ece385_74194_1/QC",
+          "QC_1"
+        ]
+      },
+      "ece385_74194_1_QD": {
+        "ports": [
+          "ece385_74194_1/QD",
+          "QD_1"
+        ]
+      }
+    }
+  }
+}

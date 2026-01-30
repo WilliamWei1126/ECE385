@@ -1,0 +1,202 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xc7s50csga324-1",
+      "gen_directory": "../../../../registerUnit.gen/sources_1/bd/computationUnit",
+      "name": "computationUnit",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2022.2"
+    },
+    "design_tree": {
+      "ece385_74151_0": "",
+      "ece385_nand_2_0": "",
+      "ece385_not_0": "",
+      "ece385_nor_2_0": "",
+      "ece385_not_1": "",
+      "ece385_xor_2_0": "",
+      "ece385_not_2": "",
+      "ece385_vcc_0": "",
+      "ece385_gnd_0": ""
+    },
+    "ports": {
+      "F2": {
+        "direction": "I"
+      },
+      "F1": {
+        "direction": "I"
+      },
+      "F0": {
+        "direction": "I"
+      },
+      "A": {
+        "direction": "I"
+      },
+      "B": {
+        "direction": "I"
+      },
+      "f": {
+        "direction": "O"
+      },
+      "Aout": {
+        "direction": "O"
+      },
+      "Bout": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "ece385_74151_0": {
+        "vlnv": "ece.illinois.edu:user:ece385_74151:1.0",
+        "xci_name": "computationUnit_ece385_74151_0_0",
+        "xci_path": "ip\\computationUnit_ece385_74151_0_0\\computationUnit_ece385_74151_0_0.xci",
+        "inst_hier_path": "ece385_74151_0"
+      },
+      "ece385_nand_2_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_2:1.0",
+        "xci_name": "computationUnit_ece385_nand_2_0_0",
+        "xci_path": "ip\\computationUnit_ece385_nand_2_0_0\\computationUnit_ece385_nand_2_0_0.xci",
+        "inst_hier_path": "ece385_nand_2_0"
+      },
+      "ece385_not_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "computationUnit_ece385_not_0_1",
+        "xci_path": "ip\\computationUnit_ece385_not_0_1\\computationUnit_ece385_not_0_1.xci",
+        "inst_hier_path": "ece385_not_0"
+      },
+      "ece385_nor_2_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nor_2:1.0",
+        "xci_name": "computationUnit_ece385_nor_2_0_0",
+        "xci_path": "ip\\computationUnit_ece385_nor_2_0_0\\computationUnit_ece385_nor_2_0_0.xci",
+        "inst_hier_path": "ece385_nor_2_0"
+      },
+      "ece385_not_1": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "computationUnit_ece385_not_0_2",
+        "xci_path": "ip\\computationUnit_ece385_not_0_2\\computationUnit_ece385_not_0_2.xci",
+        "inst_hier_path": "ece385_not_1"
+      },
+      "ece385_xor_2_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_xor_2:1.0",
+        "xci_name": "computationUnit_ece385_xor_2_0_0",
+        "xci_path": "ip\\computationUnit_ece385_xor_2_0_0\\computationUnit_ece385_xor_2_0_0.xci",
+        "inst_hier_path": "ece385_xor_2_0"
+      },
+      "ece385_not_2": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "computationUnit_ece385_not_1_0",
+        "xci_path": "ip\\computationUnit_ece385_not_1_0\\computationUnit_ece385_not_1_0.xci",
+        "inst_hier_path": "ece385_not_2"
+      },
+      "ece385_vcc_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_vcc:1.0",
+        "xci_name": "computationUnit_ece385_vcc_0_0",
+        "xci_path": "ip\\computationUnit_ece385_vcc_0_0\\computationUnit_ece385_vcc_0_0.xci",
+        "inst_hier_path": "ece385_vcc_0"
+      },
+      "ece385_gnd_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_gnd:1.0",
+        "xci_name": "computationUnit_ece385_gnd_0_0",
+        "xci_path": "ip\\computationUnit_ece385_gnd_0_0\\computationUnit_ece385_gnd_0_0.xci",
+        "inst_hier_path": "ece385_gnd_0"
+      }
+    },
+    "nets": {
+      "A_1": {
+        "ports": [
+          "A",
+          "ece385_nand_2_0/op1",
+          "ece385_xor_2_0/op1",
+          "ece385_nor_2_0/op1",
+          "Aout"
+        ]
+      },
+      "B_1": {
+        "ports": [
+          "B",
+          "ece385_nand_2_0/op2",
+          "ece385_xor_2_0/op2",
+          "ece385_nor_2_0/op2",
+          "Bout"
+        ]
+      },
+      "F0_1": {
+        "ports": [
+          "F0",
+          "ece385_74151_0/C"
+        ]
+      },
+      "F1_1": {
+        "ports": [
+          "F1",
+          "ece385_74151_0/B"
+        ]
+      },
+      "F2_1": {
+        "ports": [
+          "F2",
+          "ece385_74151_0/A"
+        ]
+      },
+      "ece385_74151_0_Y": {
+        "ports": [
+          "ece385_74151_0/Y",
+          "f"
+        ]
+      },
+      "ece385_gnd_0_GND": {
+        "ports": [
+          "ece385_gnd_0/GND",
+          "ece385_74151_0/D7",
+          "ece385_74151_0/GN"
+        ]
+      },
+      "ece385_nand_2_0_res": {
+        "ports": [
+          "ece385_nand_2_0/res",
+          "ece385_74151_0/D4",
+          "ece385_not_0/op"
+        ]
+      },
+      "ece385_nor_2_0_res": {
+        "ports": [
+          "ece385_nor_2_0/res",
+          "ece385_74151_0/D5",
+          "ece385_not_1/op"
+        ]
+      },
+      "ece385_not_0_res": {
+        "ports": [
+          "ece385_not_0/res",
+          "ece385_74151_0/D0"
+        ]
+      },
+      "ece385_not_1_res": {
+        "ports": [
+          "ece385_not_1/res",
+          "ece385_74151_0/D1"
+        ]
+      },
+      "ece385_not_2_res": {
+        "ports": [
+          "ece385_not_2/res",
+          "ece385_74151_0/D6"
+        ]
+      },
+      "ece385_vcc_0_VCC": {
+        "ports": [
+          "ece385_vcc_0/VCC",
+          "ece385_74151_0/D3"
+        ]
+      },
+      "ece385_xor_2_0_res": {
+        "ports": [
+          "ece385_xor_2_0/res",
+          "ece385_74151_0/D2",
+          "ece385_not_2/op"
+        ]
+      }
+    }
+  }
+}

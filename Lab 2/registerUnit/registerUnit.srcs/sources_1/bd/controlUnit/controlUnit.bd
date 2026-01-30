@@ -1,0 +1,323 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xc7s50csga324-1",
+      "gen_directory": "../../../../registerUnit.gen/sources_1/bd/controlUnit",
+      "name": "controlUnit",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2022.2"
+    },
+    "design_tree": {
+      "ece385_74161_0": "",
+      "ece385_7474_0": "",
+      "ece385_vcc_0": "",
+      "ece385_nand_3_0": "",
+      "ece385_nand_3_1": "",
+      "ece385_not_1": "",
+      "ece385_not_2": "",
+      "ece385_nand_2_0": "",
+      "ece385_not_3": "",
+      "ece385_nand_2_1": "",
+      "ece385_nand_2_2": "",
+      "ece385_nor_2_0": "",
+      "ece385_nor_2_1": "",
+      "ece385_not_4": "",
+      "ece385_not_5": "",
+      "ece385_not_6": "",
+      "ece385_not_7": "",
+      "ece385_not_8": ""
+    },
+    "ports": {
+      "clk": {
+        "direction": "I"
+      },
+      "E": {
+        "direction": "I"
+      },
+      "LOADA": {
+        "direction": "I"
+      },
+      "S1A": {
+        "direction": "O"
+      },
+      "S0A": {
+        "direction": "O"
+      },
+      "S1B": {
+        "direction": "O"
+      },
+      "S0B": {
+        "direction": "O"
+      },
+      "LOADB": {
+        "direction": "I"
+      }
+    },
+    "components": {
+      "ece385_74161_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_74161:1.0",
+        "xci_name": "controlUnit_ece385_74161_0_0",
+        "xci_path": "ip\\controlUnit_ece385_74161_0_0\\controlUnit_ece385_74161_0_0.xci",
+        "inst_hier_path": "ece385_74161_0"
+      },
+      "ece385_7474_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_7474:1.0",
+        "xci_name": "controlUnit_ece385_7474_0_0",
+        "xci_path": "ip\\controlUnit_ece385_7474_0_0\\controlUnit_ece385_7474_0_0.xci",
+        "inst_hier_path": "ece385_7474_0"
+      },
+      "ece385_vcc_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_vcc:1.0",
+        "xci_name": "controlUnit_ece385_vcc_0_0",
+        "xci_path": "ip\\controlUnit_ece385_vcc_0_0\\controlUnit_ece385_vcc_0_0.xci",
+        "inst_hier_path": "ece385_vcc_0"
+      },
+      "ece385_nand_3_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_3:1.0",
+        "xci_name": "controlUnit_ece385_nand_3_0_0",
+        "xci_path": "ip\\controlUnit_ece385_nand_3_0_0\\controlUnit_ece385_nand_3_0_0.xci",
+        "inst_hier_path": "ece385_nand_3_0"
+      },
+      "ece385_nand_3_1": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_3:1.0",
+        "xci_name": "controlUnit_ece385_nand_3_1_0",
+        "xci_path": "ip\\controlUnit_ece385_nand_3_1_0\\controlUnit_ece385_nand_3_1_0.xci",
+        "inst_hier_path": "ece385_nand_3_1"
+      },
+      "ece385_not_1": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_0_1",
+        "xci_path": "ip\\controlUnit_ece385_not_0_1\\controlUnit_ece385_not_0_1.xci",
+        "inst_hier_path": "ece385_not_1"
+      },
+      "ece385_not_2": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_0_2",
+        "xci_path": "ip\\controlUnit_ece385_not_0_2\\controlUnit_ece385_not_0_2.xci",
+        "inst_hier_path": "ece385_not_2"
+      },
+      "ece385_nand_2_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_2:1.0",
+        "xci_name": "controlUnit_ece385_nand_2_0_0",
+        "xci_path": "ip\\controlUnit_ece385_nand_2_0_0\\controlUnit_ece385_nand_2_0_0.xci",
+        "inst_hier_path": "ece385_nand_2_0"
+      },
+      "ece385_not_3": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_3_0",
+        "xci_path": "ip\\controlUnit_ece385_not_3_0\\controlUnit_ece385_not_3_0.xci",
+        "inst_hier_path": "ece385_not_3"
+      },
+      "ece385_nand_2_1": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_2:1.0",
+        "xci_name": "controlUnit_ece385_nand_2_1_0",
+        "xci_path": "ip\\controlUnit_ece385_nand_2_1_0\\controlUnit_ece385_nand_2_1_0.xci",
+        "inst_hier_path": "ece385_nand_2_1"
+      },
+      "ece385_nand_2_2": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_2:1.0",
+        "xci_name": "controlUnit_ece385_nand_2_1_1",
+        "xci_path": "ip\\controlUnit_ece385_nand_2_1_1\\controlUnit_ece385_nand_2_1_1.xci",
+        "inst_hier_path": "ece385_nand_2_2"
+      },
+      "ece385_nor_2_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nor_2:1.0",
+        "xci_name": "controlUnit_ece385_nor_2_0_0",
+        "xci_path": "ip\\controlUnit_ece385_nor_2_0_0\\controlUnit_ece385_nor_2_0_0.xci",
+        "inst_hier_path": "ece385_nor_2_0"
+      },
+      "ece385_nor_2_1": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nor_2:1.0",
+        "xci_name": "controlUnit_ece385_nor_2_0_1",
+        "xci_path": "ip\\controlUnit_ece385_nor_2_0_1\\controlUnit_ece385_nor_2_0_1.xci",
+        "inst_hier_path": "ece385_nor_2_1"
+      },
+      "ece385_not_4": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_4_0",
+        "xci_path": "ip\\controlUnit_ece385_not_4_0\\controlUnit_ece385_not_4_0.xci",
+        "inst_hier_path": "ece385_not_4"
+      },
+      "ece385_not_5": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_4_1",
+        "xci_path": "ip\\controlUnit_ece385_not_4_1\\controlUnit_ece385_not_4_1.xci",
+        "inst_hier_path": "ece385_not_5"
+      },
+      "ece385_not_6": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_5_0",
+        "xci_path": "ip\\controlUnit_ece385_not_5_0\\controlUnit_ece385_not_5_0.xci",
+        "inst_hier_path": "ece385_not_6"
+      },
+      "ece385_not_7": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_6_0",
+        "xci_path": "ip\\controlUnit_ece385_not_6_0\\controlUnit_ece385_not_6_0.xci",
+        "inst_hier_path": "ece385_not_7"
+      },
+      "ece385_not_8": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_not:1.0",
+        "xci_name": "controlUnit_ece385_not_8_0",
+        "xci_path": "ip\\controlUnit_ece385_not_8_0\\controlUnit_ece385_not_8_0.xci",
+        "inst_hier_path": "ece385_not_8"
+      }
+    },
+    "nets": {
+      "E_1": {
+        "ports": [
+          "E",
+          "ece385_nand_2_0/op2",
+          "ece385_not_3/op"
+        ]
+      },
+      "LOADA_1": {
+        "ports": [
+          "LOADA",
+          "ece385_nand_2_1/op1",
+          "ece385_nor_2_0/op2"
+        ]
+      },
+      "LOADB_1": {
+        "ports": [
+          "LOADB",
+          "ece385_nand_2_2/op2",
+          "ece385_nor_2_1/op2"
+        ]
+      },
+      "clk_1": {
+        "ports": [
+          "clk",
+          "ece385_7474_0/CLK1",
+          "ece385_74161_0/CLK"
+        ]
+      },
+      "ece385_74161_0_QA": {
+        "ports": [
+          "ece385_74161_0/QA",
+          "ece385_not_1/op"
+        ]
+      },
+      "ece385_74161_0_QB": {
+        "ports": [
+          "ece385_74161_0/QB",
+          "ece385_not_2/op"
+        ]
+      },
+      "ece385_7474_0_QN1": {
+        "ports": [
+          "ece385_7474_0/QN1",
+          "ece385_nand_2_0/op1"
+        ]
+      },
+      "ece385_nand_2_0_res": {
+        "ports": [
+          "ece385_nand_2_0/res",
+          "ece385_nand_3_0/op1"
+        ]
+      },
+      "ece385_nand_2_1_res": {
+        "ports": [
+          "ece385_nand_2_1/res",
+          "ece385_not_4/op"
+        ]
+      },
+      "ece385_nand_2_2_res": {
+        "ports": [
+          "ece385_nand_2_2/res",
+          "ece385_not_6/op"
+        ]
+      },
+      "ece385_nand_3_0_res": {
+        "ports": [
+          "ece385_nand_3_0/res",
+          "ece385_74161_0/CLRN",
+          "ece385_not_8/op",
+          "ece385_nor_2_0/op1",
+          "ece385_nor_2_1/op1"
+        ]
+      },
+      "ece385_nand_3_1_res": {
+        "ports": [
+          "ece385_nand_3_1/res",
+          "ece385_7474_0/D1"
+        ]
+      },
+      "ece385_nor_2_0_res": {
+        "ports": [
+          "ece385_nor_2_0/res",
+          "ece385_not_5/op"
+        ]
+      },
+      "ece385_nor_2_1_res": {
+        "ports": [
+          "ece385_nor_2_1/res",
+          "ece385_not_7/op"
+        ]
+      },
+      "ece385_not_1_res": {
+        "ports": [
+          "ece385_not_1/res",
+          "ece385_nand_3_0/op3",
+          "ece385_nand_3_1/op2"
+        ]
+      },
+      "ece385_not_2_res": {
+        "ports": [
+          "ece385_not_2/res",
+          "ece385_nand_3_0/op2",
+          "ece385_nand_3_1/op1"
+        ]
+      },
+      "ece385_not_3_res": {
+        "ports": [
+          "ece385_not_3/res",
+          "ece385_nand_3_1/op3"
+        ]
+      },
+      "ece385_not_4_res": {
+        "ports": [
+          "ece385_not_4/res",
+          "S1A"
+        ]
+      },
+      "ece385_not_5_res": {
+        "ports": [
+          "ece385_not_5/res",
+          "S0A"
+        ]
+      },
+      "ece385_not_6_res": {
+        "ports": [
+          "ece385_not_6/res",
+          "S1B"
+        ]
+      },
+      "ece385_not_7_res": {
+        "ports": [
+          "ece385_not_7/res",
+          "S0B"
+        ]
+      },
+      "ece385_not_8_res": {
+        "ports": [
+          "ece385_not_8/res",
+          "ece385_nand_2_1/op2",
+          "ece385_nand_2_2/op1"
+        ]
+      },
+      "ece385_vcc_0_VCC": {
+        "ports": [
+          "ece385_vcc_0/VCC",
+          "ece385_7474_0/CLRN1",
+          "ece385_7474_0/PREN1",
+          "ece385_74161_0/ENP",
+          "ece385_74161_0/ENT",
+          "ece385_74161_0/LOADN"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xc7s50csga324-1",
+      "gen_directory": "../../../../registerUnit.gen/sources_1/bd/routingUnit",
+      "name": "routingUnit",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2022.2"
+    },
+    "design_tree": {
+      "ece385_74153_0": "",
+      "ece385_gnd_0": ""
+    },
+    "ports": {
+      "R1": {
+        "direction": "I"
+      },
+      "R0": {
+        "direction": "I"
+      },
+      "B": {
+        "direction": "I"
+      },
+      "A": {
+        "direction": "I"
+      },
+      "F": {
+        "direction": "I"
+      },
+      "Aroutingout": {
+        "direction": "O"
+      },
+      "Broutingout": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "ece385_74153_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_74153:1.0",
+        "xci_name": "routingUnit_ece385_74153_0_0",
+        "xci_path": "ip\\routingUnit_ece385_74153_0_0\\routingUnit_ece385_74153_0_0.xci",
+        "inst_hier_path": "ece385_74153_0"
+      },
+      "ece385_gnd_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_gnd:1.0",
+        "xci_name": "routingUnit_ece385_gnd_0_0",
+        "xci_path": "ip\\routingUnit_ece385_gnd_0_0\\routingUnit_ece385_gnd_0_0.xci",
+        "inst_hier_path": "ece385_gnd_0"
+      }
+    },
+    "nets": {
+      "A_1": {
+        "ports": [
+          "B",
+          "ece385_74153_0/C3_1",
+          "ece385_74153_0/C0_2",
+          "ece385_74153_0/C2_2"
+        ]
+      },
+      "A_2": {
+        "ports": [
+          "A",
+          "ece385_74153_0/C1_1",
+          "ece385_74153_0/C0_1",
+          "ece385_74153_0/C3_2"
+        ]
+      },
+      "F_1": {
+        "ports": [
+          "F",
+          "ece385_74153_0/C2_1",
+          "ece385_74153_0/C1_2"
+        ]
+      },
+      "R0_1": {
+        "ports": [
+          "R0",
+          "ece385_74153_0/A"
+        ]
+      },
+      "R1_1": {
+        "ports": [
+          "R1",
+          "ece385_74153_0/B"
+        ]
+      },
+      "ece385_74153_0_Y1": {
+        "ports": [
+          "ece385_74153_0/Y1",
+          "Aroutingout"
+        ]
+      },
+      "ece385_74153_0_Y2": {
+        "ports": [
+          "ece385_74153_0/Y2",
+          "Broutingout"
+        ]
+      },
+      "ece385_gnd_0_GND": {
+        "ports": [
+          "ece385_gnd_0/GND",
+          "ece385_74153_0/GN1",
+          "ece385_74153_0/GN2"
+        ]
+      }
+    }
+  }
+}
