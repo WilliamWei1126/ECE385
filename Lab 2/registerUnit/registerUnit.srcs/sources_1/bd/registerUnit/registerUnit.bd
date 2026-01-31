@@ -12,7 +12,8 @@
     "design_tree": {
       "ece385_74194_0": "",
       "ece385_74194_1": "",
-      "ece385_vcc_0": ""
+      "ece385_vcc_0": "",
+      "ece385_nand_2_0": ""
     },
     "ports": {
       "A_0": {
@@ -104,6 +105,12 @@
         "xci_name": "registerUnit_ece385_vcc_0_0",
         "xci_path": "ip\\registerUnit_ece385_vcc_0_0\\registerUnit_ece385_vcc_0_0.xci",
         "inst_hier_path": "ece385_vcc_0"
+      },
+      "ece385_nand_2_0": {
+        "vlnv": "ece.illinois.edu:ece385:ece385_nand_2:1.0",
+        "xci_name": "registerUnit_ece385_nand_2_0_0",
+        "xci_path": "ip\\registerUnit_ece385_nand_2_0_0\\registerUnit_ece385_nand_2_0_0.xci",
+        "inst_hier_path": "ece385_nand_2_0"
       }
     },
     "nets": {

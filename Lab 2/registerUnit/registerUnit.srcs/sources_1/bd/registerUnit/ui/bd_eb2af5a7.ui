@@ -9,10 +9,10 @@ preplace port port-id_A_0 -pg 1 -lvl 0 -x 0 -y 100 -defaultsOSRD
 preplace port port-id_B_0 -pg 1 -lvl 0 -x 0 -y 120 -defaultsOSRD
 preplace port port-id_C_0 -pg 1 -lvl 0 -x 0 -y 140 -defaultsOSRD
 preplace port port-id_D_0 -pg 1 -lvl 0 -x 0 -y 160 -defaultsOSRD
-preplace port port-id_QA_0 -pg 1 -lvl 3 -x 590 -y 120 -defaultsOSRD
-preplace port port-id_QB_0 -pg 1 -lvl 3 -x 590 -y 140 -defaultsOSRD
-preplace port port-id_QC_0 -pg 1 -lvl 3 -x 590 -y 160 -defaultsOSRD
-preplace port port-id_QD_0 -pg 1 -lvl 3 -x 590 -y 180 -defaultsOSRD
+preplace port port-id_QA_0 -pg 1 -lvl 4 -x 840 -y 120 -defaultsOSRD
+preplace port port-id_QB_0 -pg 1 -lvl 4 -x 840 -y 140 -defaultsOSRD
+preplace port port-id_QC_0 -pg 1 -lvl 4 -x 840 -y 160 -defaultsOSRD
+preplace port port-id_QD_0 -pg 1 -lvl 4 -x 840 -y 180 -defaultsOSRD
 preplace port port-id_S0_0 -pg 1 -lvl 0 -x 0 -y 240 -defaultsOSRD
 preplace port port-id_S1_0 -pg 1 -lvl 0 -x 0 -y 220 -defaultsOSRD
 preplace port port-id_SR_0 -pg 1 -lvl 0 -x 0 -y 80 -defaultsOSRD
@@ -21,42 +21,43 @@ preplace port port-id_B_1 -pg 1 -lvl 0 -x 0 -y 440 -defaultsOSRD
 preplace port port-id_C_1 -pg 1 -lvl 0 -x 0 -y 460 -defaultsOSRD
 preplace port port-id_CLK -pg 1 -lvl 0 -x 0 -y 200 -defaultsOSRD
 preplace port port-id_D_1 -pg 1 -lvl 0 -x 0 -y 480 -defaultsOSRD
-preplace port port-id_QA_1 -pg 1 -lvl 3 -x 590 -y 440 -defaultsOSRD
-preplace port port-id_QB_1 -pg 1 -lvl 3 -x 590 -y 460 -defaultsOSRD
-preplace port port-id_QC_1 -pg 1 -lvl 3 -x 590 -y 480 -defaultsOSRD
-preplace port port-id_QD_1 -pg 1 -lvl 3 -x 590 -y 500 -defaultsOSRD
+preplace port port-id_QA_1 -pg 1 -lvl 4 -x 840 -y 440 -defaultsOSRD
+preplace port port-id_QB_1 -pg 1 -lvl 4 -x 840 -y 460 -defaultsOSRD
+preplace port port-id_QC_1 -pg 1 -lvl 4 -x 840 -y 480 -defaultsOSRD
+preplace port port-id_QD_1 -pg 1 -lvl 4 -x 840 -y 500 -defaultsOSRD
 preplace port port-id_S0_1 -pg 1 -lvl 0 -x 0 -y 560 -defaultsOSRD
 preplace port port-id_S1_1 -pg 1 -lvl 0 -x 0 -y 540 -defaultsOSRD
 preplace port port-id_SR_1 -pg 1 -lvl 0 -x 0 -y 400 -defaultsOSRD
-preplace inst ece385_74194_0 -pg 1 -lvl 2 -x 430 -y 150 -defaultsOSRD
-preplace inst ece385_74194_1 -pg 1 -lvl 2 -x 430 -y 470 -defaultsOSRD
-preplace inst ece385_vcc_0 -pg 1 -lvl 1 -x 150 -y 320 -defaultsOSRD
-preplace netloc A_0_1 1 0 2 NJ 100 NJ
-preplace netloc A_1_1 1 0 2 NJ 420 NJ
-preplace netloc B_0_1 1 0 2 NJ 120 NJ
-preplace netloc B_1_1 1 0 2 NJ 440 NJ
-preplace netloc CLK_1_1 1 0 2 NJ 200 280
-preplace netloc CLRN_0_1 1 1 1 290 60n
-preplace netloc C_0_1 1 0 2 NJ 140 NJ
-preplace netloc C_1_1 1 0 2 NJ 460 NJ
-preplace netloc D_0_1 1 0 2 NJ 160 NJ
-preplace netloc D_1_1 1 0 2 NJ 480 NJ
-preplace netloc S0_0_1 1 0 2 NJ 240 NJ
-preplace netloc S0_1_1 1 0 2 NJ 560 NJ
-preplace netloc S1_0_1 1 0 2 NJ 220 NJ
-preplace netloc S1_1_1 1 0 2 NJ 540 NJ
-preplace netloc SR_0_1 1 0 2 NJ 80 NJ
-preplace netloc SR_1_1 1 0 2 NJ 400 NJ
-preplace netloc ece385_74194_0_QA 1 2 1 NJ 120
-preplace netloc ece385_74194_0_QB 1 2 1 NJ 140
-preplace netloc ece385_74194_0_QC 1 2 1 NJ 160
-preplace netloc ece385_74194_0_QD 1 2 1 NJ 180
-preplace netloc ece385_74194_1_QA 1 2 1 NJ 440
-preplace netloc ece385_74194_1_QB 1 2 1 NJ 460
-preplace netloc ece385_74194_1_QC 1 2 1 NJ 480
-preplace netloc ece385_74194_1_QD 1 2 1 NJ 500
-levelinfo -pg 1 0 150 430 590
-pagesize -pg 1 -db -bbox -sgen -90 0 680 620
+preplace inst ece385_74194_0 -pg 1 -lvl 3 -x 680 -y 150 -defaultsOSRD
+preplace inst ece385_74194_1 -pg 1 -lvl 3 -x 680 -y 470 -defaultsOSRD
+preplace inst ece385_vcc_0 -pg 1 -lvl 2 -x 400 -y 320 -defaultsOSRD
+preplace inst ece385_nand_2_0 -pg 1 -lvl 1 -x 140 -y -220 -defaultsOSRD
+preplace netloc A_0_1 1 0 3 NJ 100 N 100 NJ
+preplace netloc A_1_1 1 0 3 NJ 420 N 420 NJ
+preplace netloc B_0_1 1 0 3 NJ 120 N 120 NJ
+preplace netloc B_1_1 1 0 3 NJ 440 N 440 NJ
+preplace netloc CLK_1_1 1 0 3 NJ 200 N 200 530
+preplace netloc CLRN_0_1 1 2 1 540 60n
+preplace netloc C_0_1 1 0 3 NJ 140 N 140 NJ
+preplace netloc C_1_1 1 0 3 NJ 460 N 460 NJ
+preplace netloc D_0_1 1 0 3 NJ 160 N 160 NJ
+preplace netloc D_1_1 1 0 3 NJ 480 N 480 NJ
+preplace netloc S0_0_1 1 0 3 NJ 240 N 240 NJ
+preplace netloc S0_1_1 1 0 3 NJ 560 N 560 NJ
+preplace netloc S1_0_1 1 0 3 NJ 220 N 220 NJ
+preplace netloc S1_1_1 1 0 3 NJ 540 N 540 NJ
+preplace netloc SR_0_1 1 0 3 NJ 80 N 80 NJ
+preplace netloc SR_1_1 1 0 3 NJ 400 N 400 NJ
+preplace netloc ece385_74194_0_QA 1 3 1 NJ 120
+preplace netloc ece385_74194_0_QB 1 3 1 NJ 140
+preplace netloc ece385_74194_0_QC 1 3 1 NJ 160
+preplace netloc ece385_74194_0_QD 1 3 1 NJ 180
+preplace netloc ece385_74194_1_QA 1 3 1 NJ 440
+preplace netloc ece385_74194_1_QB 1 3 1 NJ 460
+preplace netloc ece385_74194_1_QC 1 3 1 NJ 480
+preplace netloc ece385_74194_1_QD 1 3 1 NJ 500
+levelinfo -pg 1 0 140 400 680 840
+pagesize -pg 1 -db -bbox -sgen -90 -290 930 620
 "
 }
 0
