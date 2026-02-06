@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "D:/ECE385/Lab2/lab2_2_test/lab2_2_test.runs/impl_1/Processor.tcl"
+  variable script "C:/ECE385/Lab2/lab2_2_test/lab2_2_test.runs/impl_1/Processor.tcl"
   variable category "vivado_impl"
 }
 
@@ -122,13 +122,31 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param chipscope.maxJobs 3
-  reset_param project.defaultXPMLibraries 
-  open_checkpoint D:/ECE385/Lab2/lab2_2_test/lab2_2_test.runs/impl_1/Processor.dcp
-  set_property webtalk.parent_dir D:/ECE385/Lab2/lab2_2_test/lab2_2_test.cache/wt [current_project]
-  set_property parent.project_path D:/ECE385/Lab2/lab2_2_test/lab2_2_test.xpr [current_project]
-  set_property ip_output_repo D:/ECE385/Lab2/lab2_2_test/lab2_2_test.cache/ip [current_project]
+  set_param tcl.collectionResultDisplayLimit 0
+  set_param chipscope.maxJobs 2
+  set_param xicom.use_bs_reader 1
+OPTRACE "create in-memory project" START { }
+  create_project -in_memory -part xc7s50csga324-1
+  set_property design_mode GateLvl [current_fileset]
+  set_param project.singleFileAddWarning.threshold 0
+OPTRACE "create in-memory project" END { }
+OPTRACE "set parameters" START { }
+  set_property webtalk.parent_dir C:/ECE385/Lab2/lab2_2_test/lab2_2_test.cache/wt [current_project]
+  set_property parent.project_path C:/ECE385/Lab2/lab2_2_test/lab2_2_test.xpr [current_project]
+  set_property ip_output_repo C:/ECE385/Lab2/lab2_2_test/lab2_2_test.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
+OPTRACE "set parameters" END { }
+OPTRACE "add files" START { }
+  add_files -quiet C:/ECE385/Lab2/lab2_2_test/lab2_2_test.runs/synth_1/Processor.dcp
+OPTRACE "read constraints: implementation" START { }
+  read_xdc C:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/constrs_1/imports/Downloads/pin.XDC
+OPTRACE "read constraints: implementation" END { }
+OPTRACE "add files" END { }
+OPTRACE "link_design" START { }
+  link_design -top Processor -part xc7s50csga324-1 
+OPTRACE "link_design" END { }
+OPTRACE "gray box cells" START { }
+OPTRACE "gray box cells" END { }
 OPTRACE "init_design_reports" START { REPORT }
 OPTRACE "init_design_reports" END { }
 OPTRACE "init_design_write_hwdef" START { }

@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="61" Path="D:/ECE385/Lab2/lab2_2_test/lab2_2_test.xpr">
+<Project Version="7" Minor="61" Path="C:/ECE385/Lab2/lab2_2_test/lab2_2_test.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="fc0dcc6350dc47fca3a312ff0448fcf9"/>
@@ -170,7 +170,7 @@
       <Filter Type="Constrs"/>
       <File Path="$PSRCDIR/constrs_1/imports/Downloads/pin.XDC">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Downloads/pin.XDC"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../Users/William Wei/Downloads/pin.XDC"/>
           <Attr Name="ImportTime" Val="1770329636"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>

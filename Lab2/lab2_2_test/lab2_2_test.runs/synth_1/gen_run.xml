@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s50csga324-1" LaunchTime="1770350725" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/Processor.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7s50csga324-1" LaunchTime="1770353007" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/Processor.dcp">
   <File Type="PA-TCL" Name="Processor.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="Processor_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="Processor_reports.tcl"/>
@@ -92,7 +92,7 @@
     <Filter Type="Constrs"/>
     <File Path="$PSRCDIR/constrs_1/imports/Downloads/pin.XDC">
       <FileInfo>
-        <Attr Name="ImportPath" Val="C:/Users/William Wei/Downloads/pin.XDC"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../Users/William Wei/Downloads/pin.XDC"/>
         <Attr Name="ImportTime" Val="1770329636"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
