@@ -2,5 +2,5 @@ Time resolution is 1 ps
 WARNING: 0ns : none of the conditions were true for unique case from File:D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sources_1/imports/design_source/compute.sv:14
 WARNING: 0ns : none of the conditions were true for unique case from File:D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sources_1/imports/design_source/Router.sv:13
 WARNING: 0ns : none of the conditions were true for unique case from File:D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sources_1/imports/design_source/Router.sv:23
-WARNING: 0ns : none of the conditions were true for unique case from File:D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sources_1/imports/design_source/Control.sv:59
-$finish called at time : 1240 ns : File "D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sim_1/imports/sim_sources/testbench.sv" Line 126
+WARNING: 0ns : none of the conditions were true for unique case from File:D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sources_1/imports/design_source/Control.sv:63
+$finish called at time : 1620 ns : File "D:/ECE385/Lab2/lab2_2_test/lab2_2_test.srcs/sim_1/imports/sim_sources/testbench_8.sv" Line 127

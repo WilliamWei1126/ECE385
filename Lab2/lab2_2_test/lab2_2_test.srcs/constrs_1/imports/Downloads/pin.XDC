@@ -12,10 +12,10 @@ set_property -dict {PACKAGE_PIN G1 IOSTANDARD LVCMOS25} [get_ports {Din[0]}]
 set_property -dict {PACKAGE_PIN F2 IOSTANDARD LVCMOS25} [get_ports {Din[1]}]
 set_property -dict {PACKAGE_PIN F1 IOSTANDARD LVCMOS25} [get_ports {Din[2]}]
 set_property -dict {PACKAGE_PIN E2 IOSTANDARD LVCMOS25} [get_ports {Din[3]}]
-set_property -dict { PACKAGE_PIN E1 IOSTANDARD LVCMOS25 } [get_ports {Din[4]}]  ; # SW4
-set_property -dict { PACKAGE_PIN D2 IOSTANDARD LVCMOS25 } [get_ports {Din[5]}]  ; # SW5
-set_property -dict { PACKAGE_PIN D1 IOSTANDARD LVCMOS25 } [get_ports {Din[6]}]  ; # SW6
-set_property -dict { PACKAGE_PIN C2 IOSTANDARD LVCMOS25 } [get_ports {Din[7]}]  ; # SW7
+set_property -dict {PACKAGE_PIN E1 IOSTANDARD LVCMOS25} [get_ports {Din[4]}]
+set_property -dict {PACKAGE_PIN D2 IOSTANDARD LVCMOS25} [get_ports {Din[5]}]
+set_property -dict {PACKAGE_PIN D1 IOSTANDARD LVCMOS25} [get_ports {Din[6]}]
+set_property -dict {PACKAGE_PIN C2 IOSTANDARD LVCMOS25} [get_ports {Din[7]}]
 
 set_property -dict {PACKAGE_PIN B2 IOSTANDARD LVCMOS25} [get_ports {F[0]}]
 set_property -dict {PACKAGE_PIN A4 IOSTANDARD LVCMOS25} [get_ports {F[1]}]
@@ -62,10 +62,10 @@ set_property -dict {PACKAGE_PIN C13 IOSTANDARD LVCMOS33} [get_ports {Bval[0]}]
 set_property -dict {PACKAGE_PIN C14 IOSTANDARD LVCMOS33} [get_ports {Bval[1]}]
 set_property -dict {PACKAGE_PIN D14 IOSTANDARD LVCMOS33} [get_ports {Bval[2]}]
 set_property -dict {PACKAGE_PIN D15 IOSTANDARD LVCMOS33} [get_ports {Bval[3]}]
-set_property -dict { PACKAGE_PIN D16 IOSTANDARD LVCMOS33 } [get_ports {Bval[4]}] ; # LED4
-set_property -dict { PACKAGE_PIN F18 IOSTANDARD LVCMOS33 } [get_ports {Bval[5]}] ; # LED5
-set_property -dict { PACKAGE_PIN E17 IOSTANDARD LVCMOS33 } [get_ports {Bval[6]}] ; # LED6
-set_property -dict { PACKAGE_PIN D17 IOSTANDARD LVCMOS33 } [get_ports {Bval[7]}] ; # LED7
+set_property -dict {PACKAGE_PIN D16 IOSTANDARD LVCMOS33} [get_ports {Bval[4]}]
+set_property -dict {PACKAGE_PIN F18 IOSTANDARD LVCMOS33} [get_ports {Bval[5]}]
+set_property -dict {PACKAGE_PIN E17 IOSTANDARD LVCMOS33} [get_ports {Bval[6]}]
+set_property -dict {PACKAGE_PIN D17 IOSTANDARD LVCMOS33} [get_ports {Bval[7]}]
 
 ############################
 # LEDs: Aval[7:0] (LVCMOS33)
@@ -74,10 +74,10 @@ set_property -dict {PACKAGE_PIN C17 IOSTANDARD LVCMOS33} [get_ports {Aval[0]}]
 set_property -dict {PACKAGE_PIN B18 IOSTANDARD LVCMOS33} [get_ports {Aval[1]}]
 set_property -dict {PACKAGE_PIN A17 IOSTANDARD LVCMOS33} [get_ports {Aval[2]}]
 set_property -dict {PACKAGE_PIN B17 IOSTANDARD LVCMOS33} [get_ports {Aval[3]}]
-set_property -dict { PACKAGE_PIN C18 IOSTANDARD LVCMOS33 } [get_ports {Aval[4]}] ; # LED12
-set_property -dict { PACKAGE_PIN D18 IOSTANDARD LVCMOS33 } [get_ports {Aval[5]}] ; # LED13
-set_property -dict { PACKAGE_PIN E18 IOSTANDARD LVCMOS33 } [get_ports {Aval[6]}] ; # LED14
-set_property -dict { PACKAGE_PIN G17 IOSTANDARD LVCMOS33 } [get_ports {Aval[7]}] ; # LED15
+set_property -dict {PACKAGE_PIN C18 IOSTANDARD LVCMOS33} [get_ports {Aval[4]}]
+set_property -dict {PACKAGE_PIN D18 IOSTANDARD LVCMOS33} [get_ports {Aval[5]}]
+set_property -dict {PACKAGE_PIN E18 IOSTANDARD LVCMOS33} [get_ports {Aval[6]}]
+set_property -dict {PACKAGE_PIN G17 IOSTANDARD LVCMOS33} [get_ports {Aval[7]}]
 
 ############################
 # RGB LED signals (LVCMOS33)
@@ -87,16 +87,9 @@ set_property -dict {PACKAGE_PIN B11 IOSTANDARD LVCMOS33} [get_ports {LED[1]}]
 set_property -dict {PACKAGE_PIN C10 IOSTANDARD LVCMOS33} [get_ports {LED[2]}]
 set_property -dict {PACKAGE_PIN A11 IOSTANDARD LVCMOS33} [get_ports {LED[3]}]
 
-set_property MARK_DEBUG true [get_nets {Aval_OBUF[0]}]
-set_property MARK_DEBUG true [get_nets {Aval_OBUF[1]}]
-set_property MARK_DEBUG true [get_nets {Aval_OBUF[2]}]
-set_property MARK_DEBUG true [get_nets {Aval_OBUF[3]}]
-set_property MARK_DEBUG true [get_nets {Bval_OBUF[0]}]
-set_property MARK_DEBUG true [get_nets {Bval_OBUF[1]}]
-set_property MARK_DEBUG true [get_nets {Bval_OBUF[2]}]
-set_property MARK_DEBUG true [get_nets {Bval_OBUF[3]}]
-set_property MARK_DEBUG true [get_nets {LED_OBUF[3]}]
 
+
+set_property MARK_DEBUG false [get_nets Clk_IBUF_BUFG]
 
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
@@ -120,7 +113,26 @@ create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
 set_property port_width 1 [get_debug_ports u_ila_0/probe2]
 connect_debug_port u_ila_0/probe2 [get_nets [list {LED_OBUF[3]}]]
-set_property MARK_DEBUG false [get_nets Clk_IBUF_BUFG]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[0]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[1]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[2]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[3]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[4]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[5]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[6]}]
+set_property MARK_DEBUG false [get_nets {Bval_OBUF[7]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[0]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[1]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[2]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[3]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[4]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[5]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[6]}]
+set_property MARK_DEBUG false [get_nets {Aval_OBUF[7]}]
+set_property MARK_DEBUG false [get_nets {LED_OBUF[0]}]
+set_property MARK_DEBUG false [get_nets {LED_OBUF[1]}]
+set_property MARK_DEBUG false [get_nets {LED_OBUF[2]}]
+set_property MARK_DEBUG false [get_nets {LED_OBUF[3]}]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
