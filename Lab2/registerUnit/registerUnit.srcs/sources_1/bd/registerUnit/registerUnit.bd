@@ -15,74 +15,62 @@
       "ece385_vcc_0": ""
     },
     "ports": {
-      "A_0": {
+      "DIN3": {
         "direction": "I"
       },
-      "B_0": {
+      "DIN2": {
         "direction": "I"
       },
-      "C_0": {
+      "DIN1": {
         "direction": "I"
       },
-      "D_0": {
+      "DIN0": {
         "direction": "I"
       },
-      "QA_0": {
+      "Bout3": {
         "direction": "O"
       },
-      "QB_0": {
+      "Bout2": {
         "direction": "O"
       },
-      "QC_0": {
+      "Bout1": {
         "direction": "O"
       },
-      "QD_0": {
+      "Bout0": {
         "direction": "O"
       },
-      "S0_0": {
+      "S0A": {
         "direction": "I"
       },
-      "S1_0": {
-        "direction": "I"
-      },
-      "SR_0": {
-        "direction": "I"
-      },
-      "A_1": {
-        "direction": "I"
-      },
-      "B_1": {
-        "direction": "I"
-      },
-      "C_1": {
+      "S1A": {
         "direction": "I"
       },
       "CLK": {
         "type": "clk",
         "direction": "I"
       },
-      "D_1": {
+      "Aout3": {
+        "direction": "O"
+      },
+      "Aout2": {
+        "direction": "O"
+      },
+      "Aout1": {
+        "direction": "O"
+      },
+      "Aout0": {
+        "direction": "O"
+      },
+      "S0B": {
         "direction": "I"
       },
-      "QA_1": {
-        "direction": "O"
-      },
-      "QB_1": {
-        "direction": "O"
-      },
-      "QC_1": {
-        "direction": "O"
-      },
-      "QD_1": {
-        "direction": "O"
-      },
-      "S0_1": {
+      "S1B": {
         "direction": "I"
       },
-      "S1_1": {
+      "Ain": {
         "direction": "I"
       },
-      "SR_1": {
+      "Bin": {
         "direction": "I"
       }
     },
@@ -109,26 +97,28 @@
     "nets": {
       "A_0_1": {
         "ports": [
-          "A_0",
-          "ece385_74194_0/A"
+          "DIN3",
+          "ece385_74194_0/A",
+          "ece385_74194_1/A"
         ]
       },
-      "A_1_1": {
+      "Ain_1": {
         "ports": [
-          "A_1",
-          "ece385_74194_1/A"
+          "Ain",
+          "ece385_74194_1/SR"
         ]
       },
       "B_0_1": {
         "ports": [
-          "B_0",
-          "ece385_74194_0/B"
+          "DIN2",
+          "ece385_74194_0/B",
+          "ece385_74194_1/B"
         ]
       },
-      "B_1_1": {
+      "Bin_1": {
         "ports": [
-          "B_1",
-          "ece385_74194_1/B"
+          "Bin",
+          "ece385_74194_0/SR"
         ]
       },
       "CLK_1_1": {
@@ -147,110 +137,88 @@
       },
       "C_0_1": {
         "ports": [
-          "C_0",
-          "ece385_74194_0/C"
-        ]
-      },
-      "C_1_1": {
-        "ports": [
-          "C_1",
+          "DIN1",
+          "ece385_74194_0/C",
           "ece385_74194_1/C"
         ]
       },
       "D_0_1": {
         "ports": [
-          "D_0",
-          "ece385_74194_0/D"
-        ]
-      },
-      "D_1_1": {
-        "ports": [
-          "D_1",
+          "DIN0",
+          "ece385_74194_0/D",
           "ece385_74194_1/D"
         ]
       },
       "S0_0_1": {
         "ports": [
-          "S0_0",
+          "S0A",
           "ece385_74194_0/S0"
         ]
       },
       "S0_1_1": {
         "ports": [
-          "S0_1",
+          "S0B",
           "ece385_74194_1/S0"
         ]
       },
       "S1_0_1": {
         "ports": [
-          "S1_0",
+          "S1A",
           "ece385_74194_0/S1"
         ]
       },
       "S1_1_1": {
         "ports": [
-          "S1_1",
+          "S1B",
           "ece385_74194_1/S1"
-        ]
-      },
-      "SR_0_1": {
-        "ports": [
-          "SR_0",
-          "ece385_74194_0/SR"
-        ]
-      },
-      "SR_1_1": {
-        "ports": [
-          "SR_1",
-          "ece385_74194_1/SR"
         ]
       },
       "ece385_74194_0_QA": {
         "ports": [
           "ece385_74194_0/QA",
-          "QA_0"
+          "Bout3"
         ]
       },
       "ece385_74194_0_QB": {
         "ports": [
           "ece385_74194_0/QB",
-          "QB_0"
+          "Bout2"
         ]
       },
       "ece385_74194_0_QC": {
         "ports": [
           "ece385_74194_0/QC",
-          "QC_0"
+          "Bout1"
         ]
       },
       "ece385_74194_0_QD": {
         "ports": [
           "ece385_74194_0/QD",
-          "QD_0"
+          "Bout0"
         ]
       },
       "ece385_74194_1_QA": {
         "ports": [
           "ece385_74194_1/QA",
-          "QA_1"
+          "Aout3"
         ]
       },
       "ece385_74194_1_QB": {
         "ports": [
           "ece385_74194_1/QB",
-          "QB_1"
+          "Aout2"
         ]
       },
       "ece385_74194_1_QC": {
         "ports": [
           "ece385_74194_1/QC",
-          "QC_1"
+          "Aout1"
         ]
       },
       "ece385_74194_1_QD": {
         "ports": [
           "ece385_74194_1/QD",
-          "QD_1"
+          "Aout0"
         ]
       }
     }

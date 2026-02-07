@@ -1,16 +1,16 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.0",
-   "Default View_TopLeft":"-806,-823",
+   "Default View_ScaleFactor":"0.892169",
+   "Default View_TopLeft":"-901,-770",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
-preplace port port-id_F2 -pg 1 -lvl 0 -x -570 -y -140 -defaultsOSRD
-preplace port port-id_F1 -pg 1 -lvl 0 -x -570 -y -120 -defaultsOSRD
+preplace port port-id_F2 -pg 1 -lvl 0 -x -570 -y -160 -defaultsOSRD
+preplace port port-id_F1 -pg 1 -lvl 0 -x -570 -y -130 -defaultsOSRD
 preplace port port-id_F0 -pg 1 -lvl 0 -x -570 -y -100 -defaultsOSRD
-preplace port port-id_A -pg 1 -lvl 0 -x -570 -y -690 -defaultsOSRD
+preplace port port-id_A -pg 1 -lvl 0 -x -570 -y -700 -defaultsOSRD
 preplace port port-id_B -pg 1 -lvl 0 -x -570 -y -670 -defaultsOSRD
-preplace port port-id_f -pg 1 -lvl 4 -x 810 -y -220 -defaultsOSRD
+preplace port port-id_Fout -pg 1 -lvl 4 -x 810 -y -220 -defaultsOSRD
 preplace port port-id_Aout -pg 1 -lvl 4 -x 810 -y -670 -defaultsOSRD
 preplace port port-id_Bout -pg 1 -lvl 4 -x 810 -y -730 -defaultsOSRD
 preplace inst ece385_74151_0 -pg 1 -lvl 3 -x 640 -y -210 -defaultsOSRD
@@ -22,22 +22,22 @@ preplace inst ece385_xor_2_0 -pg 1 -lvl 1 -x -80 -y -560 -defaultsOSRD
 preplace inst ece385_not_2 -pg 1 -lvl 2 -x 310 -y -240 -defaultsOSRD
 preplace inst ece385_vcc_0 -pg 1 -lvl 1 -x -80 -y -130 -defaultsOSRD
 preplace inst ece385_gnd_0 -pg 1 -lvl 1 -x -80 -y -270 -defaultsOSRD
-preplace netloc F2_1 1 0 3 -530 -50 80 -140 N
-preplace netloc F1_1 1 0 3 -540 -30 90 -120 N
-preplace netloc F0_1 1 0 3 -550 -40 N -40 460
-preplace netloc ece385_nand_2_0_res 1 1 2 80J -650 480
-preplace netloc ece385_not_0_res 1 2 1 490 -580n
-preplace netloc ece385_nor_2_0_res 1 1 2 90J -380 450
-preplace netloc ece385_not_1_res 1 2 1 470 -450n
-preplace netloc ece385_xor_2_0_res 1 1 2 80J -320 460
-preplace netloc ece385_not_2_res 1 2 1 430 -240n
-preplace netloc ece385_vcc_0_VCC 1 1 2 NJ -130 460
-preplace netloc ece385_gnd_0_GND 1 1 2 90J -310 440
 preplace netloc A_1 1 0 4 -550 -760 N -760 N -760 760
 preplace netloc B_1 1 0 4 -530 -750 80 -730 N -730 N
+preplace netloc F0_1 1 0 3 -550 -40 N -40 460
+preplace netloc F1_1 1 0 3 -540 -30 90 -120 N
+preplace netloc F2_1 1 0 3 -530 -50 80 -140 N
 preplace netloc ece385_74151_0_Y 1 3 1 N -220
+preplace netloc ece385_gnd_0_GND 1 1 2 90J -310 440
+preplace netloc ece385_nand_2_0_res 1 1 2 80J -650 480
+preplace netloc ece385_nor_2_0_res 1 1 2 90J -380 450
+preplace netloc ece385_not_0_res 1 2 1 490 -580n
+preplace netloc ece385_not_1_res 1 2 1 470 -450n
+preplace netloc ece385_not_2_res 1 2 1 430 -240n
+preplace netloc ece385_vcc_0_VCC 1 1 2 NJ -130 460
+preplace netloc ece385_xor_2_0_res 1 1 2 80J -320 460
 levelinfo -pg 1 -570 -80 310 640 810
 pagesize -pg 1 -db -bbox -sgen -640 -860 890 340
 "
 }
-
+0
