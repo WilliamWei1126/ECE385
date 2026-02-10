@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.0",
-   "Default View_TopLeft":"-585,-728",
+   "Default View_ScaleFactor":"1.25",
+   "Default View_TopLeft":"-350,-587",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
@@ -10,20 +10,20 @@ preplace port port-id_R0 -pg 1 -lvl 0 -x -10 -y -390 -defaultsOSRD
 preplace port port-id_B -pg 1 -lvl 0 -x -10 -y -350 -defaultsOSRD
 preplace port port-id_A -pg 1 -lvl 0 -x -10 -y -320 -defaultsOSRD
 preplace port port-id_F -pg 1 -lvl 0 -x -10 -y -290 -defaultsOSRD
-preplace port port-id_Aroutingout -pg 1 -lvl 3 -x 650 -y -310 -defaultsOSRD
-preplace port port-id_Broutingout -pg 1 -lvl 3 -x 650 -y -290 -defaultsOSRD
+preplace port port-id_Aout -pg 1 -lvl 3 -x 650 -y -320 -defaultsOSRD
+preplace port port-id_Bout -pg 1 -lvl 3 -x 650 -y -290 -defaultsOSRD
 preplace inst ece385_74153_0 -pg 1 -lvl 2 -x 500 -y -300 -defaultsOSRD
 preplace inst ece385_gnd_0 -pg 1 -lvl 1 -x 180 -y -180 -defaultsOSRD
-preplace netloc R1_1 1 0 2 20 -390 N
-preplace netloc R0_1 1 0 2 10 -370 N
 preplace netloc A_1 1 0 2 N -350 340
 preplace netloc A_2 1 0 2 N -320 370
 preplace netloc F_1 1 0 2 N -290 360
-preplace netloc ece385_74153_0_Y1 1 2 1 N -310
+preplace netloc R0_1 1 0 2 10 -370 N
+preplace netloc R1_1 1 0 2 20 -390 N
+preplace netloc ece385_74153_0_Y1 1 2 1 630 -320n
 preplace netloc ece385_74153_0_Y2 1 2 1 N -290
 preplace netloc ece385_gnd_0_GND 1 1 1 350 -410n
 levelinfo -pg 1 -10 180 500 650
-pagesize -pg 1 -db -bbox -sgen -80 -810 780 340
+pagesize -pg 1 -db -bbox -sgen -80 -810 730 340
 "
 }
-
+0

@@ -36,7 +36,7 @@
       "B": {
         "direction": "I"
       },
-      "f": {
+      "Fout": {
         "direction": "O"
       },
       "Aout": {
@@ -142,7 +142,7 @@
       "ece385_74151_0_Y": {
         "ports": [
           "ece385_74151_0/Y",
-          "f"
+          "Fout"
         ]
       },
       "ece385_gnd_0_GND": {

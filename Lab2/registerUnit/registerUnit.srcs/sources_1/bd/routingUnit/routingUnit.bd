@@ -29,10 +29,10 @@
       "F": {
         "direction": "I"
       },
-      "Aroutingout": {
+      "Aout": {
         "direction": "O"
       },
-      "Broutingout": {
+      "Bout": {
         "direction": "O"
       }
     },
@@ -89,13 +89,13 @@
       "ece385_74153_0_Y1": {
         "ports": [
           "ece385_74153_0/Y1",
-          "Aroutingout"
+          "Aout"
         ]
       },
       "ece385_74153_0_Y2": {
         "ports": [
           "ece385_74153_0/Y2",
-          "Broutingout"
+          "Bout"
         ]
       },
       "ece385_gnd_0_GND": {
