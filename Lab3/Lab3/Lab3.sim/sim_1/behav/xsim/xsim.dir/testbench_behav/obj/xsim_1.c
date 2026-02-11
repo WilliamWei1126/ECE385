@@ -55,6 +55,7 @@
 typedef void (*funcp)(char *, char *);
 extern int main(int, char**);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 IKI_DLLESPEC extern void execute_33(char*, char *);
 IKI_DLLESPEC extern void execute_35(char*, char *);
 IKI_DLLESPEC extern void execute_37(char*, char *);
@@ -90,6 +91,8 @@ void relocate(char *dp)
 {
 	iki_relocate(dp, "xsim.dir/testbench_behav/xsim.reloc",  (void **)funcTab, 28);
 =======
+=======
+>>>>>>> Stashed changes
 IKI_DLLESPEC extern void execute_38(char*, char *);
 IKI_DLLESPEC extern void execute_40(char*, char *);
 IKI_DLLESPEC extern void execute_42(char*, char *);
@@ -125,6 +128,9 @@ const int NumRelocateId= 29;
 void relocate(char *dp)
 {
 	iki_relocate(dp, "xsim.dir/testbench_behav/xsim.reloc",  (void **)funcTab, 29);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 	/*Populate the transaction function pointer field in the whole net structure */

@@ -3,10 +3,17 @@
 # SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
 # IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Start of session at: Tue Feb 10 21:04:23 2026
 # Process ID: 12200
 # Current directory: D:/ECE385/Lab3/Lab3
 # Command line: vivado.exe -gui_launcher_event rodinguilauncherevent26288 D:\ECE385\Lab3\Lab3\Lab3.xpr
+=======
+# Start of session at: Tue Feb 10 22:03:04 2026
+# Process ID: 2000
+# Current directory: D:/ECE385/Lab3/Lab3
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent6440 D:\ECE385\Lab3\Lab3\Lab3.xpr
+>>>>>>> Stashed changes
 =======
 # Start of session at: Tue Feb 10 22:03:04 2026
 # Process ID: 2000
@@ -21,6 +28,7 @@ start_gui
 open_project D:/ECE385/Lab3/Lab3/Lab3.xpr
 update_compile_order -fileset sources_1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 set_property SOURCE_SET sources_1 [get_filesets sim_1]
 import_files -fileset sim_1 -norecurse D:/ECE385/Lab2/sim_sources/testbench.sv
 update_compile_order -fileset sim_1
@@ -33,6 +41,8 @@ set_property source_mgmt_mode All [current_project]
 update_compile_order -fileset sim_1
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 launch_simulation
 source testbench.tcl
 close_sim
@@ -40,7 +50,10 @@ launch_simulation
 source testbench.tcl
 close_sim
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 synth_design -rtl -rtl_skip_mlo -name rtl_1
 close_design
 synth_design -rtl -rtl_skip_mlo -name rtl_1
@@ -58,4 +71,7 @@ close_sim
 launch_simulation
 source testbench.tcl
 close_sim
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

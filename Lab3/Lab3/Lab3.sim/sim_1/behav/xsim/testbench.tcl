@@ -9,7 +9,11 @@ if { [string length $curr_wave] == 0 } {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 run 1000ns
+=======
+run all
+>>>>>>> Stashed changes
 =======
 run all
 >>>>>>> Stashed changes
