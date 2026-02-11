@@ -6,6 +6,7 @@ timeprecision 1ns;
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench.
 logic       Clk;
+<<<<<<< Updated upstream
 logic       Reset; 
 logic  [15:0] a,b;
 logic cin;
@@ -13,6 +14,18 @@ logic cin;
 	 logic  [15:0] s;
 	 logic         cout;
 lookahead_adder add (.*);	
+=======
+logic       Reset;
+
+logic  [15:0]a,b;
+logic cin;
+logic [15:0]s;
+logic         cout;
+
+// Instantiating the DUT (Device Under Test)
+// Make sure the module and signal names match with those in your design
+select_adder ral6_dut(.*);
+>>>>>>> Stashed changes
 
 
 initial begin: CLOCK_INITIALIZATION
@@ -42,6 +55,7 @@ end
 // happens first. 
 initial begin: TEST_VECTORS
 	Reset = 1;		// Toggle Reset (use blocking operator), because we want to have this happen 'first'
+<<<<<<< Updated upstream
 	#10.1 Reset=0;
 	a=16'h1234;
 	b=16'h5678;
@@ -50,6 +64,13 @@ initial begin: TEST_VECTORS
 
 
 
+=======
+    #10.1 Reset = 0;
+    cin = 1'b0;
+    a = 16'h1234;
+    b = 16'h5678;
+    repeat (3) @(posedge  Clk);
+>>>>>>> Stashed changes
 	$finish(); //this task will end the simulation if the Vivado settings are properly configured
 
 end

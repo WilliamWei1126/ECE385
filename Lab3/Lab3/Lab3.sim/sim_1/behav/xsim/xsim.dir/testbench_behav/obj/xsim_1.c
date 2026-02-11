@@ -54,6 +54,7 @@
 #endif
 typedef void (*funcp)(char *, char *);
 extern int main(int, char**);
+<<<<<<< Updated upstream
 IKI_DLLESPEC extern void execute_33(char*, char *);
 IKI_DLLESPEC extern void execute_35(char*, char *);
 IKI_DLLESPEC extern void execute_37(char*, char *);
@@ -88,6 +89,43 @@ const int NumRelocateId= 28;
 void relocate(char *dp)
 {
 	iki_relocate(dp, "xsim.dir/testbench_behav/xsim.reloc",  (void **)funcTab, 28);
+=======
+IKI_DLLESPEC extern void execute_38(char*, char *);
+IKI_DLLESPEC extern void execute_40(char*, char *);
+IKI_DLLESPEC extern void execute_42(char*, char *);
+IKI_DLLESPEC extern void execute_138(char*, char *);
+IKI_DLLESPEC extern void execute_139(char*, char *);
+IKI_DLLESPEC extern void execute_140(char*, char *);
+IKI_DLLESPEC extern void execute_82(char*, char *);
+IKI_DLLESPEC extern void execute_83(char*, char *);
+IKI_DLLESPEC extern void execute_106(char*, char *);
+IKI_DLLESPEC extern void execute_107(char*, char *);
+IKI_DLLESPEC extern void execute_130(char*, char *);
+IKI_DLLESPEC extern void execute_131(char*, char *);
+IKI_DLLESPEC extern void vlog_const_rhs_process_execute_0_fast_no_reg_no_agg(char*, char*, char*);
+IKI_DLLESPEC extern void execute_57(char*, char *);
+IKI_DLLESPEC extern void execute_58(char*, char *);
+IKI_DLLESPEC extern void execute_59(char*, char *);
+IKI_DLLESPEC extern void execute_49(char*, char *);
+IKI_DLLESPEC extern void execute_50(char*, char *);
+IKI_DLLESPEC extern void execute_45(char*, char *);
+IKI_DLLESPEC extern void execute_46(char*, char *);
+IKI_DLLESPEC extern void execute_47(char*, char *);
+IKI_DLLESPEC extern void execute_48(char*, char *);
+IKI_DLLESPEC extern void execute_141(char*, char *);
+IKI_DLLESPEC extern void execute_142(char*, char *);
+IKI_DLLESPEC extern void execute_143(char*, char *);
+IKI_DLLESPEC extern void execute_144(char*, char *);
+IKI_DLLESPEC extern void execute_145(char*, char *);
+IKI_DLLESPEC extern void execute_146(char*, char *);
+IKI_DLLESPEC extern void vlog_transfunc_eventcallback(char*, char*, unsigned, unsigned, unsigned, char *);
+funcp funcTab[29] = {(funcp)execute_38, (funcp)execute_40, (funcp)execute_42, (funcp)execute_138, (funcp)execute_139, (funcp)execute_140, (funcp)execute_82, (funcp)execute_83, (funcp)execute_106, (funcp)execute_107, (funcp)execute_130, (funcp)execute_131, (funcp)vlog_const_rhs_process_execute_0_fast_no_reg_no_agg, (funcp)execute_57, (funcp)execute_58, (funcp)execute_59, (funcp)execute_49, (funcp)execute_50, (funcp)execute_45, (funcp)execute_46, (funcp)execute_47, (funcp)execute_48, (funcp)execute_141, (funcp)execute_142, (funcp)execute_143, (funcp)execute_144, (funcp)execute_145, (funcp)execute_146, (funcp)vlog_transfunc_eventcallback};
+const int NumRelocateId= 29;
+
+void relocate(char *dp)
+{
+	iki_relocate(dp, "xsim.dir/testbench_behav/xsim.reloc",  (void **)funcTab, 29);
+>>>>>>> Stashed changes
 
 	/*Populate the transaction function pointer field in the whole net structure */
 }

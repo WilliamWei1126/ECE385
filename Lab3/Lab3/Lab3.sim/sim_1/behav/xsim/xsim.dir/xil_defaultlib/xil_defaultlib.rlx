@@ -3,6 +3,14 @@
 Oct 14 2022
 05:20:55
 D:/ECE385/Lab3/Lab3/Lab3.sim/sim_1/behav/xsim/glbl.v,1665704903,verilog,,,,glbl,,uvm,,,,,,
+<<<<<<< Updated upstream
 D:/ECE385/Lab3/Lab3/Lab3.srcs/sim_1/imports/sim_sources/testbench.sv,1770784713,systemVerilog,,,,testbench,,uvm,,,,,,
 D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/imports/design_source/lookahead_adder.sv,1770784025,systemVerilog,,D:/ECE385/Lab3/Lab3/Lab3.srcs/sim_1/imports/sim_sources/testbench.sv,,lookahead_adder,,uvm,,,,,,
 D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/new/FA.sv,1770779034,systemVerilog,,D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/imports/design_source/lookahead_adder.sv,,FA,,uvm,,,,,,
+=======
+D:/ECE385/Lab3/Lab3/Lab3.srcs/sim_1/imports/sim_sources/testbench.sv,1770783976,systemVerilog,,,,testbench,,uvm,,,,,,
+D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/imports/design_source/ripple_adder.sv,1770782662,systemVerilog,,D:/ECE385/Lab3/Lab3/Lab3.srcs/sim_1/imports/sim_sources/testbench.sv,,ripple_adder,,uvm,,,,,,
+D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/imports/design_source/select_adder.sv,1770784823,systemVerilog,,D:/ECE385/Lab3/Lab3/Lab3.srcs/sim_1/imports/sim_sources/testbench.sv,,select_adder,,uvm,,,,,,
+D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/new/FA.sv,1770778780,systemVerilog,,D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/new/FA4.sv,,FA,,uvm,,,,,,
+D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/new/FA4.sv,1770780336,systemVerilog,,D:/ECE385/Lab3/Lab3/Lab3.srcs/sources_1/imports/design_source/select_adder.sv,,FA4,,uvm,,,,,,
+>>>>>>> Stashed changes
