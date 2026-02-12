@@ -25,8 +25,8 @@ module lookahead_adder (
 	GG8=G[11]|(G[10]&P[11])|(G[9]&P[11]&P[10])|(G[8]&P[11]&P[10]&P[9]);
 	GG12=G[15]|(G[14]&P[15])|(G[13]&P[15]&P[14])|(G[12]&P[15]&P[14]&P[13]);
 	c4=GG0|(cin&PG0);
-	c8=GG4|(c4&PG4);
-	c12=GG8|(c8&PG8);
+	c8=GG4|(GG0&PG4)|(PG4&PG0&cin);
+	c12=GG8|(PG8&GG4)|(PG8&PG4&GG0)|(PG8&PG4&PG0&cin);
 
 	end
 	lookahead4 lookahead40(.a(a[3:0]),.b(b[3:0]),.cin(cin),.s(s[3:0]),.cout());
