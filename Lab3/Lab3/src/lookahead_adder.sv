@@ -25,6 +25,11 @@ module lookahead_adder (
 		* Insert code here to implement a CLA adder.
 		* Your code should be completly combinational (don't use always_ff or always_latch).
 		* Feel free to create sub-modules or other files. */
+
+
+
+endmodule
+
 module lookahead4(input logic [3:0] a,input logic[3:0] b,input logic cin,output logic[3:0] s,output logic cout,output logic PG,output logic GG);
 logic c1,c2,c3;
 logic [3:0] P;
@@ -46,7 +51,4 @@ end
 	 FA fa1(.x(a[1]),.y(b[1]),.z(c1),.s(s[1]),.c());
 	 FA fa2(.x(a[2]),.y(b[2]),.z(c2),.s(s[2]),.c());
 	 FA fa3(.x(a[3]),.y(b[3]),.z(c3),.s(s[3]),.c());
-endmodule
-
-
 endmodule
