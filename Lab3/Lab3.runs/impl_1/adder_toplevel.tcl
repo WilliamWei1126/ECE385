@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "D:/ECE385/Lab3/Lab3.runs/impl_1/adder_toplevel.tcl"
+  variable script "C:/ECE385/Lab3/Lab3.runs/impl_1/adder_toplevel.tcl"
   variable category "vivado_impl"
 }
 
@@ -123,9 +123,9 @@ start_step write_bitstream
 set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
-  set_param chipscope.maxJobs 3
+  set_param chipscope.maxJobs 2
   open_checkpoint adder_toplevel_routed.dcp
-  set_property webtalk.parent_dir D:/ECE385/Lab3/Lab3.cache/wt [current_project]
+  set_property webtalk.parent_dir C:/ECE385/Lab3/Lab3.cache/wt [current_project]
 set_property TOP adder_toplevel [current_fileset]
 OPTRACE "read constraints: write_bitstream" START { }
 OPTRACE "read constraints: write_bitstream" END { }

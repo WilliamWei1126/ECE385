@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date         : Tue Feb 10 23:19:08 2026
-| Host         : DESKTOP-DBM6BK3 running 64-bit major release  (build 9200)
+| Date         : Thu Feb 12 19:50:24 2026
+| Host         : DESKTOP-6V711SS running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file adder_toplevel_control_sets_placed.rpt
 | Design       : adder_toplevel
 | Device       : xc7s50
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              24 |            9 |
+| No           | No                    | No                     |              24 |           14 |
 | No           | No                    | Yes                    |               0 |            0 |
 | No           | Yes                   | No                     |              17 |            5 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              49 |           16 |
+| Yes          | Yes                   | No                     |              49 |           18 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -76,8 +76,8 @@ Table of Contents
 |  clk_IBUF_BUFG | button_sync[0]/counter[0]_i_2__1_n_0 | button_sync[0]/counter[0]_i_1__0_n_0 |                4 |             16 |         4.00 |
 |  clk_IBUF_BUFG | button_sync[1]/sel                   | button_sync[1]/counter[0]_i_1_n_0    |                4 |             16 |         4.00 |
 |  clk_IBUF_BUFG |                                      | button_sync[1]/reset_s               |                5 |             17 |         3.40 |
-|  clk_IBUF_BUFG | run_once/E[0]                        | button_sync[1]/reset_s               |                8 |             17 |         2.12 |
-|  clk_IBUF_BUFG |                                      |                                      |                9 |             24 |         2.67 |
+|  clk_IBUF_BUFG | run_once/E[0]                        | button_sync[1]/reset_s               |               10 |             17 |         1.70 |
+|  clk_IBUF_BUFG |                                      |                                      |               14 |             24 |         1.71 |
 +----------------+--------------------------------------+--------------------------------------+------------------+----------------+--------------+
 
 

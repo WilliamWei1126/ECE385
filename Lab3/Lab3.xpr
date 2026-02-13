@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="61" Path="D:/ECE385/Lab3/Lab3.xpr">
+<Project Version="7" Minor="61" Path="C:/ECE385/Lab3/Lab3.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="19b0079fcacd4404a2d2fdb8885f7bea"/>
@@ -90,17 +90,8 @@
       <Filter Type="Srcs"/>
       <File Path="$PSRCDIR/sources_1/imports/sources_1/new/FA.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/new/FA.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/new/FA.sv"/>
           <Attr Name="ImportTime" Val="1770778780"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/sources_1/new/FA4.sv">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/new/FA4.sv"/>
-          <Attr Name="ImportTime" Val="1770780336"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -108,7 +99,7 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/hex_driver.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/hex_driver.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/hex_driver.sv"/>
           <Attr Name="ImportTime" Val="1770675457"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -117,8 +108,17 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/load_reg.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/load_reg.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/load_reg.sv"/>
           <Attr Name="ImportTime" Val="1770675457"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/lookahead_adder.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/lookahead_adder.sv"/>
+          <Attr Name="ImportTime" Val="1770785095"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -126,17 +126,8 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/negedge_detector.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/negedge_detector.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/negedge_detector.sv"/>
           <Attr Name="ImportTime" Val="1770675457"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/select_adder.sv">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/select_adder.sv"/>
-          <Attr Name="ImportTime" Val="1770785126"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -144,7 +135,7 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/sync_debounce.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/sync_debounce.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/sync_debounce.sv"/>
           <Attr Name="ImportTime" Val="1770675457"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -153,7 +144,27 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/adder_toplevel.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/adder_toplevel.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/adder_toplevel.sv"/>
+          <Attr Name="ImportTime" Val="1770785126"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/sources_1/new/FA4.sv">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/new/FA4.sv"/>
+          <Attr Name="ImportTime" Val="1770780336"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/select_adder.sv">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/select_adder.sv"/>
           <Attr Name="ImportTime" Val="1770785126"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -163,18 +174,8 @@
       <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/ripple_adder.sv">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/ripple_adder.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sources_1/imports/design_source/ripple_adder.sv"/>
           <Attr Name="ImportTime" Val="1770785126"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/sources_1/imports/design_source/lookahead_adder.sv">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sources_1/imports/design_source/lookahead_adder.sv"/>
-          <Attr Name="ImportTime" Val="1770785095"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -191,7 +192,7 @@
       <Filter Type="Constrs"/>
       <File Path="$PSRCDIR/constrs_1/imports/Downloads/Pin.xdc">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Downloads/Pin.xdc"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Downloads/Pin.xdc"/>
           <Attr Name="ImportTime" Val="1770786706"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -205,7 +206,7 @@
       <Filter Type="Srcs"/>
       <File Path="$PSRCDIR/sim_1/imports/sim_sources/testbench.sv">
         <FileInfo>
-          <Attr Name="ImportPath" Val="C:/Users/William Wei/Documents/sim_1/imports/sim_sources/testbench.sv"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/William Wei/Documents/sim_1/imports/sim_sources/testbench.sv"/>
           <Attr Name="ImportTime" Val="1770785176"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>

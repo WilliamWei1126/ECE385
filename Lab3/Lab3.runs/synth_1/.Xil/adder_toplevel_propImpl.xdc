@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:D:/ECE385/Lab3/Lab3.srcs/constrs_1/imports/Downloads/Pin.xdc rfile:../../../Lab3.srcs/constrs_1/imports/Downloads/Pin.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/ECE385/Lab3/Lab3.srcs/constrs_1/imports/Downloads/Pin.xdc rfile:../../../Lab3.srcs/constrs_1/imports/Downloads/Pin.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:10 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN N15 IOSTANDARD LVCMOS33 } [get_ports {clk}]
 set_property src_info {type:XDC file:1 line:16 export:INPUT save:INPUT read:READ} [current_design]
