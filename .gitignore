@@ -1,0 +1,31 @@
+# =========================
+# Vivado / Xilinx generated
+# =========================
+**/.Xil/
+**/*.cache/
+**/*.hw/
+**/*.ip_user_files/
+**/*.runs/
+**/*.sim/
+**/*.gen/
+**/*.jou
+**/*.log
+**/*.str
+**/*.dmp
+**/*.wdb
+**/*.pb
+**/*.db
+
+# Block Design / IP generated artifacts (usually safe to ignore)
+**/*.srcs/sources_1/bd/*/ip/
+**/*.srcs/sources_1/ip/
+**/*.srcs/constrs_1/imports/
+**/*.srcs/sim_1/
+
+# =========================
+# OS / editor noise
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
