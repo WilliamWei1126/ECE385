@@ -42,12 +42,12 @@ module Miltiplier_top(
 	
 	reg_8 reg_A (
 		.Clk            (Clk), 
-		.Reset          (Reset_Load_Clear),
+		.Reset          (Reset_Load_Clear_SH),
 
 		.Shift_In       (A_In), 
-		.Load           (1), 
+		.Load           (1'b1), 
 		.Shift_En       (Shift),
-		.D              (SW),
+		.D              (SW_SH),
 
 		.Shift_Out      (A_out),
 		.Data_Out       (Aval)
@@ -58,9 +58,9 @@ module Miltiplier_top(
 		.Reset          (0),
 
 		.Shift_In       (B_In), 
-		.Load           (Reset_Load_Clear), 
+		.Load           (Reset_Load_Clear_SH), 
 		.Shift_En       (Shift),
-		.D              (SW),
+		.D              (SW_SH),
 
 		.Shift_Out      (LSB),
 		.Data_Out       (Bval)
@@ -68,7 +68,12 @@ module Miltiplier_top(
 	
 	
 	/*control unit LSB of register*/
+	CONTROL control_unit (
+	   .Clk            (CLK)
+	   .Reset          (Reset_Load_Clear_SH)
 	
+	
+	);
 	
 	
 	hex_driver hex_a (
