@@ -26,4 +26,6 @@ module NineBitAdder(
     
     output logic[8:0] Result
     );
+    
+    select_adder adder(.a(In1), .b(In2), .cin(1'b0), .s(Result), .cout());
 endmodule

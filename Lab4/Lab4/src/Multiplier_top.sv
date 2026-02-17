@@ -50,14 +50,14 @@ module Miltiplier_top(
 		.Load           (), 
 		.Shift_En       (Shift),
 		.D              (AdderResult[7:0]),
-
+		
 		.Shift_Out      (A_out),
 		.Data_Out       (Aval)
 	);
 
 	reg_8 reg_B (
 		.Clk            (Clk), 
-		.Reset          (0),
+		.Reset          (1'b0),
 
 		.Shift_In       (A_out), 
 		.Load           (Clr_Ld), 
