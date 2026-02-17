@@ -3,7 +3,7 @@
 module CONTROL (
 	input  logic Clk, 
 	input  logic Reset,
-	input  logic Eun,
+	input  logic Run,
 	input  logic M,
 
 	output logic Clr_Ld, 

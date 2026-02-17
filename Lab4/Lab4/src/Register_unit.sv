@@ -16,7 +16,7 @@ module register_unit (
 
 
 
-	reg_4 reg_A (
+	reg_8 reg_A (
 		.Clk            (Clk), 
 		.Reset          (Reset),
 
@@ -29,7 +29,7 @@ module register_unit (
 		.Data_Out       (A)
 	);
 
-	reg_4 reg_B (
+	reg_8 reg_B (
 		.Clk            (Clk), 
 		.Reset          (Reset),
 
