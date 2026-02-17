@@ -32,7 +32,8 @@ module Miltiplier_top(
     output logic[7:0] Bval,
     output logic Xval
     );
-    logic LSB;
+    
+    logic LSB, Clr_Ld, Shift, Add, Sub;
 	logic Shift;
 	logic[7:0] SW_SH;
 	logic Reset_Load_Clear_SH;
@@ -44,10 +45,10 @@ module Miltiplier_top(
 		.Clk            (Clk), 
 		.Reset          (Reset_Load_Clear_SH),
 
-		.Shift_In       (A_In), 
-		.Load           (1'b1), 
+		.Shift_In       (), 
+		.Load           (), 
 		.Shift_En       (Shift),
-		.D              (SW_SH),
+		.D              (),
 
 		.Shift_Out      (A_out),
 		.Data_Out       (Aval)
@@ -57,7 +58,7 @@ module Miltiplier_top(
 		.Clk            (Clk), 
 		.Reset          (0),
 
-		.Shift_In       (B_In), 
+		.Shift_In       (A_out), 
 		.Load           (Reset_Load_Clear_SH), 
 		.Shift_En       (Shift),
 		.D              (SW_SH),
@@ -69,9 +70,22 @@ module Miltiplier_top(
 	
 	/*control unit LSB of register*/
 	CONTROL control_unit (
-	   .Clk            (CLK)
-	   .Reset          (Reset_Load_Clear_SH)
+	   .Clk            (CLK),
+	   .Reset          (Reset_Load_Clear_SH),
+	   .Run            (Run_SH),
+	   .M              (LSB),
+	   
+	   .Clr_Ld         (Clr_Ld),
+	   .Shift          (Shift),
+	   .Add            (Add),
+	   .Sub            (Sub)
+	);
 	
+	NineBitAdder adder (
+	   .In1            (),
+	   .In2            (),
+	   
+	   .Result         ()
 	
 	);
 	
