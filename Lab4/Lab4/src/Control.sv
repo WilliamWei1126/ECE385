@@ -1,15 +1,15 @@
 //Two-always example for state machine
 
-module control (
+module CONTROL (
 	input  logic Clk, 
 	input  logic Reset,
-	input  logic LoadA,
-	input  logic LoadB,
-	input  logic Execute,
+	input  logic Eun,
+	input  logic M,
 
-	output logic Shift_En, 
-	output logic Ld_A,
-	output logic Ld_B
+	output logic Clr_Ld, 
+	output logic Shift,
+	output logic Add,
+	output logic Sub
 );
 
 // Declare signals curr_state, next_state of type enum
