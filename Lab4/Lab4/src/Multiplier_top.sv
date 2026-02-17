@@ -35,20 +35,21 @@ module Miltiplier_top(
     
     logic LSB, Clr_Ld, Shift, Add, Sub;
 	logic Shift;
-	logic[7:0] SW_SH;
+	logic[7:0] SW_SH, Ain;
+	logic[8:0] AdderResult;
 	logic Reset_Load_Clear_SH;
 	logic Run_SH;
 	// Register unit that holds the accumulated sum
-
+    assign Xval = AdderResult[8];
 	
 	reg_8 reg_A (
 		.Clk            (Clk), 
-		.Reset          (Reset_Load_Clear_SH),
+		.Reset          (Clr_Ld),
 
-		.Shift_In       (), 
+		.Shift_In       (Xval), 
 		.Load           (), 
 		.Shift_En       (Shift),
-		.D              (),
+		.D              (AdderResult[7:0]),
 
 		.Shift_Out      (A_out),
 		.Data_Out       (Aval)
@@ -59,7 +60,7 @@ module Miltiplier_top(
 		.Reset          (0),
 
 		.Shift_In       (A_out), 
-		.Load           (Reset_Load_Clear_SH), 
+		.Load           (Clr_Ld), 
 		.Shift_En       (Shift),
 		.D              (SW_SH),
 
@@ -82,10 +83,10 @@ module Miltiplier_top(
 	);
 	
 	NineBitAdder adder (
-	   .In1            (),
-	   .In2            (),
+	   .In1            (Aval),
+	   .In2            (SW_SH),
 	   
-	   .Result         ()
+	   .Result         (AdderResult)
 	
 	);
 	
