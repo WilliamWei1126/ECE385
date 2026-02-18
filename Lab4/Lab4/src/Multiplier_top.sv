@@ -33,18 +33,20 @@ module Miltiplier_top(
     output logic Xval
     );
     
-    logic LSB, Clr_Ld, Shift, Add, Sub, LoadA;
+    logic LSB, Shift, Add, Sub, LoadA;
 	logic[7:0] SW_SH, Ain, SWinv;
 	logic[8:0] AdderResult, AddIn;
 	logic Reset_Load_Clear_SH;
 	logic Run_SH;
 	logic cin;
 	logic A_out;
+	logic Ld_B;
+	logic Clr_A;
 
 	// Register unit that holds the accumulated sum
     always_ff @( posedge CLK ) begin : blockName
 		if(Clr_Ld)	Xval <= 1'b0;
-		
+
 		else 		Xval <= AdderResult[8];
 	end 
 	
@@ -65,7 +67,7 @@ module Miltiplier_top(
 	
 	reg_8 reg_A (
 		.Clk            (CLK), 
-		.Reset          (Clr_Ld),
+		.Reset          (Clr_A),
 
 		.Shift_In       (Xval), 
 		.Load           (LoadA), 
@@ -81,7 +83,7 @@ module Miltiplier_top(
 		.Reset          (1'b0),
 
 		.Shift_In       (A_out), 
-		.Load           (Clr_Ld), 
+		.Load           (Ld_B), 
 		.Shift_En       (Shift),
 		.D              (SW_SH),
 
@@ -98,7 +100,8 @@ module Miltiplier_top(
 	   .Run            (Run_SH),
 	   .M              (LSB),
 	   
-	   .Clr_Ld         (Clr_Ld),
+	   .Ld_B           (Ld_B),
+	   .Clr_A		   (Clr_A),
 	   .Shift          (Shift),
 	   .Add            (Add),
 	   .Sub            (Sub)
