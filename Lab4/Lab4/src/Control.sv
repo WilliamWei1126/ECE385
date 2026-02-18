@@ -77,6 +77,8 @@ module CONTROL (
 					
 		endcase
 	end
+	logic[3:0] countp;
+	FA4 whycantuseplus(.A(count), .B(4'b0001),.c_in(1'b0),.S(countp),.c_out());
 
 
 
@@ -91,7 +93,7 @@ module CONTROL (
 		else
 		begin
 			curr_state <= next_state;
-			 if(curr_state==shifting)count<=count+1;
+			 if(curr_state==shifting)count<=countp;
 			 if(curr_state==load)count<=4'b0000;
 
 		end
