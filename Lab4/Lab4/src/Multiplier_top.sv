@@ -44,6 +44,7 @@ module Miltiplier_top(
 	// Register unit that holds the accumulated sum
     always_ff @( posedge CLK ) begin : blockName
 		if(Clr_Ld)	Xval <= 1'b0;
+		
 		else 		Xval <= AdderResult[8];
 	end 
 	
