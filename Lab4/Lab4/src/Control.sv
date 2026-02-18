@@ -6,7 +6,9 @@ module CONTROL (
 	input  logic Run,
 	input  logic M,
 
-	output logic Clr_Ld, 
+	//output logic Clr_Ld, 
+	output logic Clr_A,
+	output logic Ld_B,
 	output logic Shift,
 	output logic Add,
 	output logic Sub
@@ -26,7 +28,9 @@ module CONTROL (
 	always_comb
 	begin
 	// Assign outputs based on ‘state’
-				Clr_Ld = 1'b0;
+				//Clr_Ld = 1'b0;
+				Clr_A=1'b0;
+				Ld_B=1'b0;
 				Shift=1'b0;
 				Add = 1'b0;
 				Sub=1'b0;
@@ -34,7 +38,11 @@ module CONTROL (
 			shifting:Shift=1'b1;	
 			adding:Add = 1'b1;
 			subing:Sub=1'b1;
-			load:Clr_Ld = (Reset); 
+			load:begin 
+			if(Reset||Run)Clr_A=1'b1;
+			else Clr_A=1'b0;
+			Ld_B=Reset;
+			end
 		endcase
 	end
 
