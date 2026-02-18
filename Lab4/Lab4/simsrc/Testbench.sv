@@ -66,59 +66,59 @@ initial begin: TEST_VECTORS
     
     //7 * 59 = 413 = 019D
     SW <= 8'h3B;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b1;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b0;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     SW <= 8'h07;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b0;
-    repeat (300) @(posedge CLK);
+    repeat (200) @(posedge CLK);
 
     //-7 * +59 = -413 = FE63
     SW <= 8'h3B;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b0;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     SW <= 8'hF9;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b0;
-    repeat (300) @(posedge CLK);
+    repeat (200) @(posedge CLK);
     
     //+7 * -59 = -413 = FE63
     SW <= 8'hC5;                 
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b0;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     SW <= 8'h07;                 
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b0;
-    repeat (300) @(posedge CLK);
+    repeat (200) @(posedge CLK);
 
     //-7 * -59 = 413 = 019D
     SW <= 8'hC5;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Reset_Load_Clear = 1'b0;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     SW <= 8'hF9;
-    repeat (10) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b1;
-    repeat (12) @(posedge CLK);
+    repeat (20) @(posedge CLK);
     Run <= 1'b0;
-    repeat (300) @(posedge CLK);
+    repeat (200) @(posedge CLK);
     $finish;
 
 end
