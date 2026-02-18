@@ -33,21 +33,41 @@ module Miltiplier_top(
     output logic Xval
     );
     
-    logic LSB, Clr_Ld, Shift, Add, Sub;
-	logic Shift;
-	logic[7:0] SW_SH, Ain;
-	logic[8:0] AdderResult;
+    logic LSB, Clr_Ld, Shift, Add, Sub, LoadA;
+	logic[7:0] SW_SH, Ain, SWinv;
+	logic[8:0] AdderResult, AddIn;
 	logic Reset_Load_Clear_SH;
 	logic Run_SH;
+	logic cin;
+	logic A_out;
+
 	// Register unit that holds the accumulated sum
-    assign Xval = AdderResult[8];
+    always_ff @( posedge CLK ) begin : blockName
+		if(Clr_Ld)	Xval <= 1'b0;
+		else 		Xval <= AdderResult[8];
+	end 
+	
+	always_comb begin
+	   SWinv = ~SW_SH;
+	   if(Add == 1'b1 && Sub == 1'b0) begin
+	       AddIn = {SW_SH[7], SW_SH};
+		   cin = 1'b0;
+	   end else if (Add == 1'b0 && Sub == 1'b1) begin
+	       AddIn = {SWinv[7], SWinv};
+		   cin = 1'b1;
+	   end else begin
+	       AddIn = 9'b000000000;
+		   cin = 1'b0;
+	   end
+	   LoadA = Add | Sub;
+	end
 	
 	reg_8 reg_A (
-		.Clk            (Clk), 
+		.Clk            (CLK), 
 		.Reset          (Clr_Ld),
 
 		.Shift_In       (Xval), 
-		.Load           (), 
+		.Load           (LoadA), 
 		.Shift_En       (Shift),
 		.D              (AdderResult[7:0]),
 		
@@ -56,7 +76,7 @@ module Miltiplier_top(
 	);
 
 	reg_8 reg_B (
-		.Clk            (Clk), 
+		.Clk            (CLK), 
 		.Reset          (1'b0),
 
 		.Shift_In       (A_out), 
@@ -67,6 +87,7 @@ module Miltiplier_top(
 		.Shift_Out      (LSB),
 		.Data_Out       (Bval)
 	);
+	
 	
 	
 	/*control unit LSB of register*/
@@ -82,17 +103,20 @@ module Miltiplier_top(
 	   .Sub            (Sub)
 	);
 	
+
+	
 	NineBitAdder adder (
-	   .In1            (Aval),
-	   .In2            (SW_SH),
-	   
+	   .In1            ({Xval, Aval}),
+	   .In2            (AddIn),
+	   .cin				(cin),
+
 	   .Result         (AdderResult)
 	
 	);
 	
 	
 	hex_driver hex_a (
-		.clk		(clk),
+		.clk		(CLK),
 		.reset		(Reset_Load_Clear),
 		.in			({Aval[7:4], Aval[3:0], Bval[7:4], Bval[3:0]}),
 		.hex_seg	(hex_seg),
@@ -101,14 +125,14 @@ module Miltiplier_top(
 	
 	// Synchchronizers/debouncers
 	sync_debounce button_sync [1:0] (
-	   .clk    (clk),
+	   .clk    (CLK),
 	   
 	   .d      ({Reset_Load_Clear, Run}),
 	   .q      ({Reset_Load_Clear_SH, Run_SH})
 	);
 	
 	sync_debounce SW_sync [7:0] (
-	   .clk    (clk),
+	   .clk    (CLK),
 	   
 	   .d      (SW),
 	   .q      (SW_SH)

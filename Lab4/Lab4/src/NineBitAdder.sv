@@ -23,9 +23,10 @@
 module NineBitAdder(
     input logic[8:0] In1,
     input logic[8:0] In2,
+    input logic cin,
     
     output logic[8:0] Result
     );
     
-    select_adder adder(.a(In1), .b(In2), .cin(1'b0), .s(Result), .cout());
+    select_adder adder(.a(In1), .b(In2), .cin(cin), .s(Result), .cout());
 endmodule
