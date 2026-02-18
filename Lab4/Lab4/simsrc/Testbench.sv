@@ -32,7 +32,7 @@ Miltiplier_top dut (
 );
 
 initial begin: CLOCK_INITIALIZATION
-	Clk = 1'b1;
+	CLK = 1'b1;
 end 
 
 // Toggle the clock
@@ -44,7 +44,7 @@ end
 // the simulation
 
 always begin : CLOCK_GENERATION
-	#1 Clk = ~Clk;
+	#1 CLK = ~CLK;
 end
 
 // Testing begins here
@@ -58,14 +58,68 @@ end
 // same simulation timestep. The exception is for reset, which we want to make sure
 // happens first. 
 initial begin: TEST_VECTORS
-	Reset = 1;		// Toggle Reset (use blocking operator), because we want to have this happen 'first'
+    Reset_Load_Clear = 1'b0;
+    Run <= 1'b0;
+    SW <= 8'h00;
 
-    #10.1 Reset = 0;
-    cin = 1'b0;
-    a = 16'h1234;
-    b = 16'h5678;
-    repeat (3) @(posedge  Clk);
-	$finish(); //this task will end the simulation if the Vivado settings are properly configured
+    repeat (20) @(posedge CLK);
+    
+    //7 * 59 = 413 = 019D
+    SW <= 8'h3B;
+    repeat (10) @(posedge CLK);
+    Reset_Load_Clear = 1'b1;
+    repeat (10) @(posedge CLK);
+    Reset_Load_Clear = 1'b0;
+    repeat (12) @(posedge CLK);
+    SW <= 8'h07;
+    repeat (10) @(posedge CLK);
+    Run <= 1'b1;
+    repeat (12) @(posedge CLK);
+    Run <= 1'b0;
+    repeat (300) @(posedge CLK);
+
+    //-7 * +59 = -413 = FE63
+    SW <= 8'h3B;
+    repeat (10) @(posedge CLK);
+    Reset_Load_Clear = 1'b1;
+    repeat (12) @(posedge CLK);
+    Reset_Load_Clear = 1'b0;
+    repeat (12) @(posedge CLK);
+    SW <= 8'hF9;
+    repeat (10) @(posedge CLK);
+    Run <= 1'b1;
+    repeat (12) @(posedge CLK);
+    Run <= 1'b0;
+    repeat (300) @(posedge CLK);
+    
+    //+7 * -59 = -413 = FE63
+    SW <= 8'hC5;                 
+    repeat (10) @(posedge CLK);
+    Reset_Load_Clear = 1'b1;
+    repeat (12) @(posedge CLK);
+    Reset_Load_Clear = 1'b0;
+    repeat (12) @(posedge CLK);
+    SW <= 8'h07;                 
+    repeat (10) @(posedge CLK);
+    Run <= 1'b1;
+    repeat (12) @(posedge CLK);
+    Run <= 1'b0;
+    repeat (300) @(posedge CLK);
+
+    //-7 * -59 = 413 = 019D
+    SW <= 8'hC5;
+    repeat (10) @(posedge CLK);
+    Reset_Load_Clear = 1'b1;
+    repeat (12) @(posedge CLK);
+    Reset_Load_Clear = 1'b0;
+    repeat (12) @(posedge CLK);
+    SW <= 8'hF9;
+    repeat (10) @(posedge CLK);
+    Run <= 1'b1;
+    repeat (12) @(posedge CLK);
+    Run <= 1'b0;
+    repeat (300) @(posedge CLK);
+    $finish;
 
 end
 endmodule
