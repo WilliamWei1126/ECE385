@@ -15,76 +15,56 @@ module CONTROL (
 // Declare signals curr_state, next_state of type enum
 // with enum values of s_start, s_count0, ..., s_done as the state values
 // Note that the length implies a max of 8 states, so you will need to bump this up for 8-bits
-	enum logic [3:0] {
-		s_start, 
-		s_count0, 
-		s_count1, 
-		s_count2, 
-		s_count3,
-		s_count4,
-		s_count5,
-		s_count6,
-		s_count7, 
-		s_done
+	enum logic [2:0] {
+		load,done,
+		check,
+		shifting,adding,subing
+		//s_done
 	} curr_state, next_state; 
+	logic [3:0] count;
 
 	always_comb
 	begin
 	// Assign outputs based on ‘state’
+				Clr_Ld = 1'b0;
+				Shift=1'b0;
+				Add = 1'b0;
+				Sub=1'b0;
 		unique case (curr_state) 
-			s_start: 
-			begin
-				Ld_A = LoadA;
-				Ld_B = LoadB;
-				Shift_En = 1'b0;
-			end
-
-			s_done: 
-			begin
-				Ld_A = 1'b0;
-				Ld_B = 1'b0;
-				Shift_En = 1'b0;
-			end
-
-			default:  //default case, can also have default assignments for Ld_A and Ld_B before case
-			begin 
-				Ld_A = 1'b0;
-				Ld_B = 1'b0;
-				Shift_En = 1'b1;
-			end
+			shifting:Shift=1'b1;	
+			adding:Add = 1'b1;
+			subing:Sub=1'b1;
+			load:Clr_Ld = (Reset); 
 		endcase
 	end
 
-// Assign outputs based on state
+// state trnaisitons
 	always_comb
 	begin
 
 		next_state  = curr_state;	//required because I haven't enumerated all possibilities below. Synthesis would infer latch without this
 		unique case (curr_state) 
-
-			s_start :    
-			begin
-				if (Execute) 
-				begin
-					next_state = s_count0;
-				end
+			load :begin 
+				if (Run) next_state = check;
+				else next_state=load;
 			end
-
-			s_count0 :    next_state = s_count1;
-			s_count1 :    next_state = s_count2;
-			s_count2 :    next_state = s_count3;
-			s_count3 :    next_state = s_count4;
-			s_count4 :    next_state = s_count5;
-			s_count5 :    next_state = s_count6;
-			s_count6 :    next_state = s_count7;
-			s_count7 :    next_state = s_done;
-
-			s_done :    
-			begin
-				if (~Execute) 
-				begin
-					next_state = s_start;
-				end
+			check:begin
+				if(count==4'd8)next_state=done;
+				else if(count==7&&M==4'd1)next_state=subing;
+				else if(M==1)next_state=adding;
+				else next_state=shifting;
+			end
+			shifting:begin
+				next_state=check;
+			end
+			adding:begin
+				next_state=shifting;
+			end
+			subing:begin
+				next_state=shifting;end
+			done:begin
+				if(~Run)next_state=load;
+				else next_state=done;
 			end
 					
 		endcase
@@ -97,11 +77,15 @@ module CONTROL (
 	begin
 		if (Reset)
 		begin
-			curr_state <= s_start;
+			curr_state <= load;
+			count<=4'b0000;
 		end
-		else 
+		else
 		begin
 			curr_state <= next_state;
+			 if(curr_state==shifting)count<=count+1;
+			 if(curr_state==load)count<=4'b0000;
+
 		end
 	end
 
