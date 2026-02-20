@@ -50,7 +50,7 @@ module adder_toplevel   (
 	);
 
 	// Addition unit
-	
+	/*
 	ripple_adder adder_ra (
 		.a	 	(sw_s), 
 		.b	 	(out[15:0]), 
@@ -58,7 +58,7 @@ module adder_toplevel   (
 		.cout	(s[16]), 
 		.s   	(s[15:0]) 
 	);
-	
+	*/
 	
 	/*
 	lookahead_adder adder_la (		
@@ -69,7 +69,7 @@ module adder_toplevel   (
     	.s   	(s[15:0]) 
 	 );
 	 */
-	/*
+	
 	 select_adder adder_sa (	
 	 	.a	 	(sw_s), 
 	 	.b	 	(out[15:0]), 
@@ -77,7 +77,7 @@ module adder_toplevel   (
 	 	.cout	(s[16]), 
 	 	.s   	(s[15:0]) 
 	 );
-    */
+    
 	// Hex units that display contents of sw and sum register in hex
 	hex_driver hex_a (
 		.clk		(clk),
