@@ -4,22 +4,33 @@ module testbench();
     timeunit 1ns;  
     timeprecision 1ps;
 
-    // DUT inputs
+    // =================================================================
+    // 1. DUT Inputs & Outputs
+    // =================================================================
     logic        clk;
     logic        reset;
     logic        run_i;
     logic        continue_i;
     logic [15:0] sw_i;
 
-    // DUT outputs
     logic [15:0] led_o;
     logic [7:0]  hex_seg_left;
     logic [3:0]  hex_grid_left;
     logic [7:0]  hex_seg_right;
     logic [3:0]  hex_grid_right;
 
-    // Instantiating the DUT (Device Under Test)
-    // Explicit port mapping (as in your format) prevents hidden bugs
+    // =================================================================
+    // 2. Waveform Debug / Spy Signals
+    // =================================================================
+    logic [15:0] debug_pc;
+    logic [15:0] debug_mar;
+    logic [15:0] debug_mdr;
+    logic [15:0] debug_ir;
+    logic [4:0]  debug_state;
+
+    // =================================================================
+    // 3. Instantiate the DUT
+    // =================================================================
     processor_top dut (
         .clk            (clk),
         .reset          (reset),
@@ -33,16 +44,29 @@ module testbench();
         .hex_grid_right (hex_grid_right)
     );
 
+    // =================================================================
+    // 4. Hierarchical Assignments
+    // =================================================================
+    assign debug_pc    = dut.slc3.cpu.pc;
+    assign debug_mar   = dut.slc3.cpu.mar;
+    assign debug_mdr   = dut.slc3.cpu.mdr;
+    assign debug_ir    = dut.slc3.cpu.ir;
+    assign debug_state = dut.slc3.cpu.cpu_control.state; 
+
+    // =================================================================
+    // 5. Clock Generation
+    // =================================================================
     initial begin: CLOCK_INITIALIZATION
         clk = 1'b0;
     end 
 
-    // 100 MHz Clock Generation (Toggle every 5ns -> 10ns period)
     always begin : CLOCK_GENERATION
         #5 clk = ~clk;
     end
 
-    // Testing begins here
+    // =================================================================
+    // 6. Test Vectors (Simulation Sequence)
+    // =================================================================
     initial begin: TEST_VECTORS
         // Initial conditions
         reset      <= 1'b0;
@@ -53,38 +77,33 @@ module testbench();
         // Wait a few clocks for stability
         repeat (5) @(posedge clk);
         
-        // 1. Apply Reset (Hold for enough cycles to clear the debouncer)
+        // --- APPLY RESET ---
         reset <= 1'b1;
         repeat (20) @(posedge clk);
         reset <= 1'b0;
         
         repeat (10) @(posedge clk);
 
-        // 2. Set starting address on switches and press Run
+        // --- FETCH INSTRUCTION 1 ---
         sw_i <= 16'h0000;
         run_i <= 1'b1;
         repeat (20) @(posedge clk);
         run_i <= 1'b0;
 
-        // CPU enters FETCH phase. Wait for it to hit 'pause_ir1'.
+        // Wait for it to Fetch and hit the pause_ir1 state
         repeat (100) @(posedge clk);
 
-        // 3. Press Continue for the 2nd instruction
-        continue_i <= 1'b1;
-        repeat (20) @(posedge clk);
-        continue_i <= 1'b0;
+        // --- FETCH INSTRUCTIONS 2 THROUGH 5 ---
+        for (int i = 2; i <= 5; i++) begin
+            continue_i <= 1'b1;
+            repeat (20) @(posedge clk);
+            continue_i <= 1'b0;
 
-        // Wait for it to hit 'pause_ir1' again.
-        repeat (100) @(posedge clk);
-
-        // 4. Press Continue for the 3rd instruction
-        continue_i <= 1'b1;
-        repeat (20) @(posedge clk);
-        continue_i <= 1'b0;
-
-        // Let simulation run to observe final FETCH state
-        repeat (200) @(posedge clk);
+            // Wait for it to loop through FETCH and pause again
+            repeat (100) @(posedge clk);
+        end
         
+        $display("5 Instructions Fetched. Simulation complete.");
         $finish;
     end
 endmodule
