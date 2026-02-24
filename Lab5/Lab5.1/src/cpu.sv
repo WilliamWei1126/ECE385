@@ -53,6 +53,13 @@ logic [15:0] mar;
 logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
+logic [15:0] bus;//added
+always_comb begin
+    if(gate_pc)bus=pc;
+   else if(gate_mdr)bus=mdr;
+    else bus=0;
+end
+///////
 logic ben;
 
 
@@ -70,27 +77,51 @@ control cpu_control (
 
 assign led_o = ir;
 assign hex_display_debug = ir;
-
+//////////////////////////////////////
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
     .reset  (reset),
 
     .load   (ld_ir),
-    .data_i (),
+    .data_i (bus),
 
     .data_q (ir)
 );
+load_reg #(.DATA_WIDTH(16)) mar_reg (
+    .clk    (clk),
+    .reset  (reset),
 
+    .load   (ld_mar),
+    .data_i (bus),
+
+    .data_q (mar)
+);
+
+load_reg #(.DATA_WIDTH(16)) mdr_reg (
+    .clk    (clk),
+    .reset  (reset),
+
+    .load   (ld_mdr),
+    .data_i (mem_rdata),//need change for 5.2
+
+    .data_q (mdr)
+);
+
+logic[15:0] pcin;
+always_comb begin
+if(pcmux==1'b00) pcin=pc+1;
+else pcin=pc+1;//need change for lab5.2
+end
 load_reg #(.DATA_WIDTH(16)) pc_reg (
     .clk(clk),
     .reset(reset),
 
     .load(ld_pc),
-    .data_i(),
+    .data_i(pcin),
 
     .data_q(pc)
 );
-
+//////////////////////////////////////
 
 
 endmodule

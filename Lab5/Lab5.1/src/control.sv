@@ -86,6 +86,8 @@ module control (
 		gate_mdr = 1'b0;
 		 
 		pcmux = 2'b00;
+		mem_mem_ena = 1'b0; 
+		mem_wr_ena  = 1'b0;
 		
 	
 		// Assign relevant control signals based on current state
