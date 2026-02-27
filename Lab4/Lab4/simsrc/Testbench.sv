@@ -16,6 +16,7 @@ logic [3:0] hex_grid;
 logic [7:0] hex_seg;
 logic [7:0] Aval, Bval;
 logic       Xval;
+logic [15:0] Answer;
 // Instantiating the DUT (Device Under Test)
 // Make sure the module and signal names match with those in your design
 
@@ -46,6 +47,11 @@ end
 always begin : CLOCK_GENERATION
 	#1 CLK = ~CLK;
 end
+
+always_comb begin
+    Answer={Aval, Bval};
+end
+
 
 // Testing begins here
 // The initial block is not synthesizable on an FPGA
