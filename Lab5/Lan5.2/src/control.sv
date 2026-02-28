@@ -38,14 +38,26 @@ module control (
 	output logic		ld_ir,
 	output logic		ld_pc,
 	output logic        ld_led,
+	output logic        ld_reg,
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
+	output logic        gate_mar_mux,
+	output logic        gate_ALU,
 						
 	output logic [1:0]	pcmux,
+	output logic        addr_1_mux,
+	output logic        addr_2_mux,
+	output logic        sr_2_mux,
+	
+	output logic [2:0]  SR,
+	output logic [2:0]  SR2,
+	output logic [2:0]  DR,
+	
+	output logic [2:0]  ALUK,
 	
 	//You should add additional control signals according to the SLC-3 datapath design
-
+	output logic        mio_en,
 	output logic		mem_mem_ena, // Mem Operation Enable
 	output logic		mem_wr_ena  // Mem Write Enable
 );
