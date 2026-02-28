@@ -43,17 +43,25 @@ logic ld_mdr;
 logic ld_ir; 
 logic ld_pc; 
 logic ld_led;
+logic ld_reg;
 
 logic gate_pc;
 logic gate_mdr;
 
-logic [1:0] pcmux;
+logic [1:0] pcmux, ALUK;
+
+logic [2:0] SR2, SR, DR;
 
 logic [15:0] mar; 
 logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
 logic [15:0] bus;//added
+logic [15:0] SR2_out;
+logic [15:0] SR_out;
+logic [15:0] aluout;
+logic [15:0] A,B;
+
 always_comb begin
     if(gate_pc)bus=pc;
    else if(gate_mdr)bus=mdr;
@@ -74,12 +82,32 @@ control cpu_control (
     .*
 );
 
-reg_file register (.*);
-alu alu1 (.*);
+
+
 
 assign led_o = ir;
 assign hex_display_debug = ir;
 //////////////////////////////////////
+
+alu alu1 (
+    .A      (A),
+    .B      (B),
+    .ALUK   (ALUK),
+
+    .aluout (aluout)
+);
+reg_file register (
+    .clk    (clk),
+    .reset  (reset),
+    .ld_reg (ld_reg),
+    .SR2    (SR2),
+    .SR     (SR),
+    .DR     (DR).
+    .bus    (bus),
+
+    .SR2_out(SR2_out),
+    .SR_out (SR_out)
+);
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
     .reset  (reset),

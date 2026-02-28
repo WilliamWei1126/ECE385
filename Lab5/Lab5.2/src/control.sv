@@ -39,6 +39,7 @@ module control (
 	output logic		ld_pc,
 	output logic        ld_led,
 	output logic        ld_reg,
+	output logic		ld_cc,
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
