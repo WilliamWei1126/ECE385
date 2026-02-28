@@ -74,6 +74,8 @@ control cpu_control (
     .*
 );
 
+reg_file register (.*);
+alu alu1 (.*);
 
 assign led_o = ir;
 assign hex_display_debug = ir;
