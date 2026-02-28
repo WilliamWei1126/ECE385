@@ -32,6 +32,7 @@ module control (
 
 	input logic 		continue_i,
 	input logic 		run_i,
+	input logic			n,z,p,
 
 	output logic		ld_mar,
 	output logic		ld_mdr,

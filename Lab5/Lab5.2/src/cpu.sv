@@ -38,12 +38,15 @@ module cpu (
 
 
 // Internal connections, follow the datapath block diagram and add the additional needed signals
+logic ben, n, z, p, nin, zin, pin;
+
 logic ld_mar; 
 logic ld_mdr; 
 logic ld_ir; 
 logic ld_pc; 
 logic ld_led;
 logic ld_reg;
+logic ld_cc;
 
 logic gate_pc;
 logic gate_mdr;
@@ -68,7 +71,7 @@ always_comb begin
     else bus=0;
 end
 ///////
-logic ben;
+
 
 
 assign mem_addr = mar;
@@ -81,6 +84,9 @@ assign mem_wdata = mdr;
 control cpu_control (
     .*
 );
+
+
+
 
 
 
@@ -135,6 +141,56 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .data_i (mem_rdata),//need change for 5.2
 
     .data_q (mdr)
+);
+
+always_comb begin
+    unique case(bus)
+        bus > 16'd0: begin
+            pin = 1;
+            nin = 0;
+            zin = 0;
+        end
+        bus < 16'd0: begin
+            pin = 0;
+            nin = 1;
+            zin = 0;
+        end
+        default: begin
+            pin = 0;
+            nin = 0;
+            zin = 1;
+        end
+    endcase
+end
+
+load_reg #(.DATA_WIDTH(1)) n_reg (
+    .clk    (clk),
+    .reset  (reset),
+
+    .load   (ld_cc),
+    .data_i (nin),
+
+    .data_q (n)
+);
+
+load_reg #(.DATA_WIDTH(1)) z_reg (
+    .clk    (clk),
+    .reset  (reset),
+
+    .load   (ld_cc),
+    .data_i (zin),
+
+    .data_q (z)
+);
+
+load_reg #(.DATA_WIDTH(1)) p_reg (
+    .clk    (clk),
+    .reset  (reset),
+
+    .load   (ld_cc),
+    .data_i (pin),
+
+    .data_q (p)
 );
 
 logic[15:0] pcin;
