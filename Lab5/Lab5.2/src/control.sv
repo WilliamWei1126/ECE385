@@ -55,7 +55,7 @@ module control (
 	
 	
 	
-	output logic [1:0]  a,//modified to be 2 bit
+	output logic [1:0]  aluk,//modified to be 2 bit
 	
 	//You should add additional control signals according to the SLC-3 datapath design
 	output logic        mio_en,
@@ -108,10 +108,11 @@ module control (
 		sr_2_mux=ir[5]; 
 		DR_mux=1'b0;
 		
-		al=2'b00;
+		aluk=2'b00;
 
 		mem_mem_ena = 1'b0; 
 		mem_wr_ena  = 1'b0;
+		mio_en=1'b0;
 		
 	
 		// Assign relevant control signals based on current state
@@ -164,11 +165,59 @@ module control (
 				ld_mar=1'b1;
 				gate_mar_mux=1'b1;
 				sr_1_mux=1'b1;
-
+				addr_1_mux=1'b1;
+				addr_2_mux=2'b01;
+			end
+			s_27:begin
+				ld_reg=1'b1;
+				ld_cc=1'b1;
+				gate_mdr=1'b1;
+				DR_mux=1'b0;
+			end
+			s_7:begin
+				ld_mar=1'b1;
+				gate_mar_mux=1'b1;
+				sr_1_mux=1'b1;
+				addr_1_mux=1'b1;
+				addr_2_mux=2'b01;
+			end
+			s_23:begin 
+				ld_mdr=1'b1;
+				gate_ALU=1'b1;
+				sr_1_mux=1'b0;
+				aluk=2'b11;
+				mio_en=1'b0;
+			end
+			s_16,s_16_2,s_16_3:begin 
+				mem_wr_ena=1'b1;
+				mem_mem_ena=1'b1;
+			end
+			s_4:begin
+				ld_reg=1'b1;
+				gate_pc=1'b1;
+				DR_mux=1'b1;
+			end
+			s_21:begin 
+				ld_pc=1'b1;
+				addr_1_mux=1'b0;
+				addr_2_mux=2'b11;
+				pcmux=2'b10;
+			end
+			s_12:begin
+				ld_pc=1'b1;
+				sr_1_mux=1'b1;
+				addr_1_mux=1'b1;
+				addr_2_mux=2'b00;
+				pcmux=2'b10;
+			end
+			s_22:begin
+				ld_pc=1'b1;
+				addr_1_mux=1'b0;
+				addr_2_mux=2'b10;
+				pcmux=2'b10;
 			end
 			pause_ir1: ld_led = 1'b1; 
 			pause_ir2: ld_led = 1'b1; 
-			// you need to finish the rest of state output logic..... 
 
 			default : ;
 		endcase
@@ -178,7 +227,7 @@ module control (
 	always_comb
 	begin
 		// default next state is staying at current state
-		state_nxt = state;
+		state_nxt = s_18;
 
 		unique case (state)
 			halted : 
@@ -193,15 +242,44 @@ module control (
 			s_33_3 : 
 				state_nxt = s_35;
 			s_35 : 
-				state_nxt = pause_ir1;
+				state_nxt = s_32;
+			s_32:begin
+				unique case (ir[15:12])
+				4'b0001:state_nxt=s_1;
+				4'b0101:state_nxt=s_5;
+				4'b1001:state_nxt=s_9;
+				4'b0110:state_nxt=s_6;
+				4'b0111:state_nxt=s_7;
+				4'b0100:state_nxt=s_4;
+				4'b1100:state_nxt=s_12;
+				4'b0000:state_nxt=s_0;
+				4'b1101:state_nxt=pause_ir1;
+				default:state_nxt=halted;//not sure
+				endcase
+			end
+			s_6:state_nxt=s_25;
+			s_25:state_nxt=s_25_2;
+			s_25_2:state_nxt=s_25_3;
+			s_25_3:state_nxt=s_27;
+			s_7:state_nxt=s_23;
+			s_23:state_nxt=s_16;
+			s_16:state_nxt=s_16_2;
+			s_16_2:state_nxt=s_16_3;
+			s_4:state_nxt=s_21;
+			s_0:begin
+				if(ben)state_nxt=s_22;
+				else state_nxt=s_18;
+			end
 			// pause_ir1 and pause_ir2 are only for week 1 such that TAs can see 
 			// the values in ir.
 			pause_ir1 : 
 				if (continue_i) 
 					state_nxt = pause_ir2;
+					else state_nxt=pause_ir1;
 			pause_ir2 : 
 				if (~continue_i)
 					state_nxt = s_18;
+				else state_nxt=pause_ir2;
 			// you need to finish the rest of state transition logic.....
 			
 			default :;
