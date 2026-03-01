@@ -28,7 +28,6 @@ module control (
 	input logic			reset,
 
 	input logic  [15:0]	ir,
-	input logic			ben,
 
 	input logic 		continue_i,
 	input logic 		run_i,
