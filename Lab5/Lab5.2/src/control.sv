@@ -49,14 +49,14 @@ module control (
 						
 	output logic [1:0]	pcmux,
 	output logic        addr_1_mux,
-	output logic        addr_2_mux,
-	output logic        sr_2_mux,
+	output logic  [1:0]      addr_2_mux,//update to be 2 bit
+	output logic        sr_1_mux,//update: add sr1mux
+	output logic        sr_2_mux, 
+	output logic        DR_mux,//add
 	
-	output logic [2:0]  SR,
-	output logic [2:0]  SR2,
-	output logic [2:0]  DR,
 	
-	output logic [2:0]  ALUK,
+	
+	output logic [1:0]  ALUK,//modified to be 2 bit
 	
 	//You should add additional control signals according to the SLC-3 datapath design
 	output logic        mio_en,
