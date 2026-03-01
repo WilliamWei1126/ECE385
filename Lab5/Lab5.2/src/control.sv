@@ -55,7 +55,7 @@ module control (
 	
 	
 	
-	output logic [1:0]  ALUK,//modified to be 2 bit
+	output logic [1:0]  a,//modified to be 2 bit
 	
 	//You should add additional control signals according to the SLC-3 datapath design
 	output logic        mio_en,
@@ -67,13 +67,10 @@ module control (
 		halted, 
 		pause_ir1,
 		pause_ir2, 
-		s_18, 
-		s_33_1,
-		s_33_2,
-		s_33_3,
-		s_35
+		s_18, s_33_1,s_33_2,s_33_3,s_35,s_32,
+		s_1,s_5,s_9,s_6,s_25,s_25_2,s_25_3,s_27,s_7,s_23,s_16,s_16_2,s_16_3,s_4,s_21,s_12,s_22,s_0
 	} state, state_nxt;   // Internal state logic
-
+	logic ben;
 
 	always_ff @ (posedge clk)
 	begin
@@ -94,11 +91,25 @@ module control (
 		ld_ir = 1'b0;
 		ld_pc = 1'b0;
 		ld_led = 1'b0;
+		ld_reg=1'b0;
+		ld_cc=1'b0;
 		
-		gate_pc = 1'b0;
-		gate_mdr = 1'b0;
+		ben=(ir[11]&n)|(ir[10]&z)|(ir[9]&p);
+
+		gate_pc=1'b0;
+		gate_mdr=1'b0;
+	 	gate_mar_mux=1'b0;
+		gate_ALU=1'b0;
 		 
 		pcmux = 2'b00;
+		addr_1_mux=1'b0;
+		addr_2_mux=2'b00;
+		sr_1_mux=1'b0;
+		sr_2_mux=ir[5]; 
+		DR_mux=1'b0;
+		
+		al=2'b00;
+
 		mem_mem_ena = 1'b0; 
 		mem_wr_ena  = 1'b0;
 		
@@ -113,16 +124,48 @@ module control (
 					pcmux = 2'b00;
 					ld_pc = 1'b1;
 				end
-			s_33_1, s_33_2, s_33_3 : //you may have to think about this as well to adapt to ram with wait-states
+			s_33_1, s_33_2, s_33_3,s_25,s_25_2,s_25_3 : //you may have to think about this as well to adapt to ram with wait-states
 				begin
 					mem_mem_ena = 1'b1;
 					ld_mdr = 1'b1;
+					mio_en=1'b1;
 				end
 			s_35 : 
 				begin 
 					gate_mdr = 1'b1;
 					ld_ir = 1'b1;
 				end
+			s_32:;
+			s_1:begin 
+				ld_reg=1'b1;
+				ld_cc=1'b1;
+				gate_ALU=1'b1;
+				sr_1_mux=1'b1;
+				DR_mux=1'b0;
+				aluk=2'b00;
+			end
+			s_5:begin
+				ld_reg=1'b1;
+				ld_cc=1'b1;
+				gate_ALU=1'b1;
+				sr_1_mux=1'b1;
+				DR_mux=1'b0;
+				aluk=2'b01;
+			end
+			s_9:begin
+				ld_reg=1'b1;
+				ld_cc=1'b1;
+				gate_ALU=1'b1;
+				sr_1_mux=1'b1;
+				DR_mux=1'b0;
+				aluk=2'b10;
+			end
+			s_6:begin
+				ld_mar=1'b1;
+				gate_mar_mux=1'b1;
+				sr_1_mux=1'b1;
+
+			end
 			pause_ir1: ld_led = 1'b1; 
 			pause_ir2: ld_led = 1'b1; 
 			// you need to finish the rest of state output logic..... 
