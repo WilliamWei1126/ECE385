@@ -30,8 +30,9 @@ module alu(
     always_comb begin
         unique case(ALUK)
             2'd0: aluout = A+B;
-            2'd1: aluout = ~A;
-            2'd2: aluout = A&B;
+            2'd1: aluout = A&B;
+            2'd2: aluout = ~A;
+            2'd3: aluout = A;
             default: aluout = 16'b0000000000000000;
 
 

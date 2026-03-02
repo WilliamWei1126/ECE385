@@ -44,11 +44,11 @@ module control (
 	output logic		gate_pc,
 	output logic		gate_mdr,
 	output logic        gate_mar_mux,
-	output logic        gate_ALU,
+	output logic        gate_alu,
 						
 	output logic [1:0]	pcmux,
 	output logic        addr_1_mux,
-	output logic  [1:0]      addr_2_mux,//update to be 2 bit
+	output logic  [1:0] addr_2_mux,//update to be 2 bit
 	output logic        sr_1_mux,//update: add sr1mux
 	output logic        sr_2_mux, 
 	output logic        DR_mux,//add
@@ -99,7 +99,7 @@ module control (
 		gate_pc=1'b0;
 		gate_mdr=1'b0;
 	 	gate_mar_mux=1'b0;
-		gate_ALU=1'b0;
+		gate_alu=1'b0;
 		 
 		pcmux = 2'b00;
 		addr_1_mux=1'b0;
@@ -140,7 +140,7 @@ module control (
 			s_1:begin 
 				ld_reg=1'b1;
 				ld_cc=1'b1;
-				gate_ALU=1'b1;
+				gate_alu=1'b1;
 				sr_1_mux=1'b1;
 				DR_mux=1'b0;
 				aluk=2'b00;
@@ -148,7 +148,7 @@ module control (
 			s_5:begin
 				ld_reg=1'b1;
 				ld_cc=1'b1;
-				gate_ALU=1'b1;
+				gate_alu=1'b1;
 				sr_1_mux=1'b1;
 				DR_mux=1'b0;
 				aluk=2'b01;
@@ -156,7 +156,7 @@ module control (
 			s_9:begin
 				ld_reg=1'b1;
 				ld_cc=1'b1;
-				gate_ALU=1'b1;
+				gate_alu=1'b1;
 				sr_1_mux=1'b1;
 				DR_mux=1'b0;
 				aluk=2'b10;
@@ -183,7 +183,7 @@ module control (
 			end
 			s_23:begin 
 				ld_mdr=1'b1;
-				gate_ALU=1'b1;
+				gate_alu=1'b1;
 				sr_1_mux=1'b0;
 				aluk=2'b11;
 				mio_en=1'b0;
