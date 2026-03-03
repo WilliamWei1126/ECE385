@@ -86,9 +86,7 @@ control cpu_control (
 
 
 
-
-assign led_o = ir;
-assign hex_display_debug = ir;
+assign hex_display_debug = pc;
 //////////////////////////////////////
 
 always_comb begin //all gates
@@ -167,7 +165,7 @@ reg_file register (
     .clk    (clk),
     .reset  (reset),
     .ld_reg (ld_reg),
-    .SR2    (ir[8:6]),
+    .SR2    (ir[2:0]),
     .SR     (sr1in),
     .DR     (drin),
     .bus    (bus),
@@ -201,8 +199,8 @@ always_comb begin
 
     unique case(mio_en)
     
-        1'b0: memin = mem_rdata;
-        1'b1: memin = bus;
+        1'b1: memin = mem_rdata;
+        1'b0: memin = bus;
         default: memin = 16'b0;
     endcase
 
@@ -277,6 +275,16 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .data_i(pcin),
 
     .data_q(pc)
+);
+
+load_reg #(.DATA_WIDTH(16)) led_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(ld_led),
+    .data_i({4'b0, ir[11:0]}),
+
+    .data_q(led_o)
 );
 //////////////////////////////////////
 

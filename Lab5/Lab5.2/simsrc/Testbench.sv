@@ -29,9 +29,11 @@ module testbench();
   );
 
   // Debug taps (adjust if your hierarchy differs)
-  logic [15:0] debug_pc, debug_ir, debug_mar, debug_mdr, mem_rdata;
+  logic [15:0] debug_pc, debug_ir, debug_mar, debug_mdr, debug_hex_display_d, debug_bus, debug_Bin;
   logic [4:0]  debug_state;
-  logic debug_ld_pc, debug_reset, debug_ld_mdr, debug_mio_en;
+  logic [1:0] debug_aluk;
+  logic [15:0] debug_reg[7:0];
+  logic debug_ld_pc, debug_reset, debug_ld_mdr, debug_ld_reg;
   assign debug_pc    = dut.slc3.cpu.pc;
   assign debug_ir    = dut.slc3.cpu.ir;
   assign debug_state = dut.slc3.cpu.cpu_control.state;
@@ -40,8 +42,12 @@ module testbench();
   assign debug_ld_mdr = dut.slc3.cpu.ld_mdr;
   assign debug_reset = dut.slc3.cpu.reset;
   assign debug_ld_pc = dut.slc3.cpu.ld_pc;
-  assign debug_mem_rdata = dut.slc3.cpu.mem_rdata;
-  assign debug_mio_en = dut.slc3.cpu.mio_en;
+  assign debug_hex_display_d = dut.slc3.io_bridge.hex_display_d;
+  assign debug_bus = dut.slc3.cpu.bus;
+  assign debug_reg = dut.slc3.cpu.register.SR_temp;
+  assign debug_aluk = dut.slc3.cpu.aluk;
+  assign debug_ld_reg = dut.slc3.cpu.ld_reg;
+  assign debug_Bin = dut.slc3.cpu.Bin;
 
 
   // Clock 10ns period
@@ -102,15 +108,17 @@ module testbench();
     // reset and run
     press_reset(20);
     press_run(20);
-
+    
     // let it go for a while
-    repeat (500) @(posedge clk);
+    set_switches(16'h0001);
+    press_continue(20);
+    repeat (20) @(posedge clk);
+    set_switches(16'h0002);
+    press_continue(20);
+    repeat (200) @(posedge clk);
 
     // press continue a few times (for PAUSE-based programs)
-    repeat (5) begin
-      press_continue(PRESS_CYCLES);
-      repeat (300) @(posedge clk);
-    end
+    
 
     $finish;
   end

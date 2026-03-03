@@ -33,7 +33,7 @@ module alu(
             2'd1: aluout = A&B;
             2'd2: aluout = ~A;
             2'd3: aluout = A;
-            default: aluout = 16'b0000000000000000;
+            default: aluout = 16'd0;
 
 
         endcase
