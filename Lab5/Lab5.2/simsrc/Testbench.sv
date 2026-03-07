@@ -107,7 +107,7 @@ module testbench();
 
     // reset and run
     press_reset(20);
-   press_run(20);
+    press_run(20);
     
     // let it go for a while
     set_switches(16'h0001);
