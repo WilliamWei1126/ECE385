@@ -13,14 +13,16 @@
 **/*.str
 **/*.dmp
 **/*.wdb
-**/*.pb
-**/*.db
 
-# Block Design / IP generated artifacts (usually safe to ignore)
+# Per-user / generated project state
+**/*.xpr.user
+
+# Generated checkpoints / implementation outputs
+**/*.dcp
+
+# Optional: ignore BD-generated child-IP artifacts
+# Keep this only if your repo works fine after a clean clone + open project + regenerate output products
 **/*.srcs/sources_1/bd/*/ip/
-**/*.srcs/sources_1/ip/
-**/*.srcs/constrs_1/imports/
-**/*.srcs/sim_1/
 
 # =========================
 # OS / editor noise
@@ -29,8 +31,3 @@
 Thumbs.db
 .vscode/
 .idea/
-
-# Vivado project / generated checkpoints
-**/*.xpr
-**/*.xpr.user
-**/*.dcp
