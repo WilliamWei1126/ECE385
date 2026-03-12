@@ -11,3 +11,6 @@ timestamp=[2026-03-12 00:49:29], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00
 timestamp=[2026-03-12 00:49:39], mode=PLATFORM_GENERATION, duration=0:00:06.777, duration_ms=6777, data={name=mb_intro_top}
 timestamp=[2026-03-12 00:49:43], mode=BUILD, duration=0:00:03.303, duration_ms=3303, data={name=mb_blinky, configuration=Debug, clean_build=false}
 timestamp=[2026-03-12 00:49:43], mode=BUILD, duration=0:00:00.146, duration_ms=146, data={name=mb_blinky_system, configuration=Debug, clean_build=false}
+timestamp=[2026-03-12 01:03:14], mode=WORKBENCH_START, duration=0:00:06.750, duration_ms=6750, data={}
+timestamp=[2026-03-12 01:03:15], mode=WORKBENCH_UI_INIT, duration=0:00:00.520, duration_ms=520, data={editors_count=4, platform_editors_count=1, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,mb_blinky,mb_blinky_system,mb_intro_top}
+timestamp=[2026-03-12 01:03:15], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.071, duration_ms=71, data={}

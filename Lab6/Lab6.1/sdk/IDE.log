@@ -125,3 +125,12 @@ con
 ----------------End of Script----------------
 
 00:50:43 INFO  : Launch script is exported to file 'D:\ECE385\Lab6\Lab6.1\sdk\mb_blinky_system\_ide\scripts\debugger_mb_blinky-default.tcl'
+01:03:11 DEBUG : Logs will be stored at 'C:/Users/willi/Documents/GitHub/ECE385/Lab6/Lab6.1/sdk/IDE.log'.
+01:03:12 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\Users\willi\Documents\GitHub\ECE385\Lab6\Lab6.1\sdk\temp_xsdb_launch_script.tcl
+01:03:15 INFO  : Platform repository initialization has completed.
+01:03:15 INFO  : Registering command handlers for Vitis TCF services
+01:03:16 INFO  : XSCT server has started successfully.
+01:03:16 INFO  : plnx-install-location is set to ''
+01:03:16 INFO  : Successfully done setting XSCT server connection channel  
+01:03:21 INFO  : Successfully done setting workspace for the tool. 
+01:03:21 INFO  : Successfully done query RDI_DATADIR 

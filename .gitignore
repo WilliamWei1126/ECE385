@@ -31,21 +31,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Ignore any folder named sdk anywhere, including all contents
+**/sdk/
+**/sdk/**
+
 # keep all Vivado project files everywhere
 !*.xpr
-
-# =========================
-# Lab6.1: ignore everything except selected source folders
-# =========================
-/Lab6/Lab6.1/**
-
-# keep required parent folders so Git can descend into them
-!/Lab6/Lab6.1/sdk/**
-!/Lab6/Lab6.1/sdk/mb_blinky/
-!/Lab6/Lab6.1/pin_assignment/
-!/Lab6/Lab6.1/design_source/
-
-# keep the actual folders you want
-!/Lab6/Lab6.1/sdk/
-!/Lab6/Lab6.1/pin_assignment/**
-!/Lab6/Lab6.1/design_source/**
