@@ -19,3 +19,4 @@ platform active {mb_intro_top}
 platform generate -quick
 bsp reload
 platform generate
+platform generate

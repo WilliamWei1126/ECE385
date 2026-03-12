@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item key="sdx.custom.platform.repository.locations" value="C:\Users\willi\Documents\GitHub\ECE385\Lab6\Lab6.1\sdk\mb_intro_top\export\mb_intro_top"/>
-	<item key="sdx.custom.platform.repository.last.directory.dialog.location" value="C:\Users\willi\Documents\GitHub\ECE385\Lab6\Lab6.1\sdk\mb_intro_top\export\mb_intro_top"/>
+	<item key="sdx.custom.platform.repository.locations" value="C:\Users\willi\Documents\GitHub\ECE385\Lab6\Lab6.1\sdk\mb_intro_top\export\mb_intro_top;D:\ECE385\Lab6\Lab6.1\sdk\mb_intro_top\export\mb_intro_top"/>
+	<item key="sdx.custom.platform.repository.last.directory.dialog.location" value="D:\ECE385\Lab6\Lab6.1\sdk\mb_intro_top\export\mb_intro_top"/>
 </section>
