@@ -40,13 +40,12 @@ Thumbs.db
 /Lab6/Lab6.1/**
 
 # keep required parent folders so Git can descend into them
-!/Lab6/Lab6.1/sdk/
+!/Lab6/Lab6.1/sdk/**
 !/Lab6/Lab6.1/sdk/mb_blinky/
 !/Lab6/Lab6.1/pin_assignment/
 !/Lab6/Lab6.1/design_source/
 
 # keep the actual folders you want
-!/Lab6/Lab6.1/sdk/mb_blinky/src/
-!/Lab6/Lab6.1/sdk/mb_blinky/src/**
+!/Lab6/Lab6.1/sdk/
 !/Lab6/Lab6.1/pin_assignment/**
 !/Lab6/Lab6.1/design_source/**
