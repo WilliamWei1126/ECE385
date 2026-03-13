@@ -39,7 +39,7 @@ int main()
 		if(BTNPTR->data&0x0001)LEDPTR->data=0x0000;
 		if((BTNPTR->data&0x0002) && !lastbtn1){
 			uint32_t add=LEDPTR->data+SWPTR->data;
-			if(add>65535)printf("overflow!!!!!!!!!!!!\r\n");
+			if(add>65535) xil_printf("overflow!!!!!!!!!!!!\r\n");
 			LEDPTR->data=add;
 		}
 
