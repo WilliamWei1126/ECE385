@@ -42,13 +42,10 @@ int main()
 			if(add>65535) xil_printf("overflow!!!!!!!!!!!!\r\n");
 			LEDPTR->data=add;
 		}
-
 		lastbtn1=BTNPTR->data&0x0002;
 		usleep(20000);
 	}
-
     cleanup_platform();
-
     return 0;
 }
 
