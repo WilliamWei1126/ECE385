@@ -1,4 +1,4 @@
-module testbench();
+module testbenchBasicIO1();
 
   timeunit 1ns;
   timeprecision 1ps;
@@ -103,7 +103,7 @@ module testbench();
     repeat (10) @(posedge clk);
 
     // put start address on switches before run (per your loader program)
-    set_switches(16'd20);
+    set_switches(16'h3);
 
     // reset and run
     press_reset(20);
@@ -111,11 +111,13 @@ module testbench();
     
     // let it go for a while
     set_switches(16'h0001);
-    press_continue(20);
-    repeat (20) @(posedge clk);
-    set_switches(16'h0002);
-    press_continue(20);
-    repeat (200) @(posedge clk);
+    repeat (100) @(posedge clk);
+    set_switches(16'h0000);
+    repeat (100) @(posedge clk);
+    set_switches(16'hF1AB);
+    repeat (100) @(posedge clk);
+    set_switches(16'h1537);
+    repeat (100) @(posedge clk);
 
     // press continue a few times (for PAUSE-based programs)
     
