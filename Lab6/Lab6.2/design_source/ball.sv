@@ -52,6 +52,14 @@ module  ball
         //modify to control ball motion with the keycode
         if (keycode == 8'h1A)
             Ball_Y_Motion_next = -10'd1;
+        else if (keycode == 8'h16) Ball_Y_Motion_next = 10'd1;
+        else if (keycode == 8'h4) Ball_X_Motion_next = -10'd1;
+        else if (keycode == 8'h7) Ball_X_Motion_next = 10'd1;
+        else begin
+            Ball_X_Motion_next = 0;
+            Ball_Y_Motion_next = 0;
+        end
+        
 
 
         if ( (BallY + BallS) >= Ball_Y_Max )  // Ball is at the bottom edge, BOUNCE!
