@@ -3,9 +3,6 @@
 
 # XDC: D:/ECE385/Lab6/Lab6.2/pin_assignment/mb_usb_hdmi_top.xdc
 
-# IP: ip/hdmi_tx_0/hdmi_tx_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==hdmi_tx_0 || ORIG_REF_NAME==hdmi_tx_0} -quiet] -quiet
-
 # Block Designs: D:/ECE385/Lab6/Lab6.2/design_source/mb_block/mb_block.bd
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==mb_block || ORIG_REF_NAME==mb_block} -quiet] -quiet
 

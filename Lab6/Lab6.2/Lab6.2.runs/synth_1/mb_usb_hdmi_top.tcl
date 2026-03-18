@@ -85,7 +85,7 @@ set_property target_language Verilog [current_project]
 set_property ip_repo_paths d:/ECE385/Lab6/Lab6.2/hdmi_tx_1.0 [current_project]
 update_ip_catalog
 set_property ip_output_repo d:/ECE385/Lab6/Lab6.2/Lab6.2.cache/ip [current_project]
-set_property ip_cache_permissions {read write} [current_project]
+set_property ip_cache_permissions disable [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
@@ -95,8 +95,6 @@ read_verilog -library xil_defaultlib -sv {
   D:/ECE385/Lab6/Lab6.2/design_source/hex_driver.sv
   D:/ECE385/Lab6/Lab6.2/design_source/mb_usb_hdmi_top.sv
 }
-read_ip -quiet D:/ECE385/Lab6/Lab6.2/Lab6.2.srcs/sources_1/ip/hdmi_tx_0/hdmi_tx_0.xci
-
 add_files D:/ECE385/Lab6/Lab6.2/design_source/mb_block/mb_block.bd
 set_property used_in_implementation false [get_files -all d:/ECE385/Lab6/Lab6.2/design_source/mb_block/ip/mb_block_microblaze_0_0/mb_block_microblaze_0_0.xdc]
 set_property used_in_implementation false [get_files -all d:/ECE385/Lab6/Lab6.2/design_source/mb_block/ip/mb_block_microblaze_0_0/mb_block_microblaze_0_0_ooc_debug.xdc]
@@ -143,6 +141,8 @@ read_ip -quiet D:/ECE385/Lab6/Lab6.2/Lab6.2.srcs/sources_1/ip/clk_wiz_0/clk_wiz_
 set_property used_in_implementation false [get_files -all d:/ECE385/Lab6/Lab6.2/Lab6.2.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
 set_property used_in_implementation false [get_files -all d:/ECE385/Lab6/Lab6.2/Lab6.2.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
 set_property used_in_implementation false [get_files -all d:/ECE385/Lab6/Lab6.2/Lab6.2.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
+
+read_ip -quiet D:/ECE385/Lab6/Lab6.2/Lab6.2.srcs/sources_1/ip/hdmi_tx_0/hdmi_tx_0.xci
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
