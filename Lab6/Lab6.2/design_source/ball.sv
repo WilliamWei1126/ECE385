@@ -53,6 +53,8 @@ module  ball
         if (keycode == 8'h1A) begin
             Ball_Y_Motion_next = -10'd1;
             Ball_X_Motion_next = 10'd0;
+            //I love working
+            //Stable... la
             end
         else if (keycode == 8'h16) begin
             Ball_Y_Motion_next = 10'd1;
