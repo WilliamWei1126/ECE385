@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
 -- Date        : Mon Mar 16 01:44:37 2026
 -- Host        : Will-PC-9600X running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               d:/ECE385/Lab6/Lab6.2/design_source/mb_block/ip/mb_block_dlmb_bram_if_cntlr_0/mb_block_dlmb_bram_if_cntlr_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top mb_block_dlmb_bram_if_cntlr_0 -prefix
+--               mb_block_dlmb_bram_if_cntlr_0_ mb_block_dlmb_bram_if_cntlr_0_sim_netlist.vhdl
 -- Design      : mb_block_dlmb_bram_if_cntlr_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -144,8 +144,6 @@ entity mb_block_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr is
   attribute C_UE_FAILING_REGISTERS of mb_block_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 0;
   attribute C_WRITE_ACCESS : integer;
   attribute C_WRITE_ACCESS of mb_block_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is 2;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of mb_block_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr : entity is "lmb_bram_if_cntlr";
 end mb_block_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr;
 
 architecture STRUCTURE of mb_block_dlmb_bram_if_cntlr_0_lmb_bram_if_cntlr is

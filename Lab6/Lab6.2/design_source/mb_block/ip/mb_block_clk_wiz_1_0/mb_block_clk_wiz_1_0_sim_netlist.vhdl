@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
 -- Date        : Mon Mar 16 01:44:36 2026
 -- Host        : Will-PC-9600X running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               d:/ECE385/Lab6/Lab6.2/design_source/mb_block/ip/mb_block_clk_wiz_1_0/mb_block_clk_wiz_1_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top mb_block_clk_wiz_1_0 -prefix
+--               mb_block_clk_wiz_1_0_ mb_block_clk_wiz_1_0_sim_netlist.vhdl
 -- Design      : mb_block_clk_wiz_1_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -14,16 +14,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity mb_block_clk_wiz_1_0_clk_wiz is
+entity mb_block_clk_wiz_1_0_mb_block_clk_wiz_1_0_clk_wiz is
   port (
     clk_out1 : out STD_LOGIC;
     reset : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
   );
-end mb_block_clk_wiz_1_0_clk_wiz;
+end mb_block_clk_wiz_1_0_mb_block_clk_wiz_1_0_clk_wiz;
 
-architecture STRUCTURE of mb_block_clk_wiz_1_0_clk_wiz is
+architecture STRUCTURE of mb_block_clk_wiz_1_0_mb_block_clk_wiz_1_0_clk_wiz is
   signal clk_in1_mb_block_clk_wiz_1_0 : STD_LOGIC;
   signal clk_out1_mb_block_clk_wiz_1_0 : STD_LOGIC;
   signal clkfbout_buf_mb_block_clk_wiz_1_0 : STD_LOGIC;
@@ -179,7 +179,7 @@ end mb_block_clk_wiz_1_0;
 
 architecture STRUCTURE of mb_block_clk_wiz_1_0 is
 begin
-inst: entity work.mb_block_clk_wiz_1_0_clk_wiz
+inst: entity work.mb_block_clk_wiz_1_0_mb_block_clk_wiz_1_0_clk_wiz
      port map (
       clk_in1 => clk_in1,
       clk_out1 => clk_out1,

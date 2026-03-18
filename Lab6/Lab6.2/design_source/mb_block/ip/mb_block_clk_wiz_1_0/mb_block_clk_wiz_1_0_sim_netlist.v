@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
 // Date        : Mon Mar 16 01:44:36 2026
 // Host        : Will-PC-9600X running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               d:/ECE385/Lab6/Lab6.2/design_source/mb_block/ip/mb_block_clk_wiz_1_0/mb_block_clk_wiz_1_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top mb_block_clk_wiz_1_0 -prefix
+//               mb_block_clk_wiz_1_0_ mb_block_clk_wiz_1_0_sim_netlist.v
 // Design      : mb_block_clk_wiz_1_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -28,14 +28,14 @@ module mb_block_clk_wiz_1_0
   wire locked;
   wire reset;
 
-  mb_block_clk_wiz_1_0_clk_wiz inst
+  mb_block_clk_wiz_1_0_mb_block_clk_wiz_1_0_clk_wiz inst
        (.clk_in1(clk_in1),
         .clk_out1(clk_out1),
         .locked(locked),
         .reset(reset));
 endmodule
 
-module mb_block_clk_wiz_1_0_clk_wiz
+module mb_block_clk_wiz_1_0_mb_block_clk_wiz_1_0_clk_wiz
    (clk_out1,
     reset,
     locked,

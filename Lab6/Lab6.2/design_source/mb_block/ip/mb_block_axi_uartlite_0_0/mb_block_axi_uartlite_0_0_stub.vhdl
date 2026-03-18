@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
 -- Date        : Mon Mar 16 01:45:07 2026
 -- Host        : Will-PC-9600X running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               d:/ECE385/Lab6/Lab6.2/design_source/mb_block/ip/mb_block_axi_uartlite_0_0/mb_block_axi_uartlite_0_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top mb_block_axi_uartlite_0_0 -prefix
+--               mb_block_axi_uartlite_0_0_ mb_block_axi_uartlite_0_0_stub.vhdl
 -- Design      : mb_block_axi_uartlite_0_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7s50csga324-1

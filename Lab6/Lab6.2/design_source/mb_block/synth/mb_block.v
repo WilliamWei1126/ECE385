@@ -1,7 +1,7 @@
 //Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-//Date        : Mon Mar 16 02:07:43 2026
+//Date        : Tue Mar 17 20:30:25 2026
 //Host        : Will-PC-9600X running 64-bit major release  (build 9200)
 //Command     : generate_target mb_block.bd
 //Design      : mb_block
@@ -1156,8 +1156,8 @@ module mb_block
   assign axi_uartlite_0_UART_RxD = uart_rtl_0_rxd;
   assign clk_100MHz_1 = clk_100MHz;
   assign gpio_usb_int_GPIO_TRI_I = gpio_usb_int_tri_i[0];
-  assign gpio_usb_keycode_0_tri_o[31:0] = gpio_usb_keycode_GPIO2_TRI_O;
-  assign gpio_usb_keycode_1_tri_o[31:0] = gpio_usb_keycode_GPIO_TRI_O;
+  assign gpio_usb_keycode_0_tri_o[31:0] = gpio_usb_keycode_GPIO_TRI_O;
+  assign gpio_usb_keycode_1_tri_o[31:0] = gpio_usb_keycode_GPIO2_TRI_O;
   assign gpio_usb_rst_tri_o[0] = gpio_usb_rst_GPIO_TRI_O;
   assign reset_rtl_0_1 = reset_rtl_0;
   assign uart_rtl_0_txd = axi_uartlite_0_UART_TxD;
