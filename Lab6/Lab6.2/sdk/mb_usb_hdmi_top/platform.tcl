@@ -17,21 +17,5 @@ domain create -name {standalone_microblaze_0} -display-name {standalone_microbla
 platform generate -domains 
 platform active {mb_usb_hdmi_top}
 platform generate -quick
+platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
 platform generate
-platform generate
-platform active {mb_usb_hdmi_top}
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
-platform config -updatehw {D:/ECE385/Lab6/Lab6.2/mb_usb_hdmi_top.xsa}
-platform generate -domains 
