@@ -13,7 +13,7 @@ module hdmi_text_controller_v1_0 #
     // Modify parameters as necessary for access of full VRAM range
 
     parameter integer C_AXI_DATA_WIDTH	= 32,
-    parameter integer C_AXI_ADDR_WIDTH	= 10 
+    parameter integer C_AXI_ADDR_WIDTH	= 4 
 )
 (
     // Users to add ports here
@@ -85,71 +85,7 @@ hdmi_text_controller_v1_0_AXI # (
 //Instiante clocking wizard, VGA sync generator modules, and VGA-HDMI IP here. For a hint, refer to the provided
 //top-level from the previous lab. You should get the IP to generate a valid HDMI signal (e.g. blue screen or gradient)
 //prior to working on the text drawing.
-    
-    logic reset_ah;
-    assign reset_ah = ~axi_aresetn;
-    logic clk_25Mhz, clk_125Mhz, locked;
-    logic hsync, vsync, vde;
-    logic [9:0] drawX, drawY;
-    logic [3:0] red, green, blue;
-    
-    clk_wiz_0 clk_wiz (
-        .clk_out1(clk_25MHz),
-        .clk_out2(clk_125MHz),
-        .reset(reset_ah),
-        .locked(locked),
-        .clk_in1(axi_aclk)
-    );
-    
-    vga_controller vga (
-        .pixel_clk(clk_25MHz),
-        .reset(reset_ah),
-        .hs(hsync),
-        .vs(vsync),
-        .active_nblank(vde),
-        .drawX(drawX),
-        .drawY(drawY)
-    );    
 
-    //Real Digital VGA to HDMI converter
-    hdmi_tx_0 vga_to_hdmi (
-        //Clocking and Reset
-        .pix_clk(clk_25MHz),
-        .pix_clkx5(clk_125MHz),
-        .pix_clk_locked(locked),
-        .rst(reset_ah),
-        //Color and Sync Signals
-        .red(red),
-        .green(green),
-        .blue(blue),
-        .hsync(hsync),
-        .vsync(vsync),
-        .vde(vde),
-        
-        //aux Data (unused)
-        .aux0_din(4'b0),
-        .aux1_din(4'b0),
-        .aux2_din(4'b0),
-        .ade(1'b0),
-        
-        //Differential outputs
-        .TMDS_CLK_P(hdmi_clk_p),          
-        .TMDS_CLK_N(hdmi_clk_n),          
-        .TMDS_DATA_P(hdmi_tx_p),         
-        .TMDS_DATA_N(hdmi_tx_n)          
-    );
-    
-    //Color Mapper Module   
-    color_mapper color_instance(
-        .BallX(9'b0),
-        .BallY(9'b0),
-        .DrawX(9'b0),
-        .DrawY(9'b0),
-        .Ball_size(9'b0),
-        .Red(red),
-        .Green(green),
-        .Blue(blue)
-    );
 // User logic ends
 
 endmodule
