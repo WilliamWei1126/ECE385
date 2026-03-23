@@ -34,7 +34,7 @@ module hdmi_text_controller_v1_0_AXI #
     // Width of S_AXI data bus
     parameter integer C_S_AXI_DATA_WIDTH	= 32,
     // Width of S_AXI address bus
-    parameter integer C_S_AXI_ADDR_WIDTH	= 12
+    parameter integer C_S_AXI_ADDR_WIDTH	= 10
 )
 (
     // Users to add ports here
@@ -100,15 +100,7 @@ module hdmi_text_controller_v1_0_AXI #
     output logic  S_AXI_RVALID,
     // Read ready. This signal indicates that the master can
         // accept the read data and response information.
-    input logic  S_AXI_RREADY,
-    
-    
-    //added
-    input logic [9:0] drawX,
-    input logic [9:0] drawY,
-    output logic [31:0] vgaRdata,
-    output logic[31:0] colorRdata,
-    input logic [31:0] frameCounter
+    input logic  S_AXI_RREADY
 );
 
 // AXI4LITE signals
@@ -129,7 +121,7 @@ logic  	axi_rvalid;
 // ADDR_LSB = 2 for 32 bits (n downto 2)
 // ADDR_LSB = 3 for 64 bits (n downto 3)
 localparam integer ADDR_LSB = (C_S_AXI_DATA_WIDTH/32) + 1;
-localparam integer OPT_MEM_ADDR_BITS = 9;//changed
+localparam integer OPT_MEM_ADDR_BITS = 1;
 //----------------------------------------------
 //-- Signals for user logic register space example
 //------------------------------------------------
@@ -142,7 +134,7 @@ localparam integer OPT_MEM_ADDR_BITS = 9;//changed
 //Note: the provided Verilog template had the registered declared as above, but in order to give 
 //students a hint we have replaced the 4 individual registers with an unpacked array of packed logic. 
 //Note that you as the student will still need to extend this to the full register set needed for the lab.
-logic [C_S_AXI_DATA_WIDTH-1:0] slv_regs[601];//changed
+logic [C_S_AXI_DATA_WIDTH-1:0] slv_regs[4];
 logic	 slv_reg_rden;
 logic	 slv_reg_wren;
 logic [C_S_AXI_DATA_WIDTH-1:0]	 reg_data_out;
@@ -255,7 +247,7 @@ always_ff @( posedge S_AXI_ACLK )
 begin
   if ( S_AXI_ARESETN == 1'b0 )
     begin
-        for (integer i = 0; i < 601; i++)
+        for (integer i = 0; i < 2**C_S_AXI_ADDR_WIDTH; i++)
         begin
            slv_regs[i] <= 0;
         end
@@ -371,17 +363,10 @@ end
 // Slave register read enable is asserted when valid address is available
 // and the slave is ready to accept the read address.
 assign slv_reg_rden = axi_arready & S_AXI_ARVALID & ~axi_rvalid;
-always_comb//changed
+always_comb
 begin
       // Address decoding for reading registers
-     //reg_data_out = slv_regs[axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]];
-     logic[11:0] cpuRindex;
-     cpuRindex=axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB];
-     if(cpuRindex<=600)reg_data_out=slv_regs[cpuRindex];
-     else if(cpuRindex==601)reg_data_out=frameCounter;
-     else if(cpuRindex==602)reg_data_out=drawX;
-     else if(cpuRindex==603)reg_data_out=drawY;
-     else reg_data_out = 32'b0;
+     reg_data_out = slv_regs[axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]];
 end
 
 // Output register or memory read data
@@ -404,10 +389,6 @@ begin
 end    
 
 // Add user logic here
-logic [11:0] vgaIndex;
-assign vgaIndex=(drawY[9:4]*80)+drawX[9:3];
-assign vgaRdata=slv_regs[vgaIndex[11:2]];
-assign colorRdata=slv_regs[600];
 
 // User logic ends
 

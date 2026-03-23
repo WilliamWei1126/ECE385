@@ -14,50 +14,48 @@
 //-------------------------------------------------------------------------
 
 
-module  color_mapper ( input  logic [9:0] BallX, BallY, DrawX, DrawY, Ball_size,
+module  color_mapper ( input logic [9:0] DrawX, DrawY,
+
+        input logic [31:0] vgaData,
+        input logic [31:0] colorData,
                        output logic [3:0]  Red, Green, Blue );
     
-    logic ball_on;
-	 
- /* Old Ball: Generated square box by checking if the current pixel is within a square of length
-    2*BallS, centered at (BallX, BallY).  Note that this requires unsigned comparisons.
-	 
-    if ((DrawX >= BallX - Ball_size) &&
-       (DrawX <= BallX + Ball_size) &&
-       (DrawY >= BallY - Ball_size) &&
-       (DrawY <= BallY + Ball_size))
-       )
-
-     New Ball: Generates (pixelated) circle by using the standard circle formula.  Note that while 
-     this single line is quite powerful descriptively, it causes the synthesis tool to use up three
-     of the 120 available multipliers on the chip!  Since the multiplicants are required to be signed,
-	  we have to first cast them from logic to int (signed by default) before they are multiplied). */
-	  
-    int DistX, DistY, Size;
-    assign DistX = DrawX - BallX;
-    assign DistY = DrawY - BallY;
-    assign Size = Ball_size;
-  
-    always_comb
-    begin:Ball_on_proc
-        if ( (DistX*DistX + DistY*DistY) <= (Size * Size) )
-            ball_on = 1'b1;
-        else 
-            ball_on = 1'b0;
-     end 
-       
-    always_comb
-    begin:RGB_Display
-        if ((ball_on == 1'b1)) begin 
-            Red = 4'hf;
-            Green = 4'h7;
-            Blue = 4'h0;
-        end       
-        else begin 
-            Red = 4'hf - DrawX[9:6]; 
-            Green = 4'hf - DrawX[9:6];
-            Blue = 4'hf - DrawX[9:6];
-        end      
-    end 
+  logic [7:0] char;
+    logic [1:0] charSelect;
+    assign charSelect=DrawX[4:3];
+    always_comb begin
+        case (charSelect)
+            2'b00: char=vgaData[7:0];
+            2'b01: char=vgaData[15:8];
+            2'b10: char=vgaData[23:16];
+            2'b11: char=vgaData[31:24];
+        endcase
+    end
+    logic [10:0] fontAddr;
+    logic [7:0] fontData;
+    assign fontAddr={char[6:0],DrawY[3:0]};
+    font_rom sdghjgdf(
+        .addr(fontAddr),
+        .data(fontData)
+    );
+    logic pixel;
+    logic outcolor;
+    assign pixel=fontData[3'b111-DrawX[2:0]];
+    always_comb begin
+    if(char[7])outcolor=!pixel;
+    else outcolor=pixel;
+    end
+    
+    always_comb begin
+        if (outcolor) begin
+            Red =colorData[27:24];
+            Green=colorData[23:20];
+            Blue=colorData[19:16];
+        end else begin
+            Red=colorData[11:8];
+            Green=colorData[7:4];
+            Blue =colorData[3:0];
+        end
+    end
     
 endmodule
