@@ -1,48 +1,48 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.844585",
-   "Default View_TopLeft":"89,-214",
+   "Default View_ScaleFactor":"0.757105",
+   "Default View_TopLeft":"-135,-201",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
-preplace port uart_rtl_0 -pg 1 -lvl 7 -x 2000 -y 210 -defaultsOSRD
-preplace port HDMI_0 -pg 1 -lvl 7 -x 2000 -y 80 -defaultsOSRD
+preplace port uart_rtl_0 -pg 1 -lvl 7 -x 2010 -y 210 -defaultsOSRD
+preplace port HDMI_0 -pg 1 -lvl 7 -x 2010 -y 80 -defaultsOSRD
 preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -10 -y 440 -defaultsOSRD
 preplace port port-id_reset_rtl_0 -pg 1 -lvl 0 -x -10 -y 350 -defaultsOSRD
 preplace inst microblaze_0 -pg 1 -lvl 4 -x 1120 -y 390 -defaultsOSRD
 preplace inst microblaze_0_local_memory -pg 1 -lvl 5 -x 1570 -y 470 -defaultsOSRD
 preplace inst microblaze_0_axi_periph -pg 1 -lvl 5 -x 1570 -y 200 -defaultsOSRD
-preplace inst microblaze_0_axi_intc -pg 1 -lvl 3 -x 720 -y 180 -defaultsOSRD
-preplace inst mdm_1 -pg 1 -lvl 3 -x 720 -y 390 -defaultsOSRD
+preplace inst microblaze_0_axi_intc -pg 1 -lvl 3 -x 730 -y 180 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 3 -x 730 -y 390 -defaultsOSRD
 preplace inst clk_wiz_1 -pg 1 -lvl 1 -x 110 -y 430 -defaultsOSRD
 preplace inst rst_clk_wiz_1_100M -pg 1 -lvl 2 -x 400 -y 370 -defaultsOSRD
-preplace inst axi_uartlite_0 -pg 1 -lvl 6 -x 1860 -y 220 -defaultsOSRD
-preplace inst hdmi_text_controller_0 -pg 1 -lvl 6 -x 1860 -y 80 -defaultsOSRD
-preplace netloc axi_uartlite_0_interrupt 1 2 5 600 290 NJ 290 1410J 360 NJ 360 1970
+preplace inst axi_uartlite_0 -pg 1 -lvl 6 -x 1860 -y 280 -defaultsOSRD
+preplace inst hdmi_text_controller_0 -pg 1 -lvl 6 -x 1860 -y 140 -defaultsOSRD
+preplace netloc axi_uartlite_0_interrupt 1 2 5 600 20 NJ 20 NJ 20 NJ 20 1970
 preplace netloc clk_100MHz_1 1 0 1 NJ 440
-preplace netloc clk_wiz_1_locked 1 1 1 220 410n
-preplace netloc mdm_1_debug_sys_rst 1 0 4 10 500 210 470 NJ 470 840
-preplace netloc microblaze_0_Clk 1 1 5 200 270 590 300 860 280 1390 30 1750
+preplace netloc clk_wiz_1_locked 1 1 1 210 410n
+preplace netloc mdm_1_debug_sys_rst 1 0 4 10 360 200 480 NJ 480 850
+preplace netloc microblaze_0_Clk 1 1 5 220 470 580 460 870 480 1370 40 1720
 preplace netloc reset_rtl_0_1 1 0 2 NJ 350 NJ
-preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 2 3 590 310 870J 300 1370J
-preplace netloc rst_clk_wiz_1_100M_mb_reset 1 2 2 580 320 850J
-preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 2 4 570 70 NJ 70 1420 40 1730
-preplace netloc axi_uartlite_0_UART 1 6 1 N 210
-preplace netloc hdmi_text_controller_0_HDMI 1 6 1 N 80
-preplace netloc microblaze_0_axi_dp 1 4 1 1400 100n
-preplace netloc microblaze_0_axi_periph_M01_AXI 1 5 1 N 200
-preplace netloc microblaze_0_axi_periph_M02_AXI 1 5 1 1740 60n
+preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 2 3 570 500 NJ 500 NJ
+preplace netloc rst_clk_wiz_1_100M_mb_reset 1 2 2 600 320 860J
+preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 2 4 590 290 NJ 290 1390 30 1730
+preplace netloc axi_uartlite_0_UART 1 6 1 1980 210n
+preplace netloc microblaze_0_axi_dp 1 4 1 1380 100n
+preplace netloc microblaze_0_axi_periph_M01_AXI 1 5 1 1710 200n
 preplace netloc microblaze_0_debug 1 3 1 N 380
-preplace netloc microblaze_0_dlmb_1 1 4 1 1380 370n
-preplace netloc microblaze_0_ilmb_1 1 4 1 1360 390n
-preplace netloc microblaze_0_intc_axi 1 2 4 600 20 NJ 20 NJ 20 1720
-preplace netloc microblaze_0_interrupt 1 3 1 880 180n
-levelinfo -pg 1 -10 110 400 720 1120 1570 1860 2000
-pagesize -pg 1 -db -bbox -sgen -140 0 2110 770
+preplace netloc microblaze_0_dlmb_1 1 4 1 1360 370n
+preplace netloc microblaze_0_ilmb_1 1 4 1 1350 390n
+preplace netloc microblaze_0_intc_axi 1 2 4 580 10 NJ 10 NJ 10 1710
+preplace netloc microblaze_0_interrupt 1 3 1 870 180n
+preplace netloc hdmi_text_controller_0_HDMI 1 6 1 1980 80n
+preplace netloc microblaze_0_axi_periph_M02_AXI 1 5 1 1740 120n
+levelinfo -pg 1 -10 110 400 730 1120 1570 1860 2010
+pagesize -pg 1 -db -bbox -sgen -140 -130 2120 770
 "
 }
 {
-   "da_axi4_cnt":"3",
+   "da_axi4_cnt":"6",
    "da_board_cnt":"8",
    "da_mb_cnt":"3"
 }
