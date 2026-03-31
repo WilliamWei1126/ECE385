@@ -34,7 +34,7 @@ module hdmi_text_controller_v1_0_AXI #
     // Width of S_AXI data bus
     parameter integer C_S_AXI_DATA_WIDTH	= 32,
     // Width of S_AXI address bus
-    parameter integer C_S_AXI_ADDR_WIDTH	= 12
+    parameter integer C_S_AXI_ADDR_WIDTH	= 14
 )
 (
     // Users to add ports here
@@ -142,7 +142,7 @@ localparam integer OPT_MEM_ADDR_BITS = 9;//changed
 //Note: the provided Verilog template had the registered declared as above, but in order to give 
 //students a hint we have replaced the 4 individual registers with an unpacked array of packed logic. 
 //Note that you as the student will still need to extend this to the full register set needed for the lab.
-logic [C_S_AXI_DATA_WIDTH-1:0] slv_regs[601];//changed
+//logic [C_S_AXI_DATA_WIDTH-1:0] slv_regs[601];
 logic	 slv_reg_rden;
 logic	 slv_reg_wren;
 logic [C_S_AXI_DATA_WIDTH-1:0]	 reg_data_out;
@@ -250,25 +250,46 @@ end
 // Slave register write enable is asserted when valid address and data are available
 // and the slave is ready to accept the write address and write data.
 assign slv_reg_wren = axi_wready && S_AXI_WVALID && axi_awready && S_AXI_AWVALID;
+logic [31:0] colorReg;
+logic [31:0] bramOuta;
+logic [11:0] portAAddr;
+logic [3:0] wea;
+logic [13:0] vgaIndex;
+assign vgaIndex=(drawY[9:4]*80)+drawX[9:3];
 
+assign colorRdata=colorReg;
+assign wea=slv_reg_wren?S_AXI_WSTRB:4'b0000;
+
+assign portAAddr=slv_reg_wren?axi_awaddr[12:2]:axi_araddr[12:2];
+
+blk_mem_gen_0 bram(
+    // port a is for mb r/w
+    .clka(S_AXI_ACLK),.ena(1'b1),.wea(wea),.addra(portAAddr),.dina(S_AXI_WDATA),.douta(bramOuta),
+
+    // PORT b is for vga
+    .clkb(S_AXI_ACLK),.enb(1'b1),.web(4'b0000),.addrb(vgaIndex[12:2]),.dinb(32'b0),.doutb(vgaRdata)
+);
 always_ff @( posedge S_AXI_ACLK )
 begin
   if ( S_AXI_ARESETN == 1'b0 )
     begin
-//        for (integer i = 0; i < 601; i++)
-//        begin
-//           slv_regs[i] <= 0;
-//        end
+colorReg<=32'b0;
     end
   else begin
     if (slv_reg_wren)
       begin
-        for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
-          if ( S_AXI_WSTRB[byte_index] == 1 ) begin
-            // Respective byte enables are asserted as per write strobes, note the use of the index part select operator
-            // '+:', you will need to understand how this operator works.
-            slv_regs[axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]][(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
-          end  
+//        for ( byte_index = 0; byte_index <= (C_S_AXI_DATA_WIDTH/8)-1; byte_index = byte_index+1 )
+//          if ( S_AXI_WSTRB[byte_index] == 1 ) begin
+//            // Respective byte enables are asserted as per write strobes, note the use of the index part select operator
+//            // '+:', you will need to understand how this operator works.
+//            slv_regs[axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]][(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
+//          end  
+if (axi_awaddr[12:2]==11'd600) begin
+        if (S_AXI_WSTRB[0]) colorReg[7:0]   <= S_AXI_WDATA[7:0];
+    if (S_AXI_WSTRB[1]) colorReg[15:8]  <= S_AXI_WDATA[15:8];
+    if (S_AXI_WSTRB[2]) colorReg[23:16] <= S_AXI_WDATA[23:16];
+    if (S_AXI_WSTRB[3]) colorReg[31:24] <= S_AXI_WDATA[31:24];
+        end
       end
   end
 end    
@@ -371,14 +392,13 @@ end
 // Slave register read enable is asserted when valid address is available
 // and the slave is ready to accept the read address.
 assign slv_reg_rden = axi_arready & S_AXI_ARVALID & ~axi_rvalid;
-logic[11:0] cpuRindex;
+logic[13:0] cpuRindex;
 always_comb//changed
 begin
-      // Address decoding for reading registers
-     //reg_data_out = slv_regs[axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]];
      
      cpuRindex=axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB];
-     if(cpuRindex<=600)reg_data_out=slv_regs[cpuRindex];
+     if(cpuRindex<600)reg_data_out=bramOuta;
+     else if(cpuRindex==600)reg_data_out = colorReg;
      else if(cpuRindex==601)reg_data_out=frameCounter;
      else if(cpuRindex==602)reg_data_out=drawX;
      else if(cpuRindex==603)reg_data_out=drawY;
@@ -405,10 +425,7 @@ begin
 end    
 
 // Add user logic here
-logic [11:0] vgaIndex;
-assign vgaIndex=(drawY[9:4]*80)+drawX[9:3];
-assign vgaRdata=slv_regs[vgaIndex[11:2]];
-assign colorRdata=slv_regs[600];
+
 
 // User logic ends
 
