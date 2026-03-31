@@ -260,7 +260,7 @@ assign vgaIndex=(drawY[9:4]*80)+drawX[9:3];
 assign colorRdata=colorReg;
 assign wea=slv_reg_wren?S_AXI_WSTRB:4'b0000;
 
-assign portAAddr=slv_reg_wren?axi_awaddr[12:2]:axi_araddr[12:2];
+assign portAAddr=slv_reg_wren?S_AXI_AWADDR[13:2]:axi_araddr[13:2];
 
 blk_mem_gen_0 bram(
     // port a is for mb r/w
@@ -284,7 +284,7 @@ colorReg<=32'b0;
 //            // '+:', you will need to understand how this operator works.
 //            slv_regs[axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]][(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 //          end  
-if (axi_awaddr[12:2]==11'd600) begin
+if (axi_awaddr[13:2]==11'd600) begin
         if (S_AXI_WSTRB[0]) colorReg[7:0]   <= S_AXI_WDATA[7:0];
     if (S_AXI_WSTRB[1]) colorReg[15:8]  <= S_AXI_WDATA[15:8];
     if (S_AXI_WSTRB[2]) colorReg[23:16] <= S_AXI_WDATA[23:16];
@@ -365,20 +365,25 @@ end
 // bus and axi_rresp indicates the status of read transaction.axi_rvalid 
 // is deasserted on reset (active low). axi_rresp and axi_rdata are 
 // cleared to zero on reset (active low).  
+logic readDone;//added for latency
 always_ff @( posedge S_AXI_ACLK )
 begin
   if ( S_AXI_ARESETN == 1'b0 )
     begin
       axi_rvalid <= 0;
       axi_rresp  <= 0;
+      readDone<=0;
     end 
   else
     begin    
-      if (axi_arready && S_AXI_ARVALID && ~axi_rvalid)
-        begin
+      if (axi_arready && S_AXI_ARVALID && ~axi_rvalid)begin
+      readDone<=1'b1;
+      end
+      else if(readDone)  begin
           // Valid read data is available at the read data bus
           axi_rvalid <= 1'b1;
           axi_rresp  <= 2'b0; // 'OKAY' response
+          readDone<=1'b0;
         end   
       else if (axi_rvalid && S_AXI_RREADY)
         begin
@@ -396,7 +401,7 @@ logic[13:0] cpuRindex;
 always_comb//changed
 begin
      
-     cpuRindex=axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB];
+     cpuRindex=axi_araddr[13:2];
      if(cpuRindex<600)reg_data_out=bramOuta;
      else if(cpuRindex==600)reg_data_out = colorReg;
      else if(cpuRindex==601)reg_data_out=frameCounter;
@@ -417,7 +422,7 @@ begin
       // When there is a valid read address (S_AXI_ARVALID) with 
       // acceptance of read address by the slave (axi_arready), 
       // output the read dada 
-      if (slv_reg_rden)
+      if (readDone)
         begin
           axi_rdata <= reg_data_out;     // register read data
         end   

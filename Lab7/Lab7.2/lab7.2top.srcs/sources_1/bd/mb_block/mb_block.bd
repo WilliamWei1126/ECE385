@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x1E7B0616DBB59AC4",
+      "boundary_crc": "0x1E7B06161D73E184",
       "device": "xc7s50csga324-1",
       "gen_directory": "../../../../lab7.2top.gen/sources_1/bd/mb_block",
       "name": "mb_block",
@@ -851,6 +851,11 @@
         "xci_name": "mb_block_hdmi_text_controller_0_6",
         "xci_path": "ip\\mb_block_hdmi_text_controller_0_6\\mb_block_hdmi_text_controller_0_6.xci",
         "inst_hier_path": "hdmi_text_controller_0",
+        "parameters": {
+          "C_AXI_ADDR_WIDTH": {
+            "value": "14"
+          }
+        },
         "interface_ports": {
           "axi": {
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
