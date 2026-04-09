@@ -57,7 +57,7 @@ void setColorPalette (uint8_t color, uint8_t red, uint8_t green, uint8_t blue)
 	//fill in this function to set the color palette entry <color> to <red>, <green>, <blue> 12-bit color
 	uint32_t colorCombined=((red&0b00001111)<<8)|((green &0b00001111)<<4)|(blue&0b00001111);
 	uint regIndex=color>>1;
-	if (color&0b00000001==0){
+	if ((color&0b00000001)==0){
         hdmi_ctrl->colorReg[regIndex]&=0xFFFFF000;
         hdmi_ctrl->colorReg[regIndex]|=colorCombined;
     } 

@@ -60,7 +60,7 @@ module hdmi_text_controller_v1_0 #
     logic [9:0] drawX, drawY;
     logic [3:0] red, green, blue;
     logic [31:0] vgaData;
-    logic [31:0] colorData;
+    logic [31:0] colorData[8];
     logic [31:0] frameCounter;
 // Instantiation of Axi Bus Interface AXI
 

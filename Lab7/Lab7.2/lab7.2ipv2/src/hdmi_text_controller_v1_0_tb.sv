@@ -14,38 +14,38 @@
 
 module hdmi_text_controller_tb();
 
-	//clock and reset_n signals
-	logic aclk =1'b0;
-	logic arstn = 1'b0;
-	
-	//Write Address channel (AW)
-	logic [31:0] write_addr =32'd0;	//Master write address
-	logic [2:0] write_prot = 3'd0;	//type of write(leave at 0)
-	logic write_addr_valid = 1'b0;	//master indicating address is valid
-	logic write_addr_ready;		    //slave ready to receive address
+    //clock and reset_n signals
+    logic aclk =1'b0;
+    logic arstn = 1'b0;
+    
+    //Write Address channel (AW)
+    logic [31:0] write_addr =32'd0; //Master write address
+    logic [2:0] write_prot = 3'd0;  //type of write(leave at 0)
+    logic write_addr_valid = 1'b0;  //master indicating address is valid
+    logic write_addr_ready;         //slave ready to receive address
 
-	//Write Data Channel (W)
-	logic [31:0] write_data = 32'd0;	//Master write data
-	logic [3:0] write_strb = 4'd0;	    //Master byte-wise write strobe
-	logic write_data_valid = 1'b0;	    //Master indicating write data is valid
-	logic write_data_ready;		        //slave ready to receive data
+    //Write Data Channel (W)
+    logic [31:0] write_data = 32'd0;    //Master write data
+    logic [3:0] write_strb = 4'd0;      //Master byte-wise write strobe
+    logic write_data_valid = 1'b0;      //Master indicating write data is valid
+    logic write_data_ready;             //slave ready to receive data
 
-	//Write Response Channel (WR)
-	logic write_resp_ready = 1'b0;	//Master ready to receive write response
-	logic [1:0] write_resp;		    //slave write response
-	logic write_resp_valid;		    //slave response valid
-	
-	//Read Address channel (AR)
-	logic [31:0] read_addr = 32'd0;	//Master read address
-	logic [2:0] read_prot =3'd0;	//type of read(leave at 0)
-	logic read_addr_valid = 1'b0;	//Master indicating address is valid
-	logic read_addr_ready;		    //slave ready to receive address
+    //Write Response Channel (WR)
+    logic write_resp_ready = 1'b0;  //Master ready to receive write response
+    logic [1:0] write_resp;         //slave write response
+    logic write_resp_valid;         //slave response valid
+    
+    //Read Address channel (AR)
+    logic [31:0] read_addr = 32'd0; //Master read address
+    logic [2:0] read_prot =3'd0;    //type of read(leave at 0)
+    logic read_addr_valid = 1'b0;   //Master indicating address is valid
+    logic read_addr_ready;          //slave ready to receive address
 
-	//Read Data Channel (R)
-	logic read_data_ready = 1'b0;	//Master indicating ready to receive data
-	logic [31:0] read_data;		    //slave read data
-	logic [1:0] read_resp;		    //slave read response
-	logic read_data_valid;		    //slave indicating data in channel is valid
+    //Read Data Channel (R)
+    logic read_data_ready = 1'b0;   //Master indicating ready to receive data
+    logic [31:0] read_data;         //slave read data
+    logic [1:0] read_resp;          //slave read response
+    logic read_data_valid;          //slave indicating data in channel is valid
 
     //Although we can look at the HDMI signal, it is not particularly useful for debugging
     //Instead, simulate and record the pixel clock and the pixel RGB values to generate
@@ -62,42 +62,42 @@ module hdmi_text_controller_tb();
 
     integer i,j; //use integers for loop indices, etc
 
-	//Instantiation of DUT (HDMI TEXT_CONTROLLER) IP
-	hdmi_text_controller_v1_0 # (
-		.C_AXI_DATA_WIDTH(32),
-		.C_AXI_ADDR_WIDTH(16)
-	) hdmi_text_controller_v1_0_inst (
+    //Instantiation of DUT (HDMI TEXT_CONTROLLER) IP
+    hdmi_text_controller_v1_0 # (
+        .C_AXI_DATA_WIDTH(32),
+        .C_AXI_ADDR_WIDTH(16)
+    ) hdmi_text_controller_v1_0_inst (
 
-		.axi_aclk(aclk),
-		.axi_aresetn(arstn),
+        .axi_aclk(aclk),
+        .axi_aresetn(arstn),
 
-		.axi_awaddr(write_addr),
-		.axi_awprot(write_prot),
-		.axi_awvalid(write_addr_valid),
-		.axi_awready(write_addr_ready),
+        .axi_awaddr(write_addr),
+        .axi_awprot(write_prot),
+        .axi_awvalid(write_addr_valid),
+        .axi_awready(write_addr_ready),
 
-		.axi_wdata(write_data),
-		.axi_wstrb(write_strb),
-		.axi_wvalid(write_data_valid),
-		.axi_wready(write_data_ready),
+        .axi_wdata(write_data),
+        .axi_wstrb(write_strb),
+        .axi_wvalid(write_data_valid),
+        .axi_wready(write_data_ready),
 
-		.axi_bresp(write_resp),
-		.axi_bvalid(write_resp_valid),
-		.axi_bready(write_resp_ready),
+        .axi_bresp(write_resp),
+        .axi_bvalid(write_resp_valid),
+        .axi_bready(write_resp_ready),
 
-		.axi_araddr(read_addr),
-		.axi_arprot(read_prot),
-		.axi_arvalid(read_addr_valid),
-		.axi_arready(read_addr_ready),
+        .axi_araddr(read_addr),
+        .axi_arprot(read_prot),
+        .axi_arvalid(read_addr_valid),
+        .axi_arready(read_addr_ready),
 
-		.axi_rdata(read_data),
-		.axi_rresp(read_resp),
-		.axi_rvalid(read_data_valid),
-		.axi_rready(read_data_ready)
-	);
-	
-	initial begin: CLOCK_INITIALIZATION
-	   aclk = 1'b1;
+        .axi_rdata(read_data),
+        .axi_rresp(read_resp),
+        .axi_rvalid(read_data_valid),
+        .axi_rready(read_data_ready)
+    );
+    
+    initial begin: CLOCK_INITIALIZATION
+       aclk = 1'b1;
     end 
        
     always begin : CLOCK_GENERATION
@@ -133,7 +133,7 @@ module hdmi_text_controller_tb();
             integer unsigned        fout_bmp_pointer, BMP_file_size,BMP_row_size,r;
             logic   unsigned [31:0] BMP_header[0:12];
         
-                                      BMP_row_size  = 32'(BMP_WIDTH) & 32'hFFFC;  // When saving a bitmap, the row size/width must be
+                                              BMP_row_size  = 32'(BMP_WIDTH) & 32'hFFFC;  // When saving a bitmap, the row size/width must be
         if ((BMP_WIDTH & 32'd3) !=0)  BMP_row_size  = BMP_row_size + 4;           // padded to chunks of 4 bytes.
     
         fout_bmp_pointer= $fopen(bmp_file_name,"wb");
@@ -173,12 +173,12 @@ module hdmi_text_controller_tb();
     // Provided AXI write task, follow this example for AXI read below
     task axi_write (input logic [31:0] addr, input logic [31:0] data);
         begin
-            #3 write_addr <= addr;	//Put write address on bus
-            write_data <= data;	//put write data on bus
-            write_addr_valid <= 1'b1;	//indicate address is valid
-            write_data_valid <= 1'b1;	//indicate data is valid
-            write_resp_ready <= 1'b1;	//indicate ready for a response
-            write_strb <= 4'hF;		//writing all 4 bytes
+            #3 write_addr <= addr;  //Put write address on bus
+            write_data <= data; //put write data on bus
+            write_addr_valid <= 1'b1;   //indicate address is valid
+            write_data_valid <= 1'b1;   //indicate data is valid
+            write_resp_ready <= 1'b1;   //indicate ready for a response
+            write_strb <= 4'hF;     //writing all 4 bytes
     
             //wait for one slave ready signal or the other
             wait(write_data_ready || write_addr_ready);
@@ -250,40 +250,45 @@ module hdmi_text_controller_tb();
         repeat (4) @(posedge aclk);
         arstn <= 1;
         
-        //remember AXI addresses are BYTE addresses!
-        //This writes something into the Control Register so that we're not simulating a black screen
-        //write control reg to set foreground (x36E) and background (xE94)
-        repeat (4) @(posedge aclk) axi_write((600*4), {16'h036B,16'h0E94}); 
+        // 1. WEEK 2 PALETTE WRITES
+        // Write a few different RGB values to the 8 palette registers
+        // Remember, each 32-bit register holds TWO colors (e.g., 0x2000 holds Color 1 and Color 0)
+        repeat (4) @(posedge aclk) axi_write(32'h2000, 32'h0000_0FFF); // Write to Palette Reg 0
+        repeat (4) @(posedge aclk) axi_write(32'h2004, 32'h0F00_00F0); // Write to Palette Reg 1
+        repeat (4) @(posedge aclk) axi_write(32'h2008, 32'h000F_0FF0); // Write to Palette Reg 2
+        repeat (4) @(posedge aclk) axi_write(32'h200C, 32'h00FF_0F0F); // Write to Palette Reg 3
+        repeat (4) @(posedge aclk) axi_write(32'h2010, 32'h1111_2222); // Write to Palette Reg 4
+        repeat (4) @(posedge aclk) axi_write(32'h2014, 32'h3333_4444); // Write to Palette Reg 5
+        repeat (4) @(posedge aclk) axi_write(32'h2018, 32'h5555_6666); // Write to Palette Reg 6
+        repeat (4) @(posedge aclk) axi_write(32'h201C, 32'h7777_8888); // Write to Palette Reg 7
         
-        //Write into every one of the 600 VRAM registers, note that this is different than what the driver C code does
-        //because the testbench axi_write task only generates aligned (full 32-bit) AXI writes (e.g. write_strb is always F)
-        //The C code on the MicroBlaze expects to be able to do byte and halfword (16-bit) writes, therefore if the
-        //simulation works but the checksum does not pass in the hardware, check handling of write_strb. 
-        for(i=0; i < 600; i++) begin 
-		  repeat (4) @(posedge aclk) axi_write(4*i, i);
+        // 2. WEEK 2 VRAM WRITES
+        // Write into every one of the 1200 VRAM registers (instead of 600)
+        for(i=0; i < 1200; i++) begin 
+          repeat (4) @(posedge aclk) axi_write(4*i, i);
         end
         
-        //The following is the readback routine. It tests that your AXI IP is capable of reading back all 601
-        //VRAM registers via AXI (once you've properly filled in axi_read as above). Note that the verification
-        //of the readback results is automatic, it will throw an assertion if the readback result is not as expected        
-        for(i=0; i < 600; i++) begin 
-		  repeat (4) @(posedge aclk) axi_read(4*i, tb_read);
-		  axi_read_assert:assert (tb_read == i) else $error ("AXI readback mismatch at address %x. Expected: %x. Actual:%x.", i, i, tb_read);
+        // 3. WEEK 2 VRAM READBACK & ASSERTIONS
+        // Test that your AXI IP is capable of reading back all 1200 VRAM registers       
+        for(i=0; i < 1200; i++) begin 
+          repeat (4) @(posedge aclk) axi_read(4*i, tb_read);
+          axi_read_assert:assert (tb_read == i) else $error ("AXI readback mismatch at address %x. Expected: %x. Actual:%x.", i, i, tb_read);
         end
         
-        repeat (4) @(posedge aclk) axi_read(600*4, tb_read);
-        $info ("Read back of control register: %x", tb_read);
+        // 4. WEEK 2 PALETTE READBACK
+        // Read back the first Palette register to verify Bit 13 routing works
+        repeat (4) @(posedge aclk) axi_read(32'h2000, tb_read);
+        $info ("Read back of Palette Register 0: %x", tb_read);
+        palette_read_assert:assert (tb_read == 32'h0000_0FFF) else $error ("Palette readback failed!");
         
         //Make sure you've set the simulation settings to run to 'all', rather than the 1000ns default
-		
-		//Simulate until VS goes low (indicating a new frame) and write the results
-		`ifdef SIM_VIDEO
-		wait (~pixel_vs);
-		save_bmp ("lab7_1_sim.bmp");
-		`endif
-		$finish();
-	end
+        
+        //Simulate until VS goes low (indicating a new frame) and write the results
+        `ifdef SIM_VIDEO
+        wait (~pixel_vs);
+        save_bmp ("lab7_2_sim.bmp");
+        `endif
+        $finish();
+    end
     
-endmodule	
-
-	
+endmodule

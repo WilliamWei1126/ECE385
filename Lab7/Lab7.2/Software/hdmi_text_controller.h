@@ -15,13 +15,12 @@
 #define STUDENT2NETID "easonl2"
 
 struct TEXT_HDMI_STRUCT {
-	uint8_t             VRAM [ROWS*COLUMNS*2]; //Week 2 - extended VRAM
-	//declare palette registers here, make sure you properly pad in order to correctly account for
-	//gap in address map between VRAM and start of palette and control registers
-	uint32_t colorReg[8];
-	uint32_t            FRAME_COUNT; //control registers should appear immediately after palette
-	uint32_t            DRAWX;
-	uint32_t            DRAWY;
+	uint8_t             VRAM [ROWS*COLUMNS*2];
+	    uint8_t             unused[PALETTE_START - (ROWS*COLUMNS*2)];
+	    uint32_t            colorReg[8];
+	    uint32_t            FRAME_COUNT;
+	    uint32_t            DRAWX;
+	    uint32_t            DRAWY;
 };
 
 struct COLOR{
@@ -33,7 +32,7 @@ struct COLOR{
 
 
 //you may have to change this line depending on your platform designer
-static volatile struct TEXT_HDMI_STRUCT* hdmi_ctrl = XPAR_HDMI_TEXT_CONTROLLER_0_AXI_BASEADDR;
+static volatile struct TEXT_HDMI_STRUCT* hdmi_ctrl = XPAR_HDMI_TEXT_CONTROLLER_0_BASEADDR;
 
 //CGA colors with names
 static struct COLOR colors[]={

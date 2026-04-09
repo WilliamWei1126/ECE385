@@ -1022,7 +1022,7 @@
               "SEG_hdmi_text_controller_0_reg0": {
                 "address_block": "/hdmi_text_controller_0/axi/reg0",
                 "offset": "0x00020000",
-                "range": "4K"
+                "range": "16K"
               },
               "SEG_microblaze_0_axi_intc_Reg": {
                 "address_block": "/microblaze_0_axi_intc/S_AXI/Reg",
