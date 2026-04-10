@@ -253,31 +253,31 @@ module hdmi_text_controller_tb();
         // 1. WEEK 2 PALETTE WRITES
         // Write a few different RGB values to the 8 palette registers
         // Remember, each 32-bit register holds TWO colors (e.g., 0x2000 holds Color 1 and Color 0)
-        repeat (4) @(posedge aclk) axi_write(32'h2000, 32'h0000_0FFF); // Write to Palette Reg 0
-        repeat (4) @(posedge aclk) axi_write(32'h2004, 32'h0F00_00F0); // Write to Palette Reg 1
-        repeat (4) @(posedge aclk) axi_write(32'h2008, 32'h000F_0FF0); // Write to Palette Reg 2
-        repeat (4) @(posedge aclk) axi_write(32'h200C, 32'h00FF_0F0F); // Write to Palette Reg 3
-        repeat (4) @(posedge aclk) axi_write(32'h2010, 32'h1111_2222); // Write to Palette Reg 4
-        repeat (4) @(posedge aclk) axi_write(32'h2014, 32'h3333_4444); // Write to Palette Reg 5
-        repeat (4) @(posedge aclk) axi_write(32'h2018, 32'h5555_6666); // Write to Palette Reg 6
-        repeat (4) @(posedge aclk) axi_write(32'h201C, 32'h7777_8888); // Write to Palette Reg 7
+       @(posedge aclk) axi_write(32'h2000, 32'h0000_0FFF); // Write to Palette Reg 0
+        @(posedge aclk) axi_write(32'h2004, 32'h0F00_00F0); // Write to Palette Reg 1
+    @(posedge aclk) axi_write(32'h2008, 32'h000F_0FF0); // Write to Palette Reg 2
+     @(posedge aclk) axi_write(32'h200C, 32'h00FF_0F0F); // Write to Palette Reg 3
+       @(posedge aclk) axi_write(32'h2010, 32'h1111_2222); // Write to Palette Reg 4
+       @(posedge aclk) axi_write(32'h2014, 32'h3333_4444); // Write to Palette Reg 5
+ @(posedge aclk) axi_write(32'h2018, 32'h5555_6666); // Write to Palette Reg 6
+        @(posedge aclk) axi_write(32'h201C, 32'h7777_8888); // Write to Palette Reg 7
         
         // 2. WEEK 2 VRAM WRITES
         // Write into every one of the 1200 VRAM registers (instead of 600)
         for(i=0; i < 1200; i++) begin 
-          repeat (4) @(posedge aclk) axi_write(4*i, i);
+          @(posedge aclk) axi_write(4*i, i);
         end
         
         // 3. WEEK 2 VRAM READBACK & ASSERTIONS
         // Test that your AXI IP is capable of reading back all 1200 VRAM registers       
         for(i=0; i < 1200; i++) begin 
-          repeat (4) @(posedge aclk) axi_read(4*i, tb_read);
+        @(posedge aclk) axi_read(4*i, tb_read);
           axi_read_assert:assert (tb_read == i) else $error ("AXI readback mismatch at address %x. Expected: %x. Actual:%x.", i, i, tb_read);
         end
         
         // 4. WEEK 2 PALETTE READBACK
         // Read back the first Palette register to verify Bit 13 routing works
-        repeat (4) @(posedge aclk) axi_read(32'h2000, tb_read);
+     @(posedge aclk) axi_read(32'h2000, tb_read);
         $info ("Read back of Palette Register 0: %x", tb_read);
         palette_read_assert:assert (tb_read == 32'h0000_0FFF) else $error ("Palette readback failed!");
         
