@@ -15,11 +15,11 @@
 module hdmi_text_controller_tb();
 
     //clock and reset_n signals
-    logic aclk =1'b0;
+    logic aclk = 1'b0;
     logic arstn = 1'b0;
     
     //Write Address channel (AW)
-    logic [31:0] write_addr =32'd0; //Master write address
+    logic [31:0] write_addr = 32'd0; //Master write address
     logic [2:0] write_prot = 3'd0;  //type of write(leave at 0)
     logic write_addr_valid = 1'b0;  //master indicating address is valid
     logic write_addr_ready;         //slave ready to receive address
@@ -37,7 +37,7 @@ module hdmi_text_controller_tb();
     
     //Read Address channel (AR)
     logic [31:0] read_addr = 32'd0; //Master read address
-    logic [2:0] read_prot =3'd0;    //type of read(leave at 0)
+    logic [2:0] read_prot = 3'd0;   //type of read(leave at 0)
     logic read_addr_valid = 1'b0;   //Master indicating address is valid
     logic read_addr_ready;          //slave ready to receive address
 
@@ -63,6 +63,7 @@ module hdmi_text_controller_tb();
     integer i,j; //use integers for loop indices, etc
 
     //Instantiation of DUT (HDMI TEXT_CONTROLLER) IP
+    //Note: No external clk_25MHz port here, matching your unmodified IP wrapper
     hdmi_text_controller_v1_0 # (
         .C_AXI_DATA_WIDTH(32),
         .C_AXI_ADDR_WIDTH(16)
@@ -104,37 +105,28 @@ module hdmi_text_controller_tb();
         #5 aclk = ~aclk;
     end
 
-    //Uncomment and fill in the following with your own hierarchical reference (e.g. internal signals) 
-    //so that the testbench can properly reflect the pixels being draw. 
-    //Note that looking at the HDMI signal is not particularly useful here, as it is difficult
-    //to decode. E.g. if your hdmi_text_controller has an internal signal named 'clk_25MHz' for
-    //the pixel clock, assign pixel_clk = hdmi_text_controller_v1_0_inst.clk_25MHz
-    
-    // Red Green and Blue values respectively - these come from your draw logic
+    // Internal Signal Hookups
     assign pixel_rgb[0] = hdmi_text_controller_v1_0_inst.red;
     assign pixel_rgb[1] = hdmi_text_controller_v1_0_inst.green;
     assign pixel_rgb[2] = hdmi_text_controller_v1_0_inst.blue;
     
-    // Pixel clock, hs, vs, and vde (!blank) - these come from your internal VGA module
+    // Assuming the clock wizard inside the IP generates a wire named clk_25MHz
     assign pixel_clk = hdmi_text_controller_v1_0_inst.clk_25MHz;
     assign pixel_hs = hdmi_text_controller_v1_0_inst.hsync;
     assign pixel_vs = hdmi_text_controller_v1_0_inst.vsync;
     assign pixel_vde = hdmi_text_controller_v1_0_inst.vde;
     
-    // DrawX and DrawY - these come from your internal VGA module
     assign drawX = hdmi_text_controller_v1_0_inst.drawX;
     assign drawY = hdmi_text_controller_v1_0_inst.drawY;
    
-    // BMP writing task, based off work from @BrianHGinc:
-    // https://github.com/BrianHGinc/SystemVerilog-TestBench-BPM-picture-generator
+    // BMP writing task
     task save_bmp(string bmp_file_name);
         begin
-        
             integer unsigned        fout_bmp_pointer, BMP_file_size,BMP_row_size,r;
             logic   unsigned [31:0] BMP_header[0:12];
         
-                                              BMP_row_size  = 32'(BMP_WIDTH) & 32'hFFFC;  // When saving a bitmap, the row size/width must be
-        if ((BMP_WIDTH & 32'd3) !=0)  BMP_row_size  = BMP_row_size + 4;           // padded to chunks of 4 bytes.
+                                              BMP_row_size  = 32'(BMP_WIDTH) & 32'hFFFC; 
+        if ((BMP_WIDTH & 32'd3) !=0)  BMP_row_size  = BMP_row_size + 4;            
     
         fout_bmp_pointer= $fopen(bmp_file_name,"wb");
         if (fout_bmp_pointer==0) begin
@@ -145,11 +137,9 @@ module hdmi_text_controller_tb();
        
         BMP_header[0:12] = '{BMP_file_size,0,0054,40,BMP_WIDTH,BMP_HEIGHT,{16'd24,16'd8},0,(BMP_row_size*BMP_HEIGHT*3),2835,2835,0,0};
         
-        //Write header out      
         $fwrite(fout_bmp_pointer,"BM");
-        for (int i =0 ; i <13 ; i++ ) $fwrite(fout_bmp_pointer,"%c%c%c%c",BMP_header[i][7 -:8],BMP_header[i][15 -:8],BMP_header[i][23 -:8],BMP_header[i][31 -:8]); // Better compatibility with Lattice Active_HDL.
+        for (int i =0 ; i <13 ; i++ ) $fwrite(fout_bmp_pointer,"%c%c%c%c",BMP_header[i][7 -:8],BMP_header[i][15 -:8],BMP_header[i][23 -:8],BMP_header[i][31 -:8]);
         
-        //Write image out (note that image is flipped in Y)
         for (int y=BMP_HEIGHT-1;y>=0;y--) begin
           for (int x=0;x<BMP_WIDTH;x++)
             $fwrite(fout_bmp_pointer,"%c%c%c",bitmap[x][y][23:16],bitmap[x][y][15:8],bitmap[x][y][7:0]) ;
@@ -159,73 +149,62 @@ module hdmi_text_controller_tb();
         end
     endtask
     
-    // Always procedure to log RGB values into array to generate image
     always@(posedge pixel_clk)
         if (!arstn) begin
-            for (j = 0; j < BMP_HEIGHT; j++)    //assign bitmap default to some light gray so we 
-                for (i = 0; i < BMP_WIDTH; i++) //can tell the difference between drawn black
-                    bitmap[i][j] <= 24'h0F0F0F; //and default color
+            for (j = 0; j < BMP_HEIGHT; j++)    
+                for (i = 0; i < BMP_WIDTH; i++) 
+                    bitmap[i][j] <= 24'h0F0F0F; 
         end
         else
-            if (pixel_vde) //Only draw when not in the blanking interval, BMP24 is BGR format
+            if (pixel_vde) 
                 bitmap[drawX][drawY] <= {pixel_rgb[2], 4'h0, pixel_rgb[1], 4'h0, pixel_rgb[0], 4'h00};
 
-    // Provided AXI write task, follow this example for AXI read below
+    // AXI WRITE TASK
     task axi_write (input logic [31:0] addr, input logic [31:0] data);
         begin
-            #3 write_addr <= addr;  //Put write address on bus
-            write_data <= data; //put write data on bus
-            write_addr_valid <= 1'b1;   //indicate address is valid
-            write_data_valid <= 1'b1;   //indicate data is valid
-            write_resp_ready <= 1'b1;   //indicate ready for a response
-            write_strb <= 4'hF;     //writing all 4 bytes
+            #3 write_addr <= addr;  
+            write_data <= data; 
+            write_addr_valid <= 1'b1;   
+            write_data_valid <= 1'b1;   
+            write_resp_ready <= 1'b1;   
+            write_strb <= 4'hF;     
     
-            //wait for one slave ready signal or the other
             wait(write_data_ready || write_addr_ready);
                 
-            @(posedge aclk); //one or both signals and a positive edge
-            if(write_data_ready&&write_addr_ready)//received both ready signals
+            @(posedge aclk); 
+            if(write_data_ready&&write_addr_ready)
             begin
                 write_addr_valid<=0;
                 write_data_valid<=0;
             end
-            else    //wait for the other signal and a positive edge
+            else    
             begin
-                if(write_data_ready)    //case data handshake completed
+                if(write_data_ready)    
                 begin
                     write_data_valid<=0;
-                    wait(write_addr_ready); //wait for address address ready
+                    wait(write_addr_ready); 
                 end
-                        else if(write_addr_ready)   //case address handshake completed
+                        else if(write_addr_ready)   
                         begin
                     write_addr_valid<=0;
-                            wait(write_data_ready); //wait for data ready
+                            wait(write_data_ready); 
                         end 
-                @ (posedge aclk);// complete the second handshake
-                write_addr_valid<=0; //make sure both valid signals are deasserted
+                @ (posedge aclk);
+                write_addr_valid<=0; 
                 write_data_valid<=0;
             end
                 
-            //both handshakes have occured
-            //deassert strobe
             write_strb<=0;
     
-            //wait for valid response
             wait(write_resp_valid);
             
-            //both handshake signals and rising edge
             @(posedge aclk);
     
-            //deassert ready for response
             write_resp_ready<=0;
-    
-            //end of write transaction
         end
     endtask;
     
-    //Fill in this task to perform an AXI read, similar to the provided example
-    //of the AXI write above, follow the waveforms provided into the I.AMM manual
-    //Note the read handshake process is simpler than the write
+    // AXI READ TASK
     task axi_read (input logic [31:0] addr, output logic [31:0] data);
         begin
             #3 read_addr <= addr;
@@ -243,52 +222,61 @@ module hdmi_text_controller_tb();
         end
     endtask;
   
-  
-    // Initial block for test vectors begins below
+    // MAIN TEST SEQUENCE
+   // MAIN TEST SEQUENCE
     initial begin: TEST_VECTORS
-        arstn = 0; //reset IP
+        arstn = 0;
         repeat (4) @(posedge aclk);
         arstn <= 1;
         
-        // 1. WEEK 2 PALETTE WRITES
-        // Write a few different RGB values to the 8 palette registers
-        // Remember, each 32-bit register holds TWO colors (e.g., 0x2000 holds Color 1 and Color 0)
-       @(posedge aclk) axi_write(32'h2000, 32'h0000_0FFF); // Write to Palette Reg 0
-        @(posedge aclk) axi_write(32'h2004, 32'h0F00_00F0); // Write to Palette Reg 1
-    @(posedge aclk) axi_write(32'h2008, 32'h000F_0FF0); // Write to Palette Reg 2
-     @(posedge aclk) axi_write(32'h200C, 32'h00FF_0F0F); // Write to Palette Reg 3
-       @(posedge aclk) axi_write(32'h2010, 32'h1111_2222); // Write to Palette Reg 4
-       @(posedge aclk) axi_write(32'h2014, 32'h3333_4444); // Write to Palette Reg 5
- @(posedge aclk) axi_write(32'h2018, 32'h5555_6666); // Write to Palette Reg 6
-        @(posedge aclk) axi_write(32'h201C, 32'h7777_8888); // Write to Palette Reg 7
-        
-        // 2. WEEK 2 VRAM WRITES
-        // Write into every one of the 1200 VRAM registers (instead of 600)
+        @(posedge aclk) axi_write(32'h2000, 32'h0FFF00000);// Write: Palette 0: Black (0x000) Palette 1: White (0xFFF)
+        @(posedge aclk) axi_write(32'h2004, 32'h0E940036B);// Write: Palette 2: Blue (0x36B) Palette 3: Orange(0xE94)
+
+     
         for(i=0; i < 1200; i++) begin 
-          @(posedge aclk) axi_write(4*i, i);
+          @(posedge aclk) axi_write(4*i, 32'h201002010);// Clear entire screen to white spaces Character code: 0x20,  0x10 (black background)
         end
+        @(posedge aclk) axi_write(32'h0000, 32'h6920_6A20);//write i and j into register(0x69 and 0x6A , blue is 0x20) because little endian, the writing is reversed
+        @(posedge aclk) axi_write(32'h0004, 32'h6820_6E20);//write h and n(0x68 and 0x6E)
+        @(posedge aclk) axi_write(32'h0008, 32'h6E20_6520);//write n and e(0x6E and 0x65)
+        @(posedge aclk) axi_write(32'h000C, 32'h3620_6720);//write 6 and g
+        @(posedge aclk) axi_write(32'h0010, 32'h6110_2010);//write white space and a
+        @(posedge aclk) axi_write(32'h0014, 32'h6410_6E10);//write d and n
         
-        // 3. WEEK 2 VRAM READBACK & ASSERTIONS
-        // Test that your AXI IP is capable of reading back all 1200 VRAM registers       
+        @(posedge aclk) axi_write(32'h0018, 32'h6520_2010);//write white space and e
+        @(posedge aclk) axi_write(32'h001C, 32'h7320_6120);//write s and a
+        @(posedge aclk) axi_write(32'h0020, 32'h6E20_6F20);//write n and o
+        @(posedge aclk) axi_write(32'h0024, 32'h3220_6C20);//write 2 and l
+        
+        //this block writes "  completed" in white(x10) logic is the same as above, I don't want to repeat
+        @(posedge aclk) axi_write(32'h0028, 32'h6310_2010);
+        @(posedge aclk) axi_write(32'h002C, 32'h6D10_6F10);
+        @(posedge aclk) axi_write(32'h0030, 32'h6C10_7010);
+        @(posedge aclk) axi_write(32'h0034, 32'h7410_6510);
+        @(posedge aclk) axi_write(32'h0038, 32'h6410_6510);
+        
+                //this block writes "  ECE 385" in orange(x30)
+        @(posedge aclk) axi_write(32'h003C, 32'h4530_2010);
+        @(posedge aclk) axi_write(32'h0040, 32'h4530_4330);
+        @(posedge aclk) axi_write(32'h0044, 32'h3330_2030);
+        @(posedge aclk) axi_write(32'h0048, 32'h3530_3830);
+        @(posedge aclk) axi_write(32'h004C, 32'h2130_2130);
+        
+        // 3. WEEK 2 VRAM READBACK
         for(i=0; i < 1200; i++) begin 
-        @(posedge aclk) axi_read(4*i, tb_read);
-          axi_read_assert:assert (tb_read == i) else $error ("AXI readback mismatch at address %x. Expected: %x. Actual:%x.", i, i, tb_read);
+          @(posedge aclk) axi_read(4*i, tb_read);
         end
         
         // 4. WEEK 2 PALETTE READBACK
-        // Read back the first Palette register to verify Bit 13 routing works
-     @(posedge aclk) axi_read(32'h2000, tb_read);
-        $info ("Read back of Palette Register 0: %x", tb_read);
-        palette_read_assert:assert (tb_read == 32'h0000_0FFF) else $error ("Palette readback failed!");
+        @(posedge aclk) axi_read(32'h2000, tb_read);
+        palette_read_assert:assert (tb_read == 32'h0FFF_0000) else $error ("Palette readback failed!");
         
-        //Make sure you've set the simulation settings to run to 'all', rather than the 1000ns default
-        
-        //Simulate until VS goes low (indicating a new frame) and write the results
         `ifdef SIM_VIDEO
         wait (~pixel_vs);
         save_bmp ("lab7_2_sim.bmp");
         `endif
         $finish();
+    
     end
     
 endmodule

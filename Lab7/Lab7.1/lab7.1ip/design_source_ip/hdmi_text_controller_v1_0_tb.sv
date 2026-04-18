@@ -1,4 +1,4 @@
-//HDMI Text Controller Example Testbench for ECE 385
+ //HDMI Text Controller Example Testbench for ECE 385
 //Spring 2026 Distribution
 
 //Modified 3/29/26 by Zuofu
