@@ -41,12 +41,6 @@ module mb_usb_hdmi_top(
 );
     
     logic [31:0] keycode0_gpio, keycode1_gpio;
-    logic clk_25MHz, clk_125MHz, clk, clk_100MHz;
-    logic locked;
-    logic [9:0] drawX, drawY, ballxsig, ballysig, ballsizesig;
-
-    logic hsync, vsync, vde;
-    logic [3:0] red, green, blue;
     logic reset_ah;
     
     assign reset_ah = reset_rtl_0;
@@ -72,8 +66,6 @@ module mb_usb_hdmi_top(
     mb_block mb_block_i (
         .clk_100MHz(Clk),
         .gpio_usb_int_tri_i(gpio_usb_int_tri_i),
-        .gpio_usb_keycode_0_tri_o(keycode0_gpio),
-        .gpio_usb_keycode_1_tri_o(keycode1_gpio),
         .gpio_usb_rst_tri_o(gpio_usb_rst_tri_o),
         .reset_rtl_0(~reset_ah), //Block designs expect active low reset, all other modules are active high
         .uart_rtl_0_rxd(uart_rtl_0_rxd),
