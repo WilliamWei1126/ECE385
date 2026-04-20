@@ -1,8 +1,8 @@
 //Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-//Date        : Tue Mar 17 20:30:25 2026
-//Host        : Will-PC-9600X running 64-bit major release  (build 9200)
+//Date        : Sun Apr 19 20:22:21 2026
+//Host        : Nakano_Miku running 64-bit major release  (build 9200)
 //Command     : generate_target mb_block_wrapper.bd
 //Design      : mb_block_wrapper
 //Purpose     : IP block netlist
@@ -10,7 +10,11 @@
 `timescale 1 ps / 1 ps
 
 module mb_block_wrapper
-   (clk_100MHz,
+   (HDMI_0_tmds_clk_n,
+    HDMI_0_tmds_clk_p,
+    HDMI_0_tmds_data_n,
+    HDMI_0_tmds_data_p,
+    clk_100MHz,
     gpio_usb_int_tri_i,
     gpio_usb_keycode_0_tri_o,
     gpio_usb_keycode_1_tri_o,
@@ -22,6 +26,10 @@ module mb_block_wrapper
     usb_spi_mosi,
     usb_spi_sclk,
     usb_spi_ss);
+  output HDMI_0_tmds_clk_n;
+  output HDMI_0_tmds_clk_p;
+  output [2:0]HDMI_0_tmds_data_n;
+  output [2:0]HDMI_0_tmds_data_p;
   input clk_100MHz;
   input [0:0]gpio_usb_int_tri_i;
   output [31:0]gpio_usb_keycode_0_tri_o;
@@ -35,6 +43,10 @@ module mb_block_wrapper
   output usb_spi_sclk;
   output [0:0]usb_spi_ss;
 
+  wire HDMI_0_tmds_clk_n;
+  wire HDMI_0_tmds_clk_p;
+  wire [2:0]HDMI_0_tmds_data_n;
+  wire [2:0]HDMI_0_tmds_data_p;
   wire clk_100MHz;
   wire [0:0]gpio_usb_int_tri_i;
   wire [31:0]gpio_usb_keycode_0_tri_o;
@@ -49,7 +61,11 @@ module mb_block_wrapper
   wire [0:0]usb_spi_ss;
 
   mb_block mb_block_i
-       (.clk_100MHz(clk_100MHz),
+       (.HDMI_0_tmds_clk_n(HDMI_0_tmds_clk_n),
+        .HDMI_0_tmds_clk_p(HDMI_0_tmds_clk_p),
+        .HDMI_0_tmds_data_n(HDMI_0_tmds_data_n),
+        .HDMI_0_tmds_data_p(HDMI_0_tmds_data_p),
+        .clk_100MHz(clk_100MHz),
         .gpio_usb_int_tri_i(gpio_usb_int_tri_i),
         .gpio_usb_keycode_0_tri_o(gpio_usb_keycode_0_tri_o),
         .gpio_usb_keycode_1_tri_o(gpio_usb_keycode_1_tri_o),

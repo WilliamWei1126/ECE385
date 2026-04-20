@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xF003CB6620E0D868",
+      "boundary_crc": "0xF003CB667F1C4BBA",
       "device": "xc7s50csga324-1",
       "name": "mb_block",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
@@ -219,7 +219,7 @@
       "gpio_usb_int": {
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
         "xci_name": "mb_block_gpio_usb_int_0",
-        "xci_path": "ip\\mb_block_gpio_usb_int_0\\mb_block_gpio_usb_int_0.xci",
+        "xci_path": "ip\\mb_block_gpio_usb_int_0_1\\mb_block_gpio_usb_int_0.xci",
         "inst_hier_path": "gpio_usb_int",
         "parameters": {
           "C_ALL_INPUTS": {
@@ -236,7 +236,7 @@
       "gpio_usb_keycode": {
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
         "xci_name": "mb_block_gpio_usb_keycode_0",
-        "xci_path": "ip\\mb_block_gpio_usb_keycode_0\\mb_block_gpio_usb_keycode_0.xci",
+        "xci_path": "ip\\mb_block_gpio_usb_keycode_0_1\\mb_block_gpio_usb_keycode_0.xci",
         "inst_hier_path": "gpio_usb_keycode",
         "parameters": {
           "C_ALL_INPUTS": {
@@ -256,7 +256,7 @@
       "gpio_usb_rst": {
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
         "xci_name": "mb_block_gpio_usb_rst_0",
-        "xci_path": "ip\\mb_block_gpio_usb_rst_0\\mb_block_gpio_usb_rst_0.xci",
+        "xci_path": "ip\\mb_block_gpio_usb_rst_0_1\\mb_block_gpio_usb_rst_0.xci",
         "inst_hier_path": "gpio_usb_rst",
         "parameters": {
           "C_ALL_OUTPUTS": {
@@ -1446,7 +1446,7 @@
       "spi_usb": {
         "vlnv": "xilinx.com:ip:axi_quad_spi:3.2",
         "xci_name": "mb_block_spi_usb_0",
-        "xci_path": "ip\\mb_block_spi_usb_0\\mb_block_spi_usb_0.xci",
+        "xci_path": "ip\\mb_block_spi_usb_0_1\\mb_block_spi_usb_0.xci",
         "inst_hier_path": "spi_usb",
         "parameters": {
           "C_SCK_RATIO": {
@@ -1460,7 +1460,7 @@
       "timer_usb_axi": {
         "vlnv": "xilinx.com:ip:axi_timer:2.0",
         "xci_name": "mb_block_timer_usb_axi_0",
-        "xci_path": "ip\\mb_block_timer_usb_axi_0\\mb_block_timer_usb_axi_0.xci",
+        "xci_path": "ip\\mb_block_timer_usb_axi_0_1\\mb_block_timer_usb_axi_0.xci",
         "inst_hier_path": "timer_usb_axi"
       },
       "xlconcat_0": {
@@ -1660,8 +1660,8 @@
           "spi_usb/ext_spi_clk",
           "spi_usb/s_axi_aclk",
           "timer_usb_axi/s_axi_aclk",
-          "hdmi_text_controller_0/axi_aclk",
-          "microblaze_0_axi_periph/M07_ACLK"
+          "microblaze_0_axi_periph/M07_ACLK",
+          "hdmi_text_controller_0/axi_aclk"
         ]
       },
       "reset_rtl_0_1": {
@@ -1702,8 +1702,8 @@
           "microblaze_0_axi_periph/S00_ARESETN",
           "spi_usb/s_axi_aresetn",
           "timer_usb_axi/s_axi_aresetn",
-          "hdmi_text_controller_0/axi_aresetn",
-          "microblaze_0_axi_periph/M07_ARESETN"
+          "microblaze_0_axi_periph/M07_ARESETN",
+          "hdmi_text_controller_0/axi_aresetn"
         ]
       },
       "spi_usb_io0_o": {

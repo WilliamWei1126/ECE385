@@ -327,7 +327,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>6b620f3c</spirit:value>
+            <spirit:value>4cc1af3c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -352,7 +352,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>6b620f3c</spirit:value>
+            <spirit:value>4cc1af3c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -376,7 +376,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>32387268</spirit:value>
+            <spirit:value>a070b29c</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1140,17 +1140,17 @@
         <xilinx:xpmLibrary>XPM_CDC</xilinx:xpmLibrary>
         <xilinx:xpmLibrary>XPM_MEMORY</xilinx:xpmLibrary>
       </xilinx:xpmLibraries>
-      <xilinx:coreRevision>9</xilinx:coreRevision>
+      <xilinx:coreRevision>12</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>xilinx.com:user:hdmi_text_controller_v1_0:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2026-04-10T00:17:05Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2026-04-20T01:21:59Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2022.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="4bb973a4"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="f16a1c25"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="10c74f13"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="65391896"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="92a9ea58"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="a7b3710f"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="5a61ad10"/>
