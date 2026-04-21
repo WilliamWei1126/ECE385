@@ -59,16 +59,21 @@ module hdmi_text_controller_v1_0 #
     logic hsync, vsync, vde;
     logic [9:0] drawX, drawY;
     logic [3:0] red, green, blue;
-    logic [31:0] vgaData;
-    logic [31:0] colorData[8];
-    logic [31:0] frameCounter;
+   
+   // --- NEW SIGNALS FOR 3D VOXEL ENGINE ---
+    // AXI to Hardware Registers (16.16 Fixed Point)
+    logic signed [31:0] px, py, pz, dx, dy, plx, ply;
+    
+    // Map RAM Signals (True Dual Port)
+   logic [9:0] map_addrb;
+    logic [31:0] map_doutb;
+    
+    // Frame Buffer VRAM Signals (Simple Dual Port)
+    logic [16:0] vram_w_addr, vram_r_addr;
+    logic [3:0] vram_w_data, vram_r_data;
+    logic vram_we;
 // Instantiation of Axi Bus Interface AXI
 
-
-always_ff @(negedge vsync or posedge reset_ah)begin
-    if(reset_ah)frameCounter<=32'b0;
-    else frameCounter<=frameCounter+1;
-end
 
 
 hdmi_text_controller_v1_0_AXI # ( 
@@ -96,14 +101,74 @@ hdmi_text_controller_v1_0_AXI # (
     .S_AXI_RRESP(axi_rresp),
     .S_AXI_RVALID(axi_rvalid),
     .S_AXI_RREADY(axi_rready),
-   .drawX(drawX),
-    .drawY(drawY),
-    .vgaRdata(vgaData),
-   .colorRdata(colorData),
-    .frameCounter(frameCounter)
+   
+   
+   // Custom Hookups for Raycaster
+        .player_x(px), .player_y(py), .player_z(pz),
+        .dir_x(dx), .dir_y(dy), .plane_x(plx), .plane_y(ply),
+        
+        .clk_125MHz(clk_125MHz),
+        .raycaster_map_addr(map_addrb),
+        .raycaster_map_data(map_doutb)//change
 );
 
 
+// 3. The Raycaster Engine (Replaces Color Mapper)
+    raycaster_engine engine (
+        .clk(clk_125MHz), .reset(reset_ah),
+        .player_x(px), .player_y(py), .player_z(pz),.dir_x(dx), .dir_y(dy), .plane_x(plx), .plane_y(ply),
+        .map_addrb(map_addrb), .map_doutb(map_doutb),
+        .vram_w_addr(vram_w_addr), .vram_w_data(vram_w_data), .vram_we(vram_we)
+    );
+
+    // 4. Frame Buffer VRAM (Simple Dual Port BRAM - Generated in Vivado)
+    blk_mem_gen_1 vram (
+        // --- PORT A (Written by Raycaster Engine) ---
+        // --- PORT A (Written by Raycaster Engine) ---
+        .clka(clk_125MHz),
+        .ena(1'b1),               // MUST be 1
+        .wea(vram_we),
+        .addra(vram_w_addr),
+        .dina(vram_w_data),       // <--- NO PADDING! Direct 4-bit connection
+
+        // --- PORT B (Read by VGA Controller) ---
+        .clkb(clk_25MHz),
+        .enb(1'b1),               // MUST be 1
+        .web(1'b0),
+        .addrb(vram_r_addr),           
+        .doutb(vram_r_data)       // <
+    );
+
+
+    // Upscale Logic: Read from 320x240 memory for a 640x480 screen
+    assign vram_r_addr = ((drawY >> 1) * 320) + (drawX >> 1);
+
+    // Basic Color Palette Mapping (16 Minecraft-style colors)
+    // Expands the 4-bit VRAM data into 12-bit RGB colors
+    always_comb begin
+        if (!vde) begin
+            {red, green, blue} = 12'h000;
+        end else begin
+            case (vram_r_data)
+                4'h0: {red, green, blue} = 12'h8CE; // 0: Sky (Light Blue)
+                4'h1: {red, green, blue} = 12'h777; // 1: Stone (Gray)
+                4'h2: {red, green, blue} = 12'h2A2; // 2: Grass (Green)
+                4'h3: {red, green, blue} = 12'h642; // 3: Dirt (Brown)
+                4'h4: {red, green, blue} = 12'h863; // 4: Wood Planks (Light Brown)
+                4'h5: {red, green, blue} = 12'h151; // 5: Leaves (Dark Green)
+                4'h6: {red, green, blue} = 12'hB33; // 6: Bricks (Red)
+                4'h7: {red, green, blue} = 12'h9EE; // 7: Glass (Cyan)
+                4'h8: {red, green, blue} = 12'h35C; // 8: Water (Translucent Blue)
+                4'h9: {red, green, blue} = 12'hDC8; // 9: Sand (Yellowish)
+                4'hA: {red, green, blue} = 12'hFD0; // A: Gold Block (Bright Yellow)
+                4'hB: {red, green, blue} = 12'h13B; // B: Lapis/Blue (Deep Blue)
+                4'hC: {red, green, blue} = 12'h102; // C: Obsidian (Dark Purple/Black)
+                4'hD: {red, green, blue} = 12'h511; // D: Netherrack (Dark Red)
+                4'hE: {red, green, blue} = 12'hEEE; // E: Quartz (White)
+                4'hF: {red, green, blue} = 12'hF0F; // F: Error/Highlight (Magenta)
+            endcase
+        end
+    end
 //Instiante clocking wizard, VGA sync generator modules, and VGA-HDMI IP here. For a hint, refer to the provided
 //top-level from the previous lab. You should get the IP to generate a valid HDMI signal (e.g. blue screen or gradient)
 //prior to working on the text drawing.
@@ -154,16 +219,7 @@ hdmi_text_controller_v1_0_AXI # (
         .TMDS_DATA_N(hdmi_tx_n)          
     );
     
-    //Color Mapper Module   
-    color_mapper color_instance(
-        .DrawX(drawX),
-        .DrawY(drawY),
-        .vgaData(vgaData),
-        .colorData(colorData),
-        .Red(red),
-        .Green(green),
-        .Blue(blue)
-    );
+   
 // User logic ends
 
 endmodule

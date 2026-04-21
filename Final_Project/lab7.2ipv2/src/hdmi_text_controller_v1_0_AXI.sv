@@ -104,11 +104,19 @@ module hdmi_text_controller_v1_0_AXI #
     
     
     //added
-    input logic [9:0] drawX,
-    input logic [9:0] drawY,
-    output logic [31:0] vgaRdata,
-    output logic[31:0] colorRdata[8],
-    input logic [31:0] frameCounter
+    // Outputs to the Raycaster Math Engine
+    output logic signed [31:0] player_x,
+    output logic signed [31:0] player_y,
+    output logic signed [31:0] player_z,
+    output logic signed [31:0] dir_x,
+    output logic signed [31:0] dir_y,
+    output logic signed [31:0] plane_x,
+    output logic signed [31:0] plane_y,
+    
+    // Map RAM Port B Interface (For the Raycaster to read blocks)
+    input logic clk_125MHz,
+    input logic [9:0] raycaster_map_addr,
+    output logic [31:0] raycaster_map_data
 );
 
 // AXI4LITE signals
@@ -250,30 +258,37 @@ end
 // Slave register write enable is asserted when valid address and data are available
 // and the slave is ready to accept the write address and write data.
 assign slv_reg_wren = axi_wready && S_AXI_WVALID && axi_awready && S_AXI_AWVALID;
-logic [31:0] colorReg[8];
+// --- 3D ENGINE REGISTERS & MAP RAM ---
+logic [31:0] sys_regs[7]; // Replaces colorReg[8]
 logic [31:0] bramOuta;
 logic [11:0] portAAddr;
 logic [3:0] wea;
-logic [13:0] vgaIndex;
-assign vgaIndex=(drawY[9:4]*80)+drawX[9:3];
 
-assign colorRdata=colorReg;
-assign wea=(slv_reg_wren&&axi_awaddr[13]==1'b0)?S_AXI_WSTRB:4'b0000;
+// Output assignments to the Raycaster
+assign player_x = sys_regs[0];
+assign player_y = sys_regs[1];
+assign player_z = sys_regs[2];
+assign dir_x    = sys_regs[3];
+assign dir_y    = sys_regs[4];
+assign plane_x  = sys_regs[5];
+assign plane_y  = sys_regs[6];
 
-assign portAAddr=slv_reg_wren?axi_awaddr[13:2]:axi_araddr[13:2];
+// If address bit 13 is 0, we write to Map RAM.
+assign wea = (slv_reg_wren && axi_awaddr[13]==1'b0) ? S_AXI_WSTRB : 4'b0000;
+assign portAAddr = slv_reg_wren ? axi_awaddr[13:2] : axi_araddr[13:2];
 
-blk_mem_gen_0 bram(
-    // port a is for mb r/wcpu
-    .clka(S_AXI_ACLK),.ena(1'b1),.wea(wea),.addra(portAAddr),.dina(S_AXI_WDATA),.douta(bramOuta),
+blk_mem_gen_0 world_memory(
+    // Port A is for MicroBlaze R/W
+    .clka(S_AXI_ACLK), .ena(1'b1), .wea(wea), .addra(portAAddr[9:0]), .dina(S_AXI_WDATA), .douta(bramOuta),
 
-    // PORT b is for vgamapperwet
-    .clkb(S_AXI_ACLK),.enb(1'b1),.web(4'b0000),.addrb(vgaIndex[13:1]),.dinb(32'b0),.doutb(vgaRdata)
+    // Port B is for Raycaster Read
+    .clkb(clk_125MHz), .enb(1'b1), .web(4'b0000), .addrb(raycaster_map_addr), .dinb(32'b0), .doutb(raycaster_map_data)
 );
 always_ff @( posedge S_AXI_ACLK )
 begin
   if ( S_AXI_ARESETN == 1'b0 )
     begin
-for(int i=0;i<8;i++)colorReg[i]<=32'b0;
+for(int i=0;i<7;i++) sys_regs[i]<=32'b0;
     end
   else begin
     if (slv_reg_wren)
@@ -285,10 +300,10 @@ for(int i=0;i<8;i++)colorReg[i]<=32'b0;
 //            slv_regs[axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB]][(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
 //          end  
 if (axi_awaddr[13]==1'b1) begin
-        if (S_AXI_WSTRB[0]) colorReg[axi_awaddr[4:2]][7:0]   <= S_AXI_WDATA[7:0];
-    if (S_AXI_WSTRB[1]) colorReg[axi_awaddr[4:2]][15:8]  <= S_AXI_WDATA[15:8];
-    if (S_AXI_WSTRB[2]) colorReg[axi_awaddr[4:2]][23:16] <= S_AXI_WDATA[23:16];
-    if (S_AXI_WSTRB[3]) colorReg[axi_awaddr[4:2]][31:24] <= S_AXI_WDATA[31:24];
+    if (S_AXI_WSTRB[0]) sys_regs[axi_awaddr[4:2]][7:0]   <= S_AXI_WDATA[7:0];
+            if (S_AXI_WSTRB[1]) sys_regs[axi_awaddr[4:2]][15:8]  <= S_AXI_WDATA[15:8];
+            if (S_AXI_WSTRB[2]) sys_regs[axi_awaddr[4:2]][23:16] <= S_AXI_WDATA[23:16];
+            if (S_AXI_WSTRB[3]) sys_regs[axi_awaddr[4:2]][31:24] <= S_AXI_WDATA[31:24];
         end
       end
   end
@@ -403,11 +418,9 @@ begin
      
      cpuRindex=axi_araddr[13:2];
      if(axi_araddr[13]==1'b1)begin
-    if(cpuRindex>=12'h800&&cpuRindex<=12'h807)reg_data_out=colorReg[axi_araddr[4:2]];
-        else if(cpuRindex==12'h808)reg_data_out=frameCounter;
-        else if (cpuRindex==12'h809)reg_data_out=drawX;
-        else if (cpuRindex==12'h80A)reg_data_out=drawY;
-        else reg_data_out=32'b0;
+    // Read from Player Registers if in 0x2000 range
+        if(cpuRindex>=12'h800 && cpuRindex<=12'h806) reg_data_out = sys_regs[axi_araddr[4:2]];
+        else reg_data_out = 32'b0;
      end
      else reg_data_out =bramOuta;
 end
