@@ -184,50 +184,6 @@
         <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
-    <FileSet Name="blk_mem_gen_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/blk_mem_gen_0" RelGenDir="$PGENDIR/blk_mem_gen_0">
-      <File Path="$PSRCDIR/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.xci">
-        <FileInfo>
-          <Attr Name="Library" Val="xil_defaultlib"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_stub.vhdl">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_stub.v">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.dcp">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.vho">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.veo">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/doc/blk_mem_gen_v8_4_changelog.txt">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/simulation/blk_mem_gen_v8_4.v">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/sim/blk_mem_gen_0.v">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_ooc.xdc">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/synth/blk_mem_gen_0.vhd">
-          <Attr Name="Library" Val="xil_defaultlib"/>
-        </CompFileExtendedInfo>
-      </File>
-      <Config>
-        <Option Name="TopModule" Val="blk_mem_gen_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="hdmi_tx_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/hdmi_tx_0" RelGenDir="$PGENDIR/hdmi_tx_0">
       <File Path="$PSRCDIR/sources_1/ip/hdmi_tx_0/hdmi_tx_0.xci">
         <FileInfo>
@@ -282,6 +238,51 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
+    <FileSet Name="blk_mem_gen_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/blk_mem_gen_0" RelGenDir="$PGENDIR/blk_mem_gen_0">
+      <File Path="$PSRCDIR/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.xci">
+        <FileInfo>
+          <Attr Name="Library" Val="xil_defaultlib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_stub.vhdl">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_stub.v">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.dcp">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.vho">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.veo">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/doc/blk_mem_gen_v8_4_changelog.txt">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/simulation/blk_mem_gen_v8_4.v">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/sim/blk_mem_gen_0.v">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_ooc.xdc">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="blk_mem_gen_0.xci" FileRelPathName="d:/ECE385/Lab7/Lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/blk_mem_gen_0/synth/blk_mem_gen_0.vhd">
+          <Attr Name="Library" Val="xil_defaultlib"/>
+        </CompFileExtendedInfo>
+      </File>
+      <Config>
+        <Option Name="TopModule" Val="blk_mem_gen_0"/>
+        <Option Name="dataflowViewerSettings" Val="min_width=16"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
   </FileSets>
   <Simulators>
     <Simulator Name="XSim">
@@ -303,16 +304,6 @@
   </Simulators>
   <Runs Version="1" Minor="19">
     <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7s50csga324-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="true" IncrementalCheckpoint="$PSRCDIR/utils_1/imports/synth_1/hdmi_text_controller_v1_0.dcp" WriteIncrSynthDcp="false" State="current" Dir="$PRUNDIR/synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/synth_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2022"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2022"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
-    <Run Id="blk_mem_gen_0_synth_1" Type="Ft3:Synth" SrcSet="blk_mem_gen_0" Part="xc7s50csga324-1" ConstrsSet="blk_mem_gen_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/blk_mem_gen_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2022"/>
         <Step Id="synth_design"/>
@@ -362,24 +353,17 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/impl_1">
+    <Run Id="blk_mem_gen_0_synth_1" Type="Ft3:Synth" SrcSet="blk_mem_gen_0" Part="xc7s50csga324-1" ConstrsSet="blk_mem_gen_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/blk_mem_gen_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_synth_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2022"/>
+        <Step Id="synth_design"/>
       </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2022"/>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2022"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="blk_mem_gen_0_impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="blk_mem_gen_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="blk_mem_gen_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_impl_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
         <Step Id="init_design"/>
@@ -392,6 +376,7 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
       <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2022"/>
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
@@ -448,6 +433,23 @@
       <RQSFiles/>
     </Run>
     <Run Id="div_gen_0_impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="div_gen_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="div_gen_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/div_gen_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/div_gen_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2022"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="blk_mem_gen_0_impl_1" Type="Ft2:EntireDesign" Part="xc7s50csga324-1" ConstrsSet="blk_mem_gen_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="blk_mem_gen_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/blk_mem_gen_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2022"/>
         <Step Id="init_design"/>
