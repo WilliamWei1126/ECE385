@@ -282,7 +282,7 @@ blk_mem_gen_0 world_memory(
     .clka(S_AXI_ACLK), .ena(1'b1), .wea(wea), .addra(portAAddr[9:0]), .dina(S_AXI_WDATA), .douta(bramOuta),
 
     // Port B is for Raycaster Read
-    .clkb(clk_125MHz), .enb(1'b1), .web(4'b0000), .addrb(raycaster_map_addr), .dinb(32'b0), .doutb(raycaster_map_data)
+    .clkb(S_AXI_ACLK), .enb(1'b1), .web(4'b0000), .addrb(raycaster_map_addr), .dinb(32'b0), .doutb(raycaster_map_data)
 );
 always_ff @( posedge S_AXI_ACLK )
 begin

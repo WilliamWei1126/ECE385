@@ -18,8 +18,16 @@ module raycaster_engine (
     output logic        vram_we
 );
 
-    enum logic [3:0] { 
-        INIT, CALC_RAY, CALC_STEP, DDA_STEP, DDA_BRAM_WAIT, DDA_CHECK, CALC_DIST, CALC_HEIGHT, DRAW_COL
+    enum logic [4:0] { 
+        INIT, 
+        CALC_RAY_MUL, CALC_RAY_ADD, 
+        CALC_STEP, 
+        DIV_DDX_INIT, WAIT_DDX, 
+        DIV_DDY_INIT, WAIT_DDY, 
+        SETUP_STEP_MUL, SETUP_STEP_ASSIGN,
+        DDA_STEP, DDA_BRAM_WAIT, DDA_CHECK, CALC_DIST, 
+        DIV_HEIGHT_INIT, WAIT_HEIGHT, 
+        CALC_HEIGHT_MUL, CALC_HEIGHT_ADD, DRAW_COL
     } state;
 
     logic [8:0] screen_x;
@@ -30,30 +38,44 @@ module raycaster_engine (
     logic signed [31:0] sideDistX, sideDistY, deltaDistX, deltaDistY;
     logic signed [31:0] perpWallDist;
     
-    // BUG FIX 1: MUST BE SIGNED 32-BIT!
     logic signed [31:0] stepX, stepY; 
     logic hit, side;
     logic [3:0] hit_color;
-    
-    // BUG FIX 2: INFINITE LOOP PREVENTER
     logic [6:0] depth_count; 
-
     logic [7:0] drawStart, drawEnd;
+    logic [15:0] hit_fraction; 
+    logic [31:0] abs_dir_x, abs_dir_y;
 
-    // Fast 16.16 DSP Multiplier
-    function logic signed [31:0] fix_mul(input logic signed [31:0] a, input logic signed [31:0] b);
-        logic signed [63:0] res;
-        begin
-            res = (64'(a) * 64'(b));
-            fix_mul = res[47:16]; 
-        end
-    endfunction
+    // --- DEDICATED PIPELINE REGISTERS ---
+    logic signed [63:0] calc_ray_mul_x, calc_ray_mul_y;
+    logic signed [63:0] setup_step_mul_x, setup_step_mul_y;
+    logic signed [63:0] hit_frac_mul_res;
+    
+    logic signed [31:0] saved_line_height; 
+
+    // --- VIVADO IP MODULE WIRES ---
+    logic div_valid_in;
+    logic div_valid_out;
+    logic [63:0] div_num;
+    logic [31:0] div_den;
+    logic [95:0] div_result; 
+
+    div_gen_0 hardware_divider (
+      .aclk(clk),                                      
+      .s_axis_divisor_tvalid(div_valid_in),    
+      .s_axis_divisor_tdata(div_den),      
+      .s_axis_dividend_tvalid(div_valid_in),    
+      .s_axis_dividend_tdata(div_num),  
+      .m_axis_dout_tvalid(div_valid_out),      
+      .m_axis_dout_tdata(div_result)           
+    );
 
     always_ff @(posedge clk) begin
         if (reset) begin
             state <= INIT;
             screen_x <= 0;
             vram_we <= 0;
+            div_valid_in <= 0;
         end else begin
             vram_we <= 0; 
             
@@ -65,55 +87,106 @@ module raycaster_engine (
                         mapY <= player_y[31:16];
                         hit <= 0;
                         depth_count <= 0;
-                        state <= CALC_RAY;
+                        state <= CALC_RAY_MUL;
                     end else begin
-                        screen_x <= 0; // Frame complete
+                        screen_x <= 0; 
                     end
                 end
                 
-                CALC_RAY: begin
-                    rayDirX <= dir_x + fix_mul(plane_x, cameraX);
-                    rayDirY <= dir_y + fix_mul(plane_y, cameraX);
+                CALC_RAY_MUL: begin
+                    calc_ray_mul_x <= 64'(plane_x) * 64'(cameraX);
+                    calc_ray_mul_y <= 64'(plane_y) * 64'(cameraX);
+                    state <= CALC_RAY_ADD;
+                end
+                
+                CALC_RAY_ADD: begin
+                    rayDirX <= dir_x + calc_ray_mul_x[47:16];
+                    rayDirY <= dir_y + calc_ray_mul_y[47:16];
                     state <= CALC_STEP;
                 end
                 
                 CALC_STEP: begin
-                    automatic logic signed [31:0] absDirX = (rayDirX < 0) ? -rayDirX : rayDirX;
-                    automatic logic signed [31:0] absDirY = (rayDirY < 0) ? -rayDirY : rayDirY;
+                    abs_dir_x <= (rayDirX < 0) ? -rayDirX : rayDirX;
+                    abs_dir_y <= (rayDirY < 0) ? -rayDirY : rayDirY;
+                    state <= DIV_DDX_INIT;
+                end
+                
+                DIV_DDX_INIT: begin
+                    if (abs_dir_x < 32'd16) begin
+                        deltaDistX <= 32'h0FFFFFFF;
+                        state <= DIV_DDY_INIT;
+                    end else begin
+                        div_num <= 64'h0000000100000000;
+                        div_den <= abs_dir_x;
+                        div_valid_in <= 1'b1; 
+                        state <= WAIT_DDX;
+                    end
+                end
+                
+                WAIT_DDX: begin
+                    div_valid_in <= 1'b0; 
+                    if (div_valid_out == 1'b1) begin
+                        deltaDistX <= div_result[63:32]; 
+                        state <= DIV_DDY_INIT;
+                    end
+                end
+                
+                DIV_DDY_INIT: begin
+                    if (abs_dir_y < 32'd16) begin
+                        deltaDistY <= 32'h0FFFFFFF;
+                        state <= SETUP_STEP_MUL;
+                    end else begin
+                        div_num <= 64'h0000000100000000;
+                        div_den <= abs_dir_y;
+                        div_valid_in <= 1'b1;
+                        state <= WAIT_DDY;
+                    end
+                end
+                
+                WAIT_DDY: begin
+                    div_valid_in <= 1'b0;
+                    if (div_valid_out == 1'b1) begin
+                        deltaDistY <= div_result[63:32];
+                        state <= SETUP_STEP_MUL;
+                    end
+                end
+                
+                SETUP_STEP_MUL: begin
+                    automatic logic signed [31:0] px_frac;
+                    automatic logic signed [31:0] py_frac;
                     
-                    // BUG FIX 3: Use 0FFFFFFF instead of 7FFFFFFF to prevent addition overflow!
-                    automatic logic signed [31:0] dDX = (absDirX == 0) ? 32'h0FFFFFFF : (64'h0000000100000000 / absDirX);
-                    automatic logic signed [31:0] dDY = (absDirY == 0) ? 32'h0FFFFFFF : (64'h0000000100000000 / absDirY);
+                    px_frac = player_x & 32'h0000FFFF;
+                    py_frac = player_y & 32'h0000FFFF;
                     
-                    deltaDistX <= dDX;
-                    deltaDistY <= dDY;
-
                     if (rayDirX < 0) begin
                         stepX <= -1;
-                        sideDistX <= fix_mul((player_x & 32'h0000FFFF), dDX);
+                        setup_step_mul_x <= 64'(px_frac) * 64'(deltaDistX);
                     end else begin
                         stepX <= 1;
-                        sideDistX <= fix_mul((32'h00010000 - (player_x & 32'h0000FFFF)), dDX);
+                        setup_step_mul_x <= 64'(32'h00010000 - px_frac) * 64'(deltaDistX);
                     end
                     
                     if (rayDirY < 0) begin
                         stepY <= -1;
-                        sideDistY <= fix_mul((player_y & 32'h0000FFFF), dDY);
+                        setup_step_mul_y <= 64'(py_frac) * 64'(deltaDistY);
                     end else begin
                         stepY <= 1;
-                        sideDistY <= fix_mul((32'h00010000 - (player_y & 32'h0000FFFF)), dDY);
+                        setup_step_mul_y <= 64'(32'h00010000 - py_frac) * 64'(deltaDistY);
                     end
-                    
+                    state <= SETUP_STEP_ASSIGN;
+                end
+                
+                SETUP_STEP_ASSIGN: begin
+                    sideDistX <= setup_step_mul_x[47:16];
+                    sideDistY <= setup_step_mul_y[47:16];
                     state <= DDA_STEP;
                 end
                 
                 DDA_STEP: begin
                     depth_count <= depth_count + 1;
-                    
-                    // IF WE STEP 64 TIMES, FORCE STOP SO WE DON'T HANG THE SYSTEM!
                     if (depth_count > 64) begin
                         hit <= 1;
-                        hit_color <= 4'h0; // Force Sky
+                        hit_color <= 4'h0; 
                         state <= CALC_DIST;
                     end else begin
                         if (sideDistX < sideDistY) begin
@@ -134,12 +207,10 @@ module raycaster_engine (
                     state <= DDA_CHECK;
                 end
                 
-              DDA_CHECK: begin
-                    // HARDWARE BOUNDARY FIX: Automatically hit a wall at the edges 
-                    // of the map so we never fly out into the void!
+                DDA_CHECK: begin
                     if (mapX <= 0 || mapX >= 31 || mapY <= 0 || mapY >= 31) begin
                         hit <= 1;
-                        hit_color <= 4'h1; // Force Wall Color 1
+                        hit_color <= 4'h1; 
                         state <= CALC_DIST;
                     end else if (map_doutb[3:0] > 0) begin 
                         hit <= 1;
@@ -153,25 +224,53 @@ module raycaster_engine (
                 CALC_DIST: begin
                     if (side == 0) perpWallDist <= sideDistX - deltaDistX;
                     else           perpWallDist <= sideDistY - deltaDistY;
-                    
-                    state <= CALC_HEIGHT;
+                    state <= DIV_HEIGHT_INIT;
                 end
                 
-              CALC_HEIGHT: begin
-                    // 1. Safeguard against divide-by-zero using a temporary automatic variable
-                    automatic logic signed [31:0] safe_dist = (perpWallDist <= 0) ? 1 : perpWallDist;
-                    automatic logic signed [31:0] line_height;
+                DIV_HEIGHT_INIT: begin
+                    div_num <= {32'd0, 32'd15728640};
+                    div_den <= (perpWallDist <= 0) ? 1 : perpWallDist;
+                    div_valid_in <= 1'b1;
+                    state <= WAIT_HEIGHT;
+                end
+                
+                WAIT_HEIGHT: begin
+                    div_valid_in <= 1'b0;
+                    if (div_valid_out == 1'b1) begin
+                        saved_line_height <= div_result[63:32];
+                        state <= CALC_HEIGHT_MUL;
+                    end
+                end
+                
+                CALC_HEIGHT_MUL: begin
+                    automatic logic signed [31:0] safe_dist;
+                    safe_dist = (perpWallDist <= 0) ? 1 : perpWallDist;
+                    
+                    if (side == 0) hit_frac_mul_res <= 64'(safe_dist) * 64'(rayDirY);
+                    else           hit_frac_mul_res <= 64'(safe_dist) * 64'(rayDirX);
+                    
+                    state <= CALC_HEIGHT_ADD;
+                end
+                
+                CALC_HEIGHT_ADD: begin
+                    automatic logic signed [31:0] exact_hit;
                     automatic logic signed [31:0] ds, de; 
+                    automatic logic signed [31:0] pz;
+                    automatic logic signed [31:0] z_offset;
                     
-                    // 2. THE FIX: 16.16 Fixed-Point Division
-                    // 15728640 is (240 * 65536). This preserves fractional precision!
-                    line_height = 32'd15728640 / safe_dist; 
+                    // 1. Calculate Exact Hit
+                    if (side == 0) exact_hit = player_y + hit_frac_mul_res[47:16];
+                    else           exact_hit = player_x + hit_frac_mul_res[47:16];
+                    
+                    hit_fraction <= exact_hit[15:0]; 
 
-                    // 3. Apply the Camera Z (height) offset
-                    ds = 120 - (line_height >> 1) + (player_z[31:16] * 20);
-                    de = 120 + (line_height >> 1) + (player_z[31:16] * 20);
+                    // 2. Pure Bit-Shift Z Offset (No Multiplier Block Used)
+                    pz = player_z[31:16];
+                    z_offset = (pz << 4) + (pz << 2);
+
+                    ds = 120 - (saved_line_height >> 1) + z_offset;
+                    de = 120 + (saved_line_height >> 1) + z_offset;
                     
-                    // 4. Clip to Screen Bounds (0 to 239)
                     if (ds < 0) drawStart <= 8'd0;
                     else if (ds > 239) drawStart <= 8'd239;
                     else drawStart <= ds[7:0];
@@ -188,9 +287,18 @@ module raycaster_engine (
                     vram_w_addr <= (screen_y * 320) + screen_x;
                     vram_we <= 1'b1;
                     
-                    if (screen_y < drawStart) vram_w_data <= 4'h0; // Sky
-                    else if (screen_y > drawEnd) vram_w_data <= 4'h4; // Floor
-                    else vram_w_data <= hit_color; // Wall
+                    if (screen_y < drawStart) begin 
+                        vram_w_data <= 4'h0; // Sky
+                    end else if (screen_y > drawEnd) begin 
+                        vram_w_data <= 4'h4; // Floor
+                    end else begin
+                        if (hit_fraction < 16'h0800 || hit_fraction > 16'hF800 || 
+                            screen_y == drawStart || screen_y == drawEnd) begin
+                            vram_w_data <= 4'h1; // Black Outline
+                        end else begin
+                            vram_w_data <= hit_color; // Solid Block Color
+                        end
+                    end
                     
                     if (screen_y == 239) begin
                         screen_x <= screen_x + 1;

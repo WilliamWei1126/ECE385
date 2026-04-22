@@ -4,7 +4,7 @@
     "xci_name": "hdmi_tx_0",
     "component_reference": "realdigital.org:realdigital:hdmi_tx:1.0",
     "ip_revision": "2",
-    "gen_directory": "../../../../../../ece385/lab7/lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/hdmi_tx_0",
+    "gen_directory": "../../../../tmp_edit_project.gen/sources_1/ip/hdmi_tx_0_1",
     "parameters": {
       "component_parameters": {
         "MODE": [ { "value": "HDMI", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
@@ -38,9 +38,9 @@
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
         "IPREVISION": [ { "value": "2" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../ece385/lab7/lab7.2/lab7.2ipv2/tmp_edit_project.gen/sources_1/ip/hdmi_tx_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../tmp_edit_project.gen/sources_1/ip/hdmi_tx_0_1" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
-        "SHAREDDIR": [ { "value": "./" } ],
+        "SHAREDDIR": [ { "value": "." } ],
         "SWVERSION": [ { "value": "2022.2" } ],
         "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }

@@ -115,7 +115,7 @@ hdmi_text_controller_v1_0_AXI # (
 
 // 3. The Raycaster Engine (Replaces Color Mapper)
     raycaster_engine engine (
-        .clk(clk_125MHz), .reset(reset_ah),
+        .clk(axi_aclk), .reset(reset_ah),
         .player_x(px), .player_y(py), .player_z(pz),.dir_x(dx), .dir_y(dy), .plane_x(plx), .plane_y(ply),
         .map_addrb(map_addrb), .map_doutb(map_doutb),
         .vram_w_addr(vram_w_addr), .vram_w_data(vram_w_data), .vram_we(vram_we)
@@ -125,18 +125,18 @@ hdmi_text_controller_v1_0_AXI # (
     blk_mem_gen_1 vram (
         // --- PORT A (Written by Raycaster Engine) ---
         // --- PORT A (Written by Raycaster Engine) ---
-        .clka(clk_125MHz),
-        .ena(1'b1),               // MUST be 1
+        .clka(axi_aclk),
+        .ena(1'b1),               
         .wea(vram_we),
         .addra(vram_w_addr),
-        .dina(vram_w_data),       // <--- NO PADDING! Direct 4-bit connection
+        .dina(vram_w_data),       
 
-        // --- PORT B (Read by VGA Controller) ---
+        .dinb(4'b0000),
         .clkb(clk_25MHz),
-        .enb(1'b1),               // MUST be 1
+        .enb(1'b1),              
         .web(1'b0),
         .addrb(vram_r_addr),           
-        .doutb(vram_r_data)       // <
+        .doutb(vram_r_data)      
     );
 
 

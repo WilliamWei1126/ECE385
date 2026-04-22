@@ -200,31 +200,40 @@ module hdmi_text_controller_tb();
     // THE 3D ENGINE SIMULATION SEQUENCE
     // ==============================================================
     initial begin: TEST_VECTORS
-        arstn = 0; 
+        arstn = 0; //reset IP
         repeat (4) @(posedge aclk);
         arstn <= 1;
         repeat (10) @(posedge aclk);
         
-        $display("----------------------------------------");
-     $display("Generating Map: Diagonal Checkerboard...");
-        for(i=0; i < 32; i++) begin
-            for(j=0; j < 32; j++) begin
+        $display("1. Generating Colorful Minecraft Village in BRAM...");
+        // Write Map Data (Addresses 0x0000 to 0x0FFF)
+        for(int i=0; i < 32; i++) begin
+            for(int j=0; j < 32; j++) begin
                 if (i == 0 || i == 31 || j == 0 || j == 31) begin
-                    @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000001); // Border
-                end else if (i < 14 && j > 10 && j < 20) begin
-                    // Create a checkerboard of pillars in front of the player
-                    if ((i + j) % 2 == 0)
-                        @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000005); // Pillar
-                    else
-                        @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000000); // Gap
+                    // Outer Border Wall (Color 2)
+                    @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00002222); 
+                    
+                end else if (i == 10 && j >= 12 && j <= 18) begin
+                    // A horizontal wall of alternating colors
+                    if (j % 2 == 0) @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000003);
+                    else            @(posedge aclk) axi_write((i*32 + j) * 4, 32'h55555555);
+                    
+                end else if (i >= 6 && i <= 8 && j >= 14 && j <= 16) begin
+                    // A 3x3 solid cube house directly behind the wall
+                    @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000006);
+                    
+                end else if ((i == 12 || i == 14) && (j == 13 || j == 17)) begin
+                    // 4 freestanding pillars closest to the camera
+                    @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000007);
+                    
                 end else begin
-                    @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000000); // Air
+                    // Air
+                    @(posedge aclk) axi_write((i*32 + j) * 4, 32'h00000000); 
                 end
             end
         end
-
-        $display("2. Initializing Player Camera Registers...");
         
+        $display("2. Initializing Player Vectors at 0x2000...");
         // 15.5 in Fixed Point: 0x000F8000
         @(posedge aclk) axi_write(32'h2000, 32'h000F8000); // Player X
         @(posedge aclk) axi_write(32'h2004, 32'h000F8000); // Player Y
@@ -235,23 +244,16 @@ module hdmi_text_controller_tb();
         @(posedge aclk) axi_write(32'h2010, 32'h00000000); // Dir Y:  0.0
         @(posedge aclk) axi_write(32'h2014, 32'h00000000); // Plane X: 0.0
         @(posedge aclk) axi_write(32'h2018, 32'h0000A8F5); // Plane Y: 0.66
-        
-        $display("3. Testing AXI Read Channel...");
-        // This dummy read will make sure your waveform shows read activity!
-        @(posedge aclk) axi_read(32'h2000, tb_read);
-        $display("Read back Player X: %x", tb_read);
 
-        $display("4. Engine Booted! Rendering Frame 1 (This will take a few minutes)...");
-        
-        // Simulate until VS goes low (indicating a new frame)
+        $display("3. Booting Raycaster Engine...");
         `ifdef SIM_VIDEO
         wait (~pixel_vs);
-        save_bmp ("lab7_2_sim.bmp");
-        $display("----------------------------------------");
-        $display("SUCCESS: Frame saved to lab7_2_sim.bmp!");
+        save_bmp ("minecraft.bmp");
+        $display("SUCCESS: Frame saved!");
         `endif
         
         $finish();
     end
+    
     
 endmodule
