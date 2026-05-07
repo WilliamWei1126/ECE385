@@ -49,7 +49,6 @@ module hdmi_text_controller_v1_0 #
     input logic  axi_rready
 );
 
-//additional logic variables as necessary to support VGA, and HDMI modules.
     
     logic reset_ah;
     assign reset_ah = ~axi_aresetn;
@@ -58,23 +57,18 @@ module hdmi_text_controller_v1_0 #
     logic [9:0] drawX, drawY;
     logic [3:0] red, green, blue;
     
-   // --- NEW SIGNALS FOR 3D VOXEL ENGINE ---
-    // AXI to Hardware Registers (16.16 Fixed Point)
+  
     logic signed [31:0] px, py, pz, dx, dy, plx, ply;
     
-    // Map RAM Signals (True Dual Port)
     logic [9:0] map_addrb;
     logic [31:0] map_doutb;
     
-    // Frame Buffer VRAM Signals (Simple Dual Port)
     logic [17:0] vram_w_addr, vram_r_addr;
     logic [3:0] vram_w_data, vram_r_data;
     logic vram_we;
     
-    // Double Buffer State Wire
     logic write_buffer;
 
-// Instantiation of Axi Bus Interface AXI
 
 hdmi_text_controller_v1_0_AXI # ( 
     .C_S_AXI_DATA_WIDTH(C_AXI_DATA_WIDTH),
@@ -102,7 +96,6 @@ hdmi_text_controller_v1_0_AXI # (
     .S_AXI_RVALID(axi_rvalid),
     .S_AXI_RREADY(axi_rready),
     
-   // Custom Hookups for Raycaster
         .player_x(px), .player_y(py), .player_z(pz),
         .dir_x(dx), .dir_y(dy), .plane_x(plx), .plane_y(ply),
         
@@ -112,7 +105,6 @@ hdmi_text_controller_v1_0_AXI # (
 );
 
 
-// 3. The Raycaster Engine (Replaces Color Mapper)
     raycaster_engine engine (
         .clk(axi_aclk), .reset(reset_ah),
         .player_x(px), .player_y(py), .player_z(pz),.dir_x(dx), .dir_y(dy), .plane_x(plx), .plane_y(ply),
@@ -121,17 +113,14 @@ hdmi_text_controller_v1_0_AXI # (
         .write_buffer(write_buffer) // NEW: Pass the buffer state out to the top level
     );
 
-    // 4. Frame Buffer VRAM (Simple Dual Port BRAM - Generated in Vivado)
-    // MAKE SURE TO DOUBLE THE WRITE DEPTH TO 153600 IN VIVADO BRAM GENERATOR
+    
     blk_mem_gen_1 vram (
-        // --- PORT A (Written by Raycaster Engine) ---
         .clka(axi_aclk),
         .ena(1'b1),               
         .wea(vram_we),
         .addra(vram_w_addr),
         .dina(vram_w_data),       
 
-        // --- PORT B (Read by VGA Controller) ---
         .dinb(4'b0000),
         .clkb(clk_25MHz),
         .enb(1'b1),              
@@ -140,19 +129,15 @@ hdmi_text_controller_v1_0_AXI # (
         .doutb(vram_r_data)      
     );
 
-    // Upscale Logic & Double Buffering: Read from the opposite buffer
     always_comb begin
         if (write_buffer == 1'b0) begin
-            // Raycaster is writing to Buffer 0, so VGA safely reads from Buffer 1
-            vram_r_addr = ((drawY >> 1) * 320) + (drawX >> 1) + 18'd76800;
+            vram_r_addr=((drawY>>1)*320)+(drawX>>1)+18'd76800;
         end else begin
-            // Raycaster is writing to Buffer 1, so VGA safely reads from Buffer 0
-            vram_r_addr = ((drawY >> 1) * 320) + (drawX >> 1);
+            vram_r_addr=((drawY>>1)*320)+(drawX>>1);
         end
     end
 
-    // Basic Color Palette Mapping (16 Minecraft-style colors)
-    // Expands the 4-bit VRAM data into 12-bit RGB colors
+   //This one is ai gt4enerated
     always_comb begin
         if (!vde) begin
             {red, green, blue} = 12'h000;
@@ -178,10 +163,6 @@ hdmi_text_controller_v1_0_AXI # (
         end
     end
 
-//Instiante clocking wizard, VGA sync generator modules, and VGA-HDMI IP here. For a hint, refer to the provided
-//top-level from the previous lab. You should get the IP to generate a valid HDMI signal (e.g. blue screen or gradient)
-//prior to working on the text drawing.
-    
     clk_wiz_0 clk_wiz (
         .clk_out1(clk_25MHz),
         .clk_out2(clk_125MHz),
